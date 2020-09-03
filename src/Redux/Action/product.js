@@ -1,6 +1,6 @@
 import { ProductsService } from "../../Services"
 import { createAction } from "."
-import { DANHSACHSANPHAM } from "./type"
+import { DANHSACHSANPHAM, CHITIETSANPHAM } from "./type"
 import Swal from 'sweetalert2'
 
 
@@ -35,7 +35,7 @@ export const DanhSachSanPham = () => {
 //         })
 // }
 export const ThemSanPham = (data) => {
-
+    
     ProductsService.themSanPham(data).then(res => {
         console.log(res.data);
         Swal.fire({
@@ -57,4 +57,13 @@ export const ThemSanPham = (data) => {
         });
     })
 
+}
+export const ChiTietSanPham = (id)=>{
+    return dispatch =>{
+        ProductsService.chiTietSanPham(id).then(res=>{
+            dispatch(createAction(CHITIETSANPHAM,res.data))
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
 }

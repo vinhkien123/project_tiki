@@ -14,6 +14,12 @@ class productsServices {
             data
         })
     }
+    chiTietSanPham(id){
+        return axios({
+            url : `https://5f474cbc95646700168d9187.mockapi.io/danhSachSanPham/${id}`,
+            method: `GET`,
+        })
+    }
     xoaSanPham (id){
         return axios({
             url :`https://5f474cbc95646700168d9187.mockapi.io/danhSachSanPham/${id}`,

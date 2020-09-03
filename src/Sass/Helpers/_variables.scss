@@ -1,0 +1,68 @@
+
+/// Backgroup /////
+$bg-header-top : rgb(29, 113, 171);
+$bg-header : rgb(24, 158, 255);
+$bg-freeShip: rgba(0, 153, 0, 0.05);
+$bg-button : rgb(255, 255, 255);
+$bg-sreach : rgb(0, 109, 144);
+$hover-bg-button :  rgb(236, 236, 236);
+///// font-weight ////
+$font-weight-1 : 300;
+$font-weight-2 : 400;
+$font-weight-3 : 500;
+$fw-normal: normal;
+$fw-bold-1: 700;    
+
+//////////Width /////////////
+$width-button : 30px;
+
+
+
+///// Font-size ///// 
+$font-size-1 : 12px;
+$font-size-2 : 24px;
+$font-size-3 : 13px;
+$font-size-icon-star : 18px;
+$fs-0: 15px; //default
+$fs-1: 12px;
+$fs-2: 20px;
+$fs-review : 13px;
+//////////////////////// Marginn ///////////////
+$mg-0: 2px;
+$mg-1: 10px;
+
+//////////////////////////////// Padding ///////////////////
+$pd-2: 15px;
+$pd-3: 20px;
+$pd-border :  20px 0px;
+///// line-height///////
+$line-height-1: 2.3em;
+$line-height : 20px;
+
+
+/// Color font ///// 
+$color-font-header : rgb(255, 255, 255);
+$color-icon-header : rgb(253, 216, 53);
+$color-icon-star : rgb(255, 193, 32);
+/////////////////////////////////////////
+$color-black-0: #29303b; // default
+$color-white-0: #fff; //default
+$color-red-0:#ec5252;
+$color-giaSanPham :  rgb(255, 52, 37);
+$color-review : rgb(155, 155, 155);
+/// Border radius  ///
+$border-button : 1px solid rgb(236, 236, 236);
+$border-radius_1: 5px;
+$border-radius_100: 100%;
+$border-top-1 :  1px solid rgb(236, 236, 236);
+//variable text-alighn
+$txt-center: center;
+$txt-left: left;
+$txt-right: right;
+$txt-justify: justify;
+
+//break points
+$breakpoints:( 'extra-large': 1200px, 'large': 992px, 'medium': 768px, 'small': 576px, )
+
+
+

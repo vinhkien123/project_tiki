@@ -1,7 +1,9 @@
-import { DANHSACHSANPHAM } from "../Action/type"
+import { DANHSACHSANPHAM, CHITIETSANPHAM } from "../Action/type"
 
 const initialState = {
     danhSachSanPham : [],
+    chiTietSanPham : {}
+
 }
  const productReducers = (state = initialState,action)=>{
     switch(action.type){
@@ -9,6 +11,9 @@ const initialState = {
             state.danhSachSanPham = action.payload
             return {...state}
 
+        case CHITIETSANPHAM:
+            state.chiTietSanPham = action.payload
+            return {...state}
         default: 
             return {...state}
     }

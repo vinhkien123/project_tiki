@@ -1,24 +1,25 @@
-import React from 'react';
+import React from 'react'
 import {Route} from 'react-router-dom'
+import Header from '../../Component/Header'
+import Footer from '../../Component/Foter'
 
-const layoutHeader = (props)=>{
-   return (
-       <>
-
-       </>
-   )
+const LayoutHeader = (props)=>{
+    return (
+        <>
+            <Header />
+            {props.children}
+            <Footer/>
+        </>
+    )
 }
 export const HomeTemplate = ({Component,...rest})=>{
     return (
         <Route {...rest} render={(props)=>{
             return(
-                <layoutHeader>
-                    <Component {...props} />
-                </layoutHeader>
+                <LayoutHeader >
+                    <Component {...props}/>
+                </LayoutHeader>
             )
-        }}
-        
-        
-        />
+        }} />
     )
 }

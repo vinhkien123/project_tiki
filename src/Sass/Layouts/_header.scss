@@ -1,0 +1,13 @@
+.header{
+    .headerTop{
+        background: $bg-header-top;
+        .text-HeaderTop{
+            display: flex;
+            height: 28px;
+           -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: end;
+            justify-content: flex-end;
+        }
+    }
+}
