@@ -1,6 +1,7 @@
 .danhMuc{
     h2{
-        @include title()
+        @include title();
+        
     }
     .row{
         .elementDanhMuc{

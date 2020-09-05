@@ -1,0 +1,14 @@
+.option{
+    margin: 10px 20px;
+    padding-bottom: 0;
+    text-align: right;
+    border-bottom: 1px solid #e1e1e1;
+    .button-option{
+        .sort-list{
+            display: inline-block;
+            list-style: none;
+             padding: 0;
+             margin: 0;
+        }
+    }
+}

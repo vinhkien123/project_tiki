@@ -4,6 +4,7 @@ import { DanhSachSanPham } from '../../../../Redux/Action/product';
 import productsServices from '../../../../Services/products';
 import Swal from 'sweetalert2'
 import { ProductsService } from '../../../../Services';
+import { NavLink } from 'react-router-dom';
 
 class index extends Component {
     constructor(props) {
@@ -86,7 +87,10 @@ class index extends Component {
                         </div>
                     </div>
                 </form>
+                <NavLink to="./themsanpham" className="btn btn-success my-2">Thêm sản phẩm</NavLink>
+
                 <table className="table">
+                    
                     <th>
                         <tr>
                             <td>STT</td>

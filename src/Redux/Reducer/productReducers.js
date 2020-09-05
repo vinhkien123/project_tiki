@@ -1,8 +1,9 @@
-import { DANHSACHSANPHAM, CHITIETSANPHAM } from "../Action/type"
+import { DANHSACHSANPHAM, CHITIETSANPHAM, FLAG } from "../Action/type"
 
 const initialState = {
     danhSachSanPham : [],
-    chiTietSanPham : {}
+    chiTietSanPham : {},
+    flag : false,
 
 }
  const productReducers = (state = initialState,action)=>{
@@ -10,7 +11,9 @@ const initialState = {
         case DANHSACHSANPHAM:
             state.danhSachSanPham = action.payload
             return {...state}
-
+        case FLAG: 
+            state.flag = action.payload;
+            return {...state}
         case CHITIETSANPHAM:
             state.chiTietSanPham = action.payload
             return {...state}

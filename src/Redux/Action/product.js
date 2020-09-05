@@ -43,7 +43,7 @@ export const ThemSanPham = (data) => {
             icon: 'success',
             title: 'Thêm sản phẩm thành công ! ',
             showConfirmButton: false,
-            timer: 1200
+            timer: 800
         });
 
     }).catch(err => {
@@ -53,7 +53,7 @@ export const ThemSanPham = (data) => {
             icon: 'error',
             title: 'Thêm sản phẩm thất bại ! ',
             showConfirmButton: false,
-            timer: 1200
+            timer: 800
         });
     })
 

@@ -1,8 +1,9 @@
-import {DANHSACHPHIM} from '../Action/type'
+import {DANHSACHPHIM, CHITIETSANPHAM, CHITIETPHIM} from '../Action/type'
 
 
 const initialState = {
     danhSachPhim : [],
+    chiTietPhim : {}
 }
 const moviesReducers = (state = initialState , action)=>{
     switch(action.type){
@@ -10,7 +11,9 @@ const moviesReducers = (state = initialState , action)=>{
             state.danhSachPhim = action.payload;
             return {...state}
         
-        
+        case CHITIETPHIM:
+            state.chiTietPhim = action.payload
+            return {...state}
         default : 
             return {...state}
     }

@@ -1,0 +1,15 @@
+.gioHang{
+    .title{
+        ///// Style Title Giỏ Hàng
+        font-size: 18px;
+        color: rgb(51, 51, 51);
+         font-weight: 400;
+         margin: 0px 0px 15px;
+         ///// Style số lượng sản phẩm
+        span{
+            font-size: 14px;
+           font-weight: 300;
+           display: inline-block;
+        }
+    }
+}

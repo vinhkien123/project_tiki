@@ -1,5 +1,4 @@
 @import './Components/button.scss';
-@import './Components/card.scss';
 
 @import './Helpers/mixin.scss';
 @import './Helpers/variables.scss';
@@ -8,4 +7,9 @@
 @import './Layouts/chiTietSanPham.scss';
 @import './Layouts/footer.scss';
 @import './Layouts/home.scss';
-@import './Layouts/homeMovie.scss'
+@import './Layouts/homeMovie.scss';
+@import './Components/card.scss';
+@import './Layouts/chiTietPhim.scss';
+@import './Layouts/gioHang';
+@import './Layouts/slidebar';
+@import './Layouts/sanPham'

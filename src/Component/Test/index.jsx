@@ -1,29 +1,22 @@
-// import React, { Component } from "react";
+import React, { useState, useEffect } from 'react';
 
-// import {GlassMagnifiernpm } from "react-image-magnify";
+const IntervalExample = () => {
+  const [seconds, setSeconds] = useState(0);
 
-// import {connect} from 'react-redux'
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(seconds => seconds + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-// class Test extends Component {
-//   render() {
-//     return (
-//       <ReactImageMagnify
-//         {...{
-//           smallImage: {
-//             alt: "Wristwatch by Ted Baker London",
-//             isFluidWidth: true,
-//             src: "https://placeimg.com/640/480/any"
-//           },
-//           largeImage: {
-//             src: "https://placeimg.com/640/480/any",
-//             width: 640,
-//             height: 480
-//           },
-//           enlargedImagePortalId: "myPortal"
-//         }}
-//       />
-//     );
-//   }
-// }
+  return (
+    <div className="App">
+      <header className="App-header">
+        {seconds} seconds have elapsed since mounting.
+      </header>
+    </div>
+  );
+};
 
-// export default connect() (Test);
+export default IntervalExample;

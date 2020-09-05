@@ -32,13 +32,19 @@ export default class index extends Component {
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/admin">
                             <i className="menu-icon typcn typcn-document-text" />
-                            <span className="menu-title">Tất cả sản phẩm</span>
+                            <span className="menu-title">Trang chủ</span>
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/admin/themsanpham">
+                        <NavLink className="nav-link" to="/admin/danhsachsanpham">
                             <i className="menu-icon typcn typcn-document-text" />
-                            <span className="menu-title">Thêm sản phẩm</span>
+                            <span className="menu-title">Quản lý sản phẩm</span>
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/admin/danhsachphim">
+                            <i className="menu-icon typcn typcn-document-text" />
+                            <span className="menu-title">Quản lý phim</span>
                         </NavLink>
                     </li>
                    

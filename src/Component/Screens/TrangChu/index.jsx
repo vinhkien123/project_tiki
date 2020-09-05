@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import "../../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../../node_modules/slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import DanhSachSanPham from '../../DanhSachSanPham';
+import ButtonXemThem from '../../ButtonXemThem'
+import { Fade } from 'react-awesome-reveal';
 class index extends Component {
     render() {
         const settings = {
@@ -14,7 +17,9 @@ class index extends Component {
         return (
             <>
                 <div className="container danhMuc">
-                    <h2> DANH MỤC HOT </h2>
+                    <Fade>
+                        <h2> DANH MỤC HOT </h2>
+                    </Fade>
                     <div className="row">
                         <div className="col-2   elementDanhMuc">
                             <a href="#" className=" card rowDanhMuc">
@@ -68,7 +73,10 @@ class index extends Component {
                     </div>
                 </div>
                 <div className="container Sclick">
-                    <h2> TỪ KHÓA HOT</h2>
+                    <Fade>
+                        <h2> TỪ KHÓA HOT</h2>
+
+                    </Fade>
                     <Slider {...settings}>
                         <div>
                             <div className="element">
@@ -150,6 +158,8 @@ class index extends Component {
                             </div>
                         </div>
                     </Slider>
+                    <DanhSachSanPham />
+                    <ButtonXemThem />
                 </div>
             </>
 
