@@ -1,24 +1,27 @@
 import React from 'react'
-import {Route} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Header from '../../Component/Header'
 import Footer from '../../Component/Foter'
-
-const LayoutHeader = (props)=>{
+import ScrollMemory from 'react-router-scroll-memory'
+export const LayoutHeader = (props) => {
     return (
         <>
             <Header />
             {props.children}
-            <Footer/>
+            <Footer />
         </>
     )
 }
-export const HomeTemplate = ({Component,...rest})=>{
+export const HomeTemplate = ({ Component, ...rest }) => {
     return (
-        <Route {...rest} render={(props)=>{
-            return(
-                <LayoutHeader >
-                    <Component {...props}/>
-                </LayoutHeader>
+        <Route {...rest} onUpdate={() => window.scrollTo(0, 0)} render={(props) => {
+            return (
+                <>
+                    <ScrollMemory />
+                    <LayoutHeader >
+                        <Component {...props} />
+                    </LayoutHeader>
+                </>
             )
         }} />
     )

@@ -1,6 +1,6 @@
 import DanhSachSanPham from './DanhSachSanPham'
 import React, { Component } from 'react';
-import ThemSanPham from './Admin/Page/ThemSanPham'
+import ThemSanPham from './Admin/Page/SanPham/ThemSanPham'
 import { NavLink } from 'react-router-dom';
 import TrangChu from './Screens/TrangChu';
 import Slidebar from './Sidebar'

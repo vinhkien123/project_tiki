@@ -5,21 +5,55 @@ $bg-header : rgb(24, 158, 255);
 $bg-freeShip: rgba(0, 153, 0, 0.05);
 $bg-button : rgb(255, 255, 255);
 $bg-sreach : rgb(0, 109, 144);
+$bgr-color-5 : #ddd;
+/////@include
+$bgr-color-1 : #0080ff;
+$bgr-color-2 : blue;
+$bgr-color-4 : black;
+$bgr-color-6 : #f4f4f4;
+$bgr-color-7: rgb(236, 236, 236);
+
+/////////////////////COLOR/////////
+$color-yellow: #ffc120;
+$color-gray-5:#8f8f8f;
+$color-gray-4: rgb(239, 239, 239);
 
 
+////////////////////
 $hover-bg-button :  rgb(236, 236, 236);
 ///// font-weight ////
 $font-weight-1 : 300;
 $font-weight-2 : 400;
+$fw-bold-2: 500;
 $font-weight-3 : 500;
 $fw-normal: normal;
 $fw-bold-1: 700;    
+///////Hegight//////////@include
+$height-1: 40px;
 
 //////////Width /////////////
 $width-button : 30px;
 
-
-
+$width-img-i:20px;
+$width-1 : 1350px;
+$width-2 : 500px;
+$width-3 : 170px;
+$width-4 : 150px;
+$width-auto: 100%;
+$width-auto-1: auto;
+$width-auto-2: 20%;
+$width-auto-3: 80%;
+$width-auto-5: 50%;
+$width-auto-8: 30%;
+/////// width img //////////@at-root
+$width-img : 45px;
+$width-img-svg: 24px;
+//////////Height ///////////
+$height-a-img-i:20px;
+$height-banner:80px;
+$height : 30px;
+$height-1: 40px;
+$height-img-svg: 24px;
 ///// Font-size ///// 
 $font-size-1 : 12px;
 $font-size-2 : 24px;
@@ -29,19 +63,48 @@ $font-size-icon-star : 18px;
 $fs-0: 15px; //default
 $fs-1: 12px;
 $fs-2: 20px;
+$fs-4: 40px;
 $fs-review : 13px;
 //////////////////////// Marginn ///////////////
+$mg: 0px;
 $mg-0: 2px;
 $mg-1: 10px;
+$margin-right-img-i:4px;
+$mg-3 : 0;
+$mg-4 : 9px;
+$mg-5 : 3px;
+$mg-auto: auto;
+$mg-6: 15px;
+
 
 //////////////////////////////// Padding ///////////////////
 $pd-2: 15px;
 $pd-3: 20px;
+$pd-6 : 6px;
+$pd-0: 5px; //default
+
+$pd-7 : 5px;
 $pd-border :  20px 0px;
+$pd-4 : 10px;
+$pd-5 : 0;
+
+//////////////////////////////  Display ///////////////////
+$display-1 : block;
+$display-2 : inline-block;
+$display-3 : inline;
+
 ///// line-height///////
 $line-height-1: 2.3em;
 $line-height : 20px;
+$line-height-3: 1.3;
+$line-height-2: 30px;
 
+///// float ////////
+$float-li-a-img-i:left;
+
+
+///// list-style ///////////
+$list-style-1 : none;
 
 /// Color font ///// 
 $color-font-header : rgb(255, 255, 255);
@@ -51,13 +114,24 @@ $color-icon-star : rgb(255, 193, 32);
 $color-black-0: #29303b; // default
 $color-white-0: #fff; //default
 $color-red-0:#ec5252;
+$color-green: #5cb85c;
+$color-gray-3: #c8c8c8;
 $color-giaSanPham :  rgb(255, 52, 37);
 $color-review : rgb(155, 155, 155);
+$color-account: rgb(160, 160, 160);
 /// Border radius  ///
+$border-radius_0: 0;
 $border-button : 1px solid rgb(236, 236, 236);
 $border-radius_1: 5px;
+$border-radius_2: 10px;
+$border-radius_50: 50%;
 $border-radius_100: 100%;
 $border-top-1 :  1px solid rgb(236, 236, 236);
+$border-1 : none;
+$border-2 : 1px solid #ccc;
+$border-3: 2px solid #ffffff;
+$border-bottom: 1px solid rgb(27, 168, 255);
+
 //variable text-alighn
 $txt-center: center;
 $txt-left: left;
@@ -66,6 +140,13 @@ $txt-justify: justify;
 
 //break points
 $breakpoints:( 'extra-large': 1200px, 'large': 992px, 'medium': 768px, 'small': 576px, )
+;
 
+//variable opacity
+$opacity-1: 0.8;
+$postion: relative;
+$postion-1: absolute;
 
-
+//variable position
+$position: relative;
+$position-1: absolute;

@@ -6,7 +6,9 @@ import productsServices from '../../Services/products';
 import { ProductsService } from '../../Services';
 import ReactImageMagnify from 'react-image-magnify';
 import { Fade } from 'react-reveal'
+import logo from '../../asset/data/img/logo.jpg'
 import { ChiTietSanPham } from '../../Redux/Action/product';
+import NhanXetSanPham from './NhatXetSanPham'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -22,45 +24,45 @@ class index extends Component {
     }
     render() {
         console.log(this.props.sanPham, "Text");
-        const giaGiam = this.props.sanPham.giaSanPham / 100 * 35
-        const giaThiTruong = Number(this.props.sanPham.giaSanPham) + giaGiam
+        const giaGiam = this.props.sanPham.Price / 100 * 35
+        const giaThiTruong = Number(this.props.sanPham.Price) + giaGiam
         const giaGiamString = giaGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        var gia = Number(this.props.sanPham.giaSanPham)
+        var gia = Number(this.props.sanPham.Price)
         const giaSanPham = gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return (
             <div className="container detail">
                 <div className="row">
                     <div className="col-5 left" style={{ borderRight: "2px solid rgb(247, 247, 247);", }}>
                         {/* ZOOM SẢN PHẨM */}
-                        
-                            <ReactImageMagnify {...{
-                                smallImage: {
-                                    alt: 'Wristwatch by Ted Baker London',
-                                    isFluidWidth: true,
-                                    src: this.props.sanPham.img,
-                                    width: 390,
-                                    height: 390,
 
-                                },
-                                largeImage: {
-                                    src: this.props.sanPham.img,
-                                    imageClassName: "tele",
-                                    rcSet: "teeteee",
-                                    width: 1200,
-                                    height: 1800
-                                },
-                                className: "tleeee"
-                            }} />
-                       
+                        <ReactImageMagnify {...{
+                            smallImage: {
+                                alt: 'Wristwatch by Ted Baker London',
+                                isFluidWidth: true,
+                                src: this.props.sanPham.ImageList,
+                                width: 390,
+                                height: 390,
+
+                            },
+                            largeImage: {
+                                src: this.props.sanPham.ImageList,
+                                imageClassName: "tele",
+                                rcSet: "teeteee",
+                                width: 1200,
+                                height: 1800
+                            },
+                            className: "tleeee"
+                        }} />
+
                     </div>
                     <div className="col-7 right">
                         <Fade>
                             <h1 className="title">
                                 <div className="hinhAnh">
                                     {/* LOGO */}
-                                    <img src="https://salt.tikicdn.com/ts/upload/e9/68/49/50ac83c9f95bd008cc840e638f0f5791.png" />
+                                    <img src={logo} />
                                 </div>
-                            | {this.props.sanPham.tenSanPham}
+                            | {this.props.sanPham.Name}
                             </h1>
                             <div className="icone">
                                 <p>
@@ -149,13 +151,13 @@ class index extends Component {
 
                             </div>
                             <div className=" top">
-                                {this.props.sanPham.moTa}
+                                {this.props.sanPham.DetailedDescription}
                             </div>
                             <div className="top review">
                                 <h2>DỊCH VỤ & KHUYẾN MÃI LIÊN QUAN</h2>
                                 <ul>
                                     <li>
-                                        Đăng kí gói <b>TikiNOW</b> để nhận giao hàng miễn phí và nhiều ưu đãi dành riêng cho thành viên - <a href="#">Xem chi tiết</a>
+                                        Đăng kí gói <b>QT-DataNow</b> để nhận giao hàng miễn phí và nhiều ưu đãi dành riêng cho thành viên - <a href="#">Xem chi tiết</a>
                                     </li>
                                     <li>
                                         Nhận ngay voucher Tiki 1 triệu đồng và Săn ngay 10 Samsung Note20 Ultra với thẻ Sacombank Tiki Platinum. Xem chi tiết
@@ -199,11 +201,18 @@ class index extends Component {
                         </Fade>
                     </div>
                 </div>
+                <NhanXetSanPham />
             </div>
         );
     }
     componentDidMount() {
         this.props.dispatch(ChiTietSanPham(this.props.match.params.id))
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
+    }
+    componentDidUpdate() {
+        window.scrollTo(0, 0);
     }
 }
 const mapStateToProps = (state) => ({

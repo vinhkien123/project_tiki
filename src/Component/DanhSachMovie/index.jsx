@@ -32,7 +32,6 @@ class index extends Component {
                 </Link>
             )
         })
-        console.log(this.props.danhSachPhim, "view");
         return (
             <div className="container">
                 <Flip top>

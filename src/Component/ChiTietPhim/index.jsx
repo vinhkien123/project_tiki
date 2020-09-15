@@ -14,7 +14,6 @@ class index extends Component {
     }
 
     render() {
-        console.log(this.props, "???");
 
         return (
             <>
@@ -58,8 +57,15 @@ class index extends Component {
             </>
         );
     }
+    componentDidUpdate() {
+        window.scrollTo(0, 0);
+    }
     componentDidMount() {
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
         this.props.dispatch(ChiTietPhim(this.props.match.params.id))
+
     }
 }
 

@@ -37,7 +37,6 @@ class index extends Component {
     }
     xoaSanPham = (id) => {
         MoviesServices.xoaPhim(id).then(res => {
-            console.log(res.data);
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -47,7 +46,6 @@ class index extends Component {
             });
             this.props.history.push("/admin")
         }).catch(err => {
-            console.log(err);
             Swal.fire({
                 position: 'center',
                 icon: 'error',

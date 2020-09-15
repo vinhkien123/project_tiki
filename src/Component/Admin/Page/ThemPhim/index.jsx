@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import * as yup from 'yup'
 import { ThemSanPham } from '../../../../Redux/Action/product';
 import { ThemPhim } from '../../../../Redux/Action/movie';

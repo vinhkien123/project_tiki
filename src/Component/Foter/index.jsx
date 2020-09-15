@@ -57,7 +57,7 @@ class index extends Component {
                             <div className="col-footer_link">
                                 <div className="title">
                                     <h4>
-                                        VỀ TIKI
+                                        VỀ QT-DATA
             </h4>
                                 </div>
                                 <div className="content">
@@ -136,7 +136,7 @@ class index extends Component {
                                     <strong>Địa chỉ văn phòng:</strong> 188 Đường Lê Trọng Tấn, Phường Hòa Phát, Quận Cẩm Lệ, Thành Phố Đà Nẵng
           </p>
                                 <p className="address-text">
-                                    Tiki nhận đặt hàng trực tuyến và giao hàng tận nơi, chưa hỗ trợ mua và nhận hàng trực tiếp tại văn<br />phòng hoặc trung tâm xử lý đơn hàng
+                                    QT-Data nhận đặt hàng trực tuyến và giao hàng tận nơi, chưa hỗ trợ mua và nhận hàng trực tiếp tại văn<br />phòng hoặc trung tâm xử lý đơn hàng
           </p>
                             </div>
                         </div>
@@ -147,7 +147,7 @@ class index extends Component {
                         <div className="row footer-custom_link d-flex align-items-center">
                             <div className="col-12 col-md-6 col-lg-6">
                                 <div>
-                                    <h5>© 2016 - Bản quyền của Công Ty Cổ Phần Ti Ki - Tiki.vn</h5>
+                                    <h5>© 2016 - Bản quyền của Công Ty Cổ Phần QT-Data - QT-Data.vn</h5>
                                     <p>Giấy chứng nhận Đăng ký Kinh doanh số 0309532909 do Sở Kế hoạch và Đầu tư Thành phố Đà Nẵng cấp ngày 06/01/2010</p>
                                 </div>
                             </div>

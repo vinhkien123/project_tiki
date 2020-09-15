@@ -7,8 +7,8 @@ import Swal from 'sweetalert2'
 export const DanhSachSanPham = () => {
     return dispatch => {
         ProductsService.danhSachSanPham().then(res => {
-            dispatch(createAction(DANHSACHSANPHAM, res.data))
             console.log(res.data);
+            dispatch(createAction(DANHSACHSANPHAM, res.data.data.products))
         }).catch(err => {
             console.log(err);
         })
@@ -35,9 +35,9 @@ export const DanhSachSanPham = () => {
 //         })
 // }
 export const ThemSanPham = (data) => {
-    
+
     ProductsService.themSanPham(data).then(res => {
-        console.log(res.data);
+        console.log(res.data, "thhêm thành công");
         Swal.fire({
             position: 'center',
             icon: 'success',
@@ -47,7 +47,7 @@ export const ThemSanPham = (data) => {
         });
 
     }).catch(err => {
-        console.log(err);
+        console.log(err, "thhêm thất bại");
         Swal.fire({
             position: 'center',
             icon: 'error',
@@ -58,11 +58,13 @@ export const ThemSanPham = (data) => {
     })
 
 }
-export const ChiTietSanPham = (id)=>{
-    return dispatch =>{
-        ProductsService.chiTietSanPham(id).then(res=>{
-            dispatch(createAction(CHITIETSANPHAM,res.data))
-        }).catch(err=>{
+export const ChiTietSanPham = (id) => {
+    return dispatch => {
+        ProductsService.chiTietSanPham(id).then(res => {
+           
+
+            dispatch(createAction(CHITIETSANPHAM, res.data.data))
+        }).catch(err => {
             console.log(err);
         })
     }

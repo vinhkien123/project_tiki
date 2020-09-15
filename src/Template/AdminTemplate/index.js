@@ -13,12 +13,12 @@ import '../../asset/admin/vendors/css/vendor.bundle.addons.css'
 import '../../asset/admin/css/shared/style.css'
 import '../../asset/admin/css/demo_1/style.css'
 import '../../asset/admin/images/favicon.png'
-
+import '../../Sass/main.scss'
 const LayoutAdmin = (props) => {
     return (
         <div className="container-scroller">
             <HeaderAdmin />
-            <div className="container-fluid page-body-wrapper">
+            <div className="container-fluid page-body-wrapper admin">
                 <FoterAdmin />
                 <div className="main-panel">
                     <div className="content-wrapper">
@@ -36,7 +36,6 @@ export const AdminTemplate = ({ Component, ...rest }) => {
     return (
 
         <Route {...rest} render={(props) => {
-            console.log(props);
             
             return (
 

@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import rootReducer from './Redux/Reducer/rootReducers';
 import thunk from 'redux-thunk'
-import { createStore ,applyMiddleware,compose} from 'redux';
+import { BrowserRouter } from 'react-router-dom'
+import { createStore, applyMiddleware, compose } from 'redux';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
@@ -15,7 +17,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
