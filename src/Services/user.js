@@ -6,7 +6,7 @@ class userServices {
 
         return axios({
             method: 'post',
-            url: `${APICor}${APILink}api/users/login`,
+            url: `${APILink}api/users/login`,
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -24,7 +24,16 @@ class userServices {
         console.log(data);
         return axios({
             method : "POST",
-            url : `${APICor}${APILink}api/users`,
+            url : `${APILink}api/users`,
+            data
+        })
+    }
+    capNhatThongTin(token,data,id){
+        console.log(token);
+        return axios({
+            method : "POST",
+            url : `${APILink}api/users/update/${id}`,
+            headers:{'Authorization':  token},
             data
         })
     }

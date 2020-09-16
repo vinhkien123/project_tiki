@@ -30,40 +30,58 @@ import { AdminBanHangTemplate } from './Template/AdminBanHangTemplate/index';
 import { UserTemplate } from './Template/UserTemplate';
 import ScrollToTop from './Component/ScrollToTop'
 import User from './Component/EditUser/ThongTinTaiKhoan';
-function App() {
-  return (
-    <>
-      <ScrollToTop >
-        <Switch>
-          <HomeTemplate path="/test" exact Component={Test} />
+import { connect } from 'react-redux'
+import { DanhMucSanPham } from './Redux/Action/product';
+import DanhSachDanhMucSanPham from './Component/Admin/Page/DanhSachDanhMuc';
+import {ThongTinTaiKhoan} from './Redux/Action/user';
+class App extends Component {
+  render() {
+    return (
+      <>
+        <ScrollToTop >
+          <Switch>
+            <HomeTemplate path="/test" exact Component={Test} />
 
-          <HomeTemplate path="/" exact Component={Component} />
+            <HomeTemplate path="/" exact Component={Component} />
 
-          <HomeTemplate path="/chitietsanpham/:id" exact Component={ChiTietSanPham} />
-          <HomeTemplate path="/movie" exact Component={HomeMovie} />
+            <HomeTemplate path="/chitietsanpham/:id" exact Component={ChiTietSanPham} />
+            <HomeTemplate path="/movie" exact Component={HomeMovie} />
 
-          <HomeTemplate path="/movie/chitietphim/:id" exact Component={ChiTietPhim} />
-          <HomeTemplate path="/giohang" exact Component={GioHang} />
-          <HomeTemplate path="/sanpham" exact Component={PageSanPham} />
-          <HomeTemplate path="/khuyenmai" exact Component={KhuyenMai} />
+            <HomeTemplate path="/movie/chitietphim/:id" exact Component={ChiTietPhim} />
+            <HomeTemplate path="/giohang" exact Component={GioHang} />
+            <HomeTemplate path="/sanpham" exact Component={PageSanPham} />
+            <HomeTemplate path="/khuyenmai" exact Component={KhuyenMai} />
 
-          <Route path="/dangkybanhang" exact component={DangKyBanHang} />
-          <UserTemplate path="/user" exact Component={User} />
-          <HomeTemplate path="/test" exact Component={Test} />
-          <AdminTemplate path="/admin/themsanpham" exact Component={ThemSanPham} />
-          <AdminTemplate path="/admin/suasanpham/:id" Component={SuaSanPham} />
-          <AdminTemplate path="/admin/danhsachuser" Component={DanhSachUser} />
-          <AdminBanHangTemplate path="/adminbanhang/trangchu" exact Component={TrangChuAdmin} />
-          <AdminTemplate path="/admin/themphim" Component={ThemPhim} />
-          <AdminTemplate path="/admin" exact Component={Admin} />
-          <AdminTemplate path="/admin/danhsachphim" exact Component={DanhSachPhim} />
-          <AdminTemplate path="/admin/danhsachsanpham" exact Component={SanPham} />
+            <Route path="/dangkybanhang" exact component={DangKyBanHang} />
+            <UserTemplate path="/user" exact Component={User} />
+            <HomeTemplate path="/test" exact Component={Test} />
+            <AdminTemplate path="/admin/themsanpham" exact Component={ThemSanPham} />
+            <AdminTemplate path="/admin/suasanpham/:id" Component={SuaSanPham} />
+            <AdminTemplate path="/admin/danhsachuser" Component={DanhSachUser} />
+            <AdminBanHangTemplate path="/adminbanhang/trangchu" exact Component={TrangChuAdmin} />
+            <AdminTemplate path="/admin/themphim" Component={ThemPhim} />
+            <AdminTemplate path="/admin" exact Component={Admin} />
+            <AdminTemplate path="/admin/danhsachphim" exact Component={DanhSachPhim} />
+            <AdminTemplate path="/admin/danhsachsanpham" exact Component={SanPham} />
+            <AdminTemplate path="/admin/danhsachdanhmuc" exact Component={DanhSachDanhMucSanPham} />
 
-        </Switch>
-      </ScrollToTop>
-    </>
+          </Switch>
+        </ScrollToTop>
+      </>
 
-  );
+    );
+  }
+  componentDidMount() {
+    this.props.dispatch(DanhMucSanPham())
+    let user = localStorage.getItem("user")
+    if (user) {
+    console.log("userrr",user);
+      let userObj = JSON.parse(user)
+      this.props.dispatch(ThongTinTaiKhoan(userObj.token))
+    }
+  }
 }
+const mapStateToProps = state => ({
 
-export default App;
+})
+export default connect(mapStateToProps)(App);

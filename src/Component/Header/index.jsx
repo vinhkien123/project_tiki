@@ -18,10 +18,10 @@ import Slider from "react-slick";
 
 class index extends Component {
     componentDidMount() {
-        const user = JSON.parse(localStorage.getItem("user"))
-        if (user) {
-            this.props.dispatch(ThongTinTaiKhoan(user.token))
-        }
+        // const user = JSON.parse(localStorage.getItem("user"))
+        // if (user) {
+        //     this.props.dispatch(ThongTinTaiKhoan(user.token))
+        // }
 
     }
 
@@ -82,10 +82,10 @@ class index extends Component {
                 return (
                     <Link to={`/chitietsanpham/${item.id}`} onClick={this.Reload} className="col-6 col-md-4 col-lg-2" key={index}>
                         <div className="card text-left" >
-                            <img className="card-img-top" src={item.img} alt />
+                            <img className="card-img-top" src={item.Image} alt />
                             <div className="card-body">
 
-                                <h4 className="card-title" style={{ fontSize: "12px", textAlign: "center", fontWeight: "200" }}>{item.tenSanPham?.length > 44 ? item.tenSanPham.slice(0, 44) + "...." : item.tenSanPham}</h4>
+                                <h4 className="card-title" style={{ fontSize: "12px", textAlign: "center", fontWeight: "200" }}>{item.Name?.length > 44 ? item.Name.slice(0, 44) + "...." : item.Name}</h4>
 
                                 {/* <Time /> */}
 
@@ -116,9 +116,11 @@ class index extends Component {
         ////////////////////////// KIỂM TRA XEM NGƯỜI DÙNG CÓ ĐĂNG NHẬP HAY CHƯA ///////////////////////////////
         let showLogin
         //////////////// KIỂM TRA NGƯỜI DÙNG CÓ ĐĂNG NHẬP TÀI KHOÀN WEBSITE NÀO //////////////////////////
+        let user = localStorage.getItem("user")
 
         ///////////////////// tài khoản của website ///////////////////
-        if (localStorage.getItem("user")) {
+        if (user) {
+            user = JSON.parse(localStorage.getItem("user"))
             showLogin = <>
                 <div className="dropdown login item">
                     <div className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -168,6 +170,20 @@ class index extends Component {
             showLogin = <Model />
 
         }
+
+
+        console.log("THONGTINTAIKHOAN", this.props.thongTinTaiKhoan);
+
+        const danhMucSanPham = this.props.danhMucSanPham.map((item, index) => {
+            return (
+                <a className="dropdown-item" href="#" ><img src={item.icon} width={20} className="mr-1" alt="" />{item.title}</a>
+
+            )
+        })
+        ///////////////////////////////// renderrr/////////////////////
+
+        console.log(this.props.user,"useertest");
+
         return (
             //// HEADER //////
             <section className="container-fuild header">
@@ -241,7 +257,7 @@ class index extends Component {
                             </a>
 
                             {/* MODEL */}
-                           {showLogin}
+                            {showLogin}
 
 
                             <div className="header-cart">
@@ -261,10 +277,7 @@ class index extends Component {
                                 <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
                            </a>
                             <div className="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                <a className="dropdown-item" href="#" >Đây là lựa chọn 1</a>
-                                <a className="dropdown-item" href="#">Đây là lựa chọn 2</a>
-                                <a className="dropdown-item" href="#">Đây là lựa chọn 3</a>
-                                <a className="dropdown-item" href="#">Đây là lựa chọn 4</a>
+                                {danhMucSanPham}
                             </div>
                         </div>
                         <div className="viTri col-6 col-md-6 col-lg-2">
@@ -373,7 +386,9 @@ class index extends Component {
 }
 const mapStateToProps = state => ({
     user: state.userReducers.thongTinTaiKhoan,
-    loginFacebook: state.userReducers.loginFacebook
+    loginFacebook: state.userReducers.loginFacebook,
+    thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
+    danhMucSanPham: state.productReducers.danhMucSanPham
 
 })
 export default connect(mapStateToProps)(index);

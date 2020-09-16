@@ -59,7 +59,7 @@ class index extends Component {
                         <label className="custom-control-label" htmlFor="customRadioInline2">Nữ</label>
                     </div>
                 </div>
-                <div className="form-group add__account-form">
+                {/* <div className="form-group add__account-form">
                     <label htmlFor="inputCity">Ngày sinh</label>
                     <div className="form-row">
                         <div className="form-group col-12 col-md-4 col-lg-4">
@@ -93,7 +93,7 @@ class index extends Component {
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <button onClick={this.onClickDangKy} className="btn btn--yellow-1 btn-info">Tạo tài khoản</button>
             </form>

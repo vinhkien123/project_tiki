@@ -5,7 +5,7 @@ import productsServices from '../../../../Services/products';
 import Swal from 'sweetalert2'
 import { ProductsService } from '../../../../Services';
 import { NavLink } from 'react-router-dom';
-
+import Sreach from '../Sreach'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -76,7 +76,7 @@ class index extends Component {
                 {/* <input type="radio" onChange={this.onChange} name="radio"/> */}
                 <td>{index + 1}</td>
                 <td>{item.Name?.length > 44 ? item.Name?.slice(0, 44) + "...." : item.Name}</td>
-                <td>{item.Image[0]} </td>
+                <td><img src={item.Image} alt=""/> </td>
                 <td>{item.Price} Đồng</td>
                 <td>
                     <button className="btn btn-danger" onClick={() => this.xoaSanPham(item._id)}>Xóa</button>
@@ -96,14 +96,7 @@ class index extends Component {
         return (
             <div>
                 <form>
-                    <div className="form-group row">
-                        <div className="col-10">
-                            <input onChange={this.onChange} name="keyWord" type="text" className="form-control" placeholder="Nhập vào tên hoặc sản phẩm cần tìm ..." />
-                        </div>
-                        <div className="col-2">
-                            <button className="btn btn-success">Tìm</button>
-                        </div>
-                    </div>
+                    <Sreach/>
                 </form>
                 <NavLink to="./themsanpham" className="btn btn-success my-2">Thêm sản phẩm</NavLink>
                 <button className="btn btn-danger" name="detele">

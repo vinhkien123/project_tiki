@@ -1,9 +1,40 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as yup from 'yup'
+import * as yup from 'yup';
+import { connect } from 'react-redux'
+import { CapNhatThongTin } from '../../../Redux/Action/user';
 
 
 class index extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            FullName: "",
+            Email: "",
+            Phone: "",
+            Password: "",
+            Gender: 0,
+        }
+
+    }
+    onChange = (e) => {
+        let input = e.target
+        this.setState({
+            [input.name]: input.value
+        }, () => {
+            console.log(this.state);
+        })
+    }
+    onClick = (e) => {
+        e.preventDefault();
+        let user = localStorage.getItem("user")
+        if (user) {
+            const userObj = JSON.parse(user)
+            CapNhatThongTin(userObj.token, this.state, userObj.user.id)
+
+
+        } 
+    }
     render() {
         return (
             <>
@@ -12,37 +43,34 @@ class index extends Component {
                 <div className="container formUser">
                     <div className="form-group add__account-form">
                         <label htmlFor="inputEmail4">Họ tên</label>
-                        <input type="text" className="form-control " id="inputEmail4" placeholder="Nhập họ tên" />
+                        <input type="text" className="form-control" name="FullName" onChange={this.onChange} id="inputEmail4" placeholder="Nhập họ tên" />
                     </div>
-                    <div className="form-group add__account-form-number">
+                    <div className="form-group add__account-form-number ">
                         <label htmlFor="inputNumber4">SĐT</label>
-                        <input type="text" className="form-control" id="inputNumber4" placeholder="Nhập số điện thoại" />
-                        <a href="#">Nhập mã xác thực</a>
+                        <input type="text" className="form-control " name="Phone" onChange={this.onChange} placeholder="Nhập số điện thoại" />
+
                     </div>
+
                     <div className="form-group add__account-form" style={{ clear: 'both' }}>
-                        <label htmlFor="inputCode">Mã xác thực</label>
-                        <input type="text" className="form-control" id="inputCode" placeholder="Nhập mã xác thực gửi tới số điện thoại trên" />
-                    </div>
-                    <div className="form-group add__account-form">
                         <label htmlFor="inputEmail2">Email</label>
-                        <input type="email" className="form-control" id="inputEmail2" placeholder="Nhập email" />
+                        <input type="email" className="form-control" name="Email" onChange={this.onChange} id="inputEmail2" placeholder="Nhập email" />
                     </div>
                     <div className="form-group add__account-form">
                         <label htmlFor="inputPassword">Mật khẩu</label>
-                        <input type="password" className="form-control" id="inputPassword" placeholder="Mật khẩu từ 6 đến 32 ký tự" />
+                        <input type="password" className="form-control" id="inputPassword" name="Password" onChange={this.onChange} placeholder="Mật khẩu từ 6 đến 32 ký tự" />
                     </div>
                     <div className="form-group add__account-form">
                         <label htmlFor="customRadioInline">Giới tính</label>
                         <div className="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline1" name="customRadioInline1" className="custom-control-input" />
+                            <input type="radio" value={0} id="customRadioInline1" onClick={this.onChange} name="Gender" className="custom-control-input" />
                             <label className="custom-control-label" htmlFor="customRadioInline1">Nam</label>
                         </div>
                         <div className="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline2" name="customRadioInline1" className="custom-control-input" />
+                            <input type="radio" id="customRadioInline2" value={1} onClick={this.onChange} name="Gender" className="custom-control-input" />
                             <label className="custom-control-label" htmlFor="customRadioInline2">Nữ</label>
                         </div>
                     </div>
-                    <div className="form-group add__account-form">
+                    {/* <div className="form-group add__account-form">
                         <label htmlFor="inputCity">Ngày sinh</label>
                         <div className="form-row">
                             <div className="form-group col-12 col-md-4 col-lg-4">
@@ -76,13 +104,16 @@ class index extends Component {
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <button className="btn btn-warning float-right">Cập nhật</button>
+                    <button onClick={this.onClick} className="btn btn-warning float-right">Cập nhật</button>
                 </div>
             </>
         );
     }
 }
 
-export default index;
+const mapStateToProps = state => ({
+    thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan
+})
+export default connect(mapStateToProps)(index);

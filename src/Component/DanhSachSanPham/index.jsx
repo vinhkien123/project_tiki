@@ -30,15 +30,15 @@ class index extends Component {
             localStorage.setItem('sanPham', JSON.stringify(array))
 
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             window.location.reload(false);
-        },1)
+        }, 1)
 
     }
 
     renderDanhSachSanPham = (item, index) => {
         const giaSanPham = item.Price?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
-        
+
         return (
             <Link onClick={() => this.onClickSave(item)} to={`/chitietsanpham/${item._id}`} className="col-12 col-md-6 col-lg-3 card-tiki" key={index}>
                 <div className="card text-left" >
@@ -58,7 +58,7 @@ class index extends Component {
         )
     }
     render() {
-        console.log("danhsach",this.props.danhSachSanPham);
+        console.log("danhsach", this.props.danhSachSanPham);
         const danhSach = this.props.danhSachSanPham.filter(item => item.StatusSale == true)
         const danhSachSanPham = this.props.danhSachSanPham.map((item, index) => {
             return (
@@ -77,15 +77,23 @@ class index extends Component {
         //         this.renderDanhSachSanPham(item, index)
         //     )
         // })
-        sreachKeyWord = danhSach.filter(
-            ///////// Sreach chữ viết hoa và thường
-            item => item.Name.toLowerCase().indexOf(this.props.keyWord) != -1
-        )
-        renderKeyWord = sreachKeyWord.map((item, index) => {
+        console.log("???????",this.props.sreachProductApi);
+        sreachKeyWord = this.props.sreachProductApi?.map((item, index) => {
             return (
                 this.renderDanhSachSanPham(item, index)
             )
         })
+        ///// Tìm kiếm trên client
+        // danhSach.filter(
+        //     ///////// Sreach chữ viết hoa và thường
+        //     item => item.Name.toLowerCase().indexOf(this.props.keyWord) != -1
+        // )
+        // renderKeyWord = sreachKeyWord.map((item, index) => {
+        //     return (
+        //         this.renderDanhSachSanPham(item, index)
+        //     )
+        // })
+
         let render
         // if (this.props.sreachPrice.length >= 1) {
         //     //// render khi người dùng sreach giá từ a -> b
@@ -96,7 +104,7 @@ class index extends Component {
         // }
         render = danhSachSanPham
         if (this.props.keyWord != "") {
-            render = renderKeyWord
+            render = sreachKeyWord
         }
         return (
             <>

@@ -3,27 +3,54 @@ import { connect } from 'react-redux'
 import '../../Sass/main.scss'
 import { NavLink } from 'react-router-dom';
 import productsServices from '../../Services/products';
-import { ProductsService } from '../../Services';
+import { ProductsService, ShopingServices } from '../../Services';
 import ReactImageMagnify from 'react-image-magnify';
 import { Fade } from 'react-reveal'
 import logo from '../../asset/data/img/logo.jpg'
 import { ChiTietSanPham } from '../../Redux/Action/product';
 import NhanXetSanPham from './NhatXetSanPham'
+import shoppingServices from '../../Services/shopingcart';
+import Swal from 'sweetalert2'
+
 class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            soLuong: 1,
+            quantity: 1,
         }
     }
     tangSoLuong = () => {
-        this.setState({ soLuong: this.state.soLuong + 1 })
+        this.setState({ quantity: this.state.quantity + 1 })
     }
     giamSoLuong = () => {
-        this.setState({ soLuong: this.state.soLuong - 1 })
+        this.setState({ quantity: this.state.quantity - 1 })
+    }
+    themGioHang = () => {
+        let sanPham = this.props.sanPham
+        console.log(sanPham);
+        sanPham = { ...sanPham, quantity: this.state.quantity, price : sanPham.Price }
+        ShopingServices.themGioHang(sanPham).then(res => {
+            console.log("thanh cong", res.data);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Thêm giỏ hàng thành công ! ',
+                showConfirmButton: false,
+                timer: 1200
+            });
+        }).catch(err => {
+            console.log("thất bại",err);
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: "Thêm thất bại",
+                showConfirmButton: false,
+                timer: 1200
+            });
+        })
     }
     render() {
-        console.log(this.props.sanPham, "Text");
+
         const giaGiam = this.props.sanPham.Price / 100 * 35
         const giaThiTruong = Number(this.props.sanPham.Price) + giaGiam
         const giaGiamString = giaGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -39,13 +66,13 @@ class index extends Component {
                             smallImage: {
                                 alt: 'Wristwatch by Ted Baker London',
                                 isFluidWidth: true,
-                                src: this.props.sanPham.ImageList,
+                                src: this.props.sanPham.Image,
                                 width: 390,
                                 height: 390,
 
                             },
                             largeImage: {
-                                src: this.props.sanPham.ImageList,
+                                src: this.props.sanPham.Image,
                                 imageClassName: "tele",
                                 rcSet: "teeteee",
                                 width: 1200,
@@ -73,16 +100,16 @@ class index extends Component {
                                     <i class="fa fa-star-half"></i>
                                 </p>
                             </div>
-                            <div className="icone-cup">
+                            {/* <div className="icone-cup">
                                 <i class="fa fa-trophy"></i>
                                 <p>
-                                    <span>&nbsp;Đứng thứ {/* */}1</span> trong{/* */}
+                                    <span>&nbsp;Đứng thứ 1</span> trong
                                     <a href="#">
-                                        &nbsp;  Top 100 {/* */}Sách Tôn Giáo - Tâm Linh{/* */} bán chạy tuần này
+                                        &nbsp;  Top 100 Sách Tôn Giáo - Tâm Linh bán chạy tuần này
                                  </a>
                                 </p>
-                            </div>
-                            <div className="text">
+                            </div> */}
+                            {/* <div className="text">
 
                                 <h6>Thương hiệu:
                             <a href="#">
@@ -94,7 +121,7 @@ class index extends Component {
                                         5555704961119
                                  </span>
                                 </h6>
-                            </div>
+                            </div> */}
                             <hr></hr>
                             <div className=" text-free">
                                 <div className="">
@@ -138,14 +165,14 @@ class index extends Component {
                                         <p>Số lượng : </p>
                                         <div className="group-input">
                                             <button onClick={this.giamSoLuong}>-</button>
-                                            <input type="text" name="" className="input" value={this.state.soLuong} id="" />
+                                            <input type="text" name="" className="input" value={this.state.quantity} id="" />
                                             <button onClick={this.tangSoLuong}>+</button>
                                         </div>
                                     </div>
                                     <div className="group-button">
-                                        <button className="btn btn-danger">
+                                        <NavLink to="/giohang" onClick={this.themGioHang} className="btn btn-danger ml-3">
                                             <i class="fa fa-cart-plus"></i>
-                                        CHỌN MUA</button>
+                                        CHỌN MUA</NavLink>
                                     </div>
                                 </div>
 
@@ -160,14 +187,14 @@ class index extends Component {
                                         Đăng kí gói <b>QT-DataNow</b> để nhận giao hàng miễn phí và nhiều ưu đãi dành riêng cho thành viên - <a href="#">Xem chi tiết</a>
                                     </li>
                                     <li>
-                                        Nhận ngay voucher Tiki 1 triệu đồng và Săn ngay 10 Samsung Note20 Ultra với thẻ Sacombank Tiki Platinum. Xem chi tiết
+                                        Nhận ngay voucher QT-Data 1 triệu đồng và Săn ngay 10 Samsung Note20 Ultra với thẻ Sacombank QT-Data Platinum. Xem chi tiết
                                 </li>
                                     <li>
                                         Miễn phí giao hàng 30K cho đơn hàng từ 249K. Miễn phí giao hàng 50K cho đơn hàng từ 499K.
                                         Miễn phí giao hàng 100K cho đơn hàng từ 999K. Mỗi khách được sử dụng 1 lần/ 1 ưu đãi phí ship
                                 </li>
                                     <li>
-                                        Hoàn tiền 15% cho mọi chi tiêu với Thẻ Tín Dụng Liên Kết Sacombank Tiki Platinum - <a href="#">Mở thẻ ngay</a>
+                                        Hoàn tiền 15% cho mọi chi tiêu với Thẻ Tín Dụng Liên Kết Sacombank QT-Data Platinum - <a href="#">Mở thẻ ngay</a>
                                     </li>
                                     <li>
                                         Nhập ZALOPAY20 giảm 20K cho đơn hàng từ 100K khi thanh toán qua Zalopay, từ 20/08/2020 - 31/08/2020.
@@ -189,12 +216,12 @@ class index extends Component {
                                     <a href="#">LƯU MÃ</a>
                                     </li>
                                     <li>
-                                        Nhập mã TIKIMOMO khi tải và đăng kí MoMo để được: Coupon 50K cho đơn từ 300K,
+                                        Nhập mã QT-Data khi tải và đăng kí MoMo để được: Coupon 50K cho đơn từ 300K,
                                         Thêm 2 coupon 30K cho đơn hàng tiếp theo từ 300K.
                                    <a href="#">Xem chi tiết</a>
                                     </li>
                                     <li>
-                                        Đăng ký dịch vụ BookCare để được bọc plastic đến 99% sách tại Tiki.vn
+                                        Đăng ký dịch vụ BookCare để được bọc plastic đến 99% sách tại QT-Data.vn
                                 </li>
                                 </ul>
                             </div>

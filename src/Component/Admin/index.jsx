@@ -11,6 +11,8 @@ class index extends Component {
                 <NavLink to="admin/danhsachphim" className="mt-2 btn btn-success">Quản lý rạp phim</NavLink>
                 <br/>
                 <NavLink to="admin/danhsachuser" className="mt-2 btn btn-success">Danh sách User</NavLink>
+                <br/>
+                <NavLink to="admin/danhsachdanhmuc" className="mt-2 btn btn-success">Danh mục sản phẩm</NavLink>
             </div>
         );
     }

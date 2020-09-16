@@ -21,6 +21,7 @@ class index extends Component {
         this.props.dispatch(createAction(SREACHZA, za))
     }
     render() {
+        console.log("API ", this.props.sreachProductApi);
         return (
             <div className="viewContent" style={{ overflow: "hidden" }}>
                 <Flip>
@@ -61,7 +62,7 @@ class index extends Component {
                         </div>
                         <div style={{ paddingLeft: "20px" }}>
                             <div className="row">
-                                <DanhSachSanPham sreachPrice={this.props.sreachPrice} />
+                                <DanhSachSanPham sreachPrice={this.props.sreachPrice} sreachProductApi={this.props.sreachProductApi}/>
 
                             </div>
                         </div>
@@ -77,7 +78,8 @@ const mapStateToProps = state => ({
     sreachPrice: state.productReducers.sreachPrice,
     danhSachSanPham: state.productReducers.danhSachSanPham,
     sreachKeyWord: state.productReducers.sreachKeyWord,
-    keyWord: state.productReducers.keyWord
+    keyWord: state.productReducers.keyWord,
+    sreachProductApi : state.productReducers.sreachProductApi
 
 })
 export default connect(mapStateToProps)(index);

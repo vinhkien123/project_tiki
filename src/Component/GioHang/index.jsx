@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { DanhSachSanPham } from '../../Redux/Action/product';
+import { ShopingServices } from '../../Services';
 class index extends Component {
     render() {
         const elementGioHang = this.props.danhSachSanPham.map((item, index) => {
@@ -29,7 +30,7 @@ class index extends Component {
                                 <div className="cart-products__details">
                                     <div className="cart-products__pricess">
                                         <p className="cart-products__real-prices">
-                                            {item.giaSanPham.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; ₫
+                                            {item.giaSanPham?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; ₫
                                         </p>
                                         <p className="cart-products__discount-prices">
                                             <del>2.290.000đ</del>
@@ -104,10 +105,16 @@ class index extends Component {
     }
     componentDidMount() {
         this.props.dispatch(DanhSachSanPham())
+        ShopingServices.layDanhSachGioHang().then(res=>{
+            console.log("Lấy danh sách giỏ hàng thành công",res.data);
+        }).catch(err=>{
+            console.log(err);
+        })
     }
 }
 
 const mapStateToProps = state => ({
-    danhSachSanPham: state.productReducers.danhSachSanPham
+    danhSachSanPham: state.productReducers.danhSachSanPham,
+    
 })
 export default connect(mapStateToProps)(index);

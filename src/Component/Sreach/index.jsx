@@ -6,6 +6,7 @@ import {createAction} from '../../Redux/Action'
 import { KEYWORD } from '../../Redux/Action/type';
 import { NavLink } from 'react-router-dom';
 import '../../Sass/main.scss'
+import { SreachSanPham } from '../../Redux/Action/product';
 class index extends Component {
     constructor(props){
         super(props)
@@ -23,6 +24,7 @@ class index extends Component {
     }
     onClick = ()=>{
         this.props.dispatch(createAction(KEYWORD,this.state.keyWord))
+        this.props.dispatch(SreachSanPham(this.state.keyWord))
     }
     render() {
 

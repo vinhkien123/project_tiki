@@ -40,7 +40,7 @@ class index extends Component {
 
                 <Formik onSubmit={(value) => {
                     value.ImageList.push(value.Image)
-                    value.Image = ""
+                    
                     ThemSanPham(value)
                 }}
                     initialValues={{

@@ -1,6 +1,6 @@
 import { ProductsService } from "../../Services"
 import { createAction } from "."
-import { DANHSACHSANPHAM, CHITIETSANPHAM } from "./type"
+import { DANHSACHSANPHAM, CHITIETSANPHAM, SREACHPRODUCTAPI, DANHMUCSANPHAM } from "./type"
 import Swal from 'sweetalert2'
 
 
@@ -51,7 +51,7 @@ export const ThemSanPham = (data) => {
         Swal.fire({
             position: 'center',
             icon: 'error',
-            title: 'Thêm sản phẩm thất bại ! ',
+            title: err.response.data.message,
             showConfirmButton: false,
             timer: 800
         });
@@ -66,6 +66,44 @@ export const ChiTietSanPham = (id) => {
             dispatch(createAction(CHITIETSANPHAM, res.data.data))
         }).catch(err => {
             console.log(err);
+        })
+    }
+}
+export const SreachSanPham = (keyWord) =>{
+    return dispatch => {
+        ProductsService.timKiemSanPham(keyWord).then(res =>{
+            dispatch(createAction(SREACHPRODUCTAPI,res.data.data.products))
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Tìm kiếm sản phẩm thành công ! ',
+                showConfirmButton: false,
+                timer: 1200
+            });
+        }).catch(err =>{
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: err.response.data.message,
+                showConfirmButton: false,
+                timer: 1200
+            });
+        })
+    }
+}
+export const DanhMucSanPham = ()=>{
+    return dispatch =>{
+        ProductsService.danhMucSanPham().then(res=>{
+            dispatch(createAction(DANHMUCSANPHAM,res.data.data))
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+}
+export const DanhSachSanPhamTheoDanhMuc = (id)=>{
+    return dispatch =>{
+        ProductsService.danhSachSanPhamTheoDanhMuc(id).then(res=>{
+            dispatch(createAction())
         })
     }
 }
