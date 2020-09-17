@@ -28,7 +28,12 @@ class index extends Component {
     themGioHang = () => {
         let sanPham = this.props.sanPham
         console.log("đã click");
-        sanPham = { ...sanPham, Quantity: this.state.quantity, Price : sanPham.Price, UserId : this.props.thongTinTaiKhoan._id }
+        sanPham = {
+            Quantity: this.state.quantity,
+
+            ProductId: sanPham._id,
+            UserId: this.props.thongTinTaiKhoan._id
+        }
         ShopingServices.themGioHang(sanPham).then(res => {
             console.log("thanh cong", res.data);
             Swal.fire({
@@ -38,8 +43,11 @@ class index extends Component {
                 showConfirmButton: false,
                 timer: 1200
             });
+            this.props.history.push("/giohang")
+            window.location.reload(false);
+
         }).catch(err => {
-            console.log("thất bại",err);
+            console.log("thất bại", err);
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -47,10 +55,11 @@ class index extends Component {
                 showConfirmButton: false,
                 timer: 1200
             });
+            window.location.reload(false);
         })
     }
     render() {
-        console.log("sanphammtaiko",this.props.thongTinTaiKhoan);
+        console.log("sanphammtaiko", this.props.thongTinTaiKhoan);
         const giaGiam = this.props.sanPham.Price / 100 * 35
         const giaThiTruong = Number(this.props.sanPham.Price) + giaGiam
         const giaGiamString = giaGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

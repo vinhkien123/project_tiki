@@ -4,9 +4,13 @@ import { DanhSachSanPham } from '../../Redux/Action/product';
 import { LayDanhSachGioHangUser } from '../../Redux/Action/shopingcart';
 import { ShopingServices } from '../../Services';
 class index extends Component {
+    xoaGioHang(userId,productId){
+
+    }
     render() {
         console.log("giohangpro",this.props.danhSachGioHangTheoUser);
         const elementGioHang = this.props.danhSachGioHangTheoUser.map((item, index) => {
+            console.log("item,",item);
             return (
                 <li className="cart-products__product" key={index}>
                     <div className="cart-products__inner">
@@ -45,6 +49,7 @@ class index extends Component {
                                             <input type="text" name="" className="input" value={item.Quantity} id="" />
                                             <button >+</button>
                                         </div>
+                                        <button  className="btn btn-danger m-4">Xóa</button>
                                     </div>
                                 </div>
                             </div>

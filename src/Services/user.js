@@ -1,6 +1,6 @@
 import axios from "axios"
 const APICor = `https://cors-anywhere.herokuapp.com/`
-const APILink = `https://marketplacedata.herokuapp.com/`
+const APILink = `http://localhost:4000/`
 class userServices {
     dangNhap(data) {
 
@@ -16,7 +16,7 @@ class userServices {
     thongTinTaiKhoan(token){
         return axios({
             method: "GET",
-            url : `${APICor}${APILink}api/users/profile`,
+            url : `${APILink}api/users/profile`,
             headers:{'Authorization':  token}
         })
     }
