@@ -5,7 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 import Time from '../Time'
 class index extends Component {
     render() {
-        console.log("viewcode",this.props.danhSachSanPham);
+        console.log("viewcode", this.props.danhSachSanPham);
         const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == true)
         const elementSellTime = danhSachSale.map((item, index) => {
             const giaGiam = (item.Price - (item.Price / 100 * item.giaGiam)).toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")

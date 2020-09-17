@@ -27,8 +27,8 @@ class index extends Component {
     }
     themGioHang = () => {
         let sanPham = this.props.sanPham
-        console.log(sanPham);
-        sanPham = { ...sanPham, quantity: this.state.quantity, price : sanPham.Price }
+        console.log("đã click");
+        sanPham = { ...sanPham, Quantity: this.state.quantity, Price : sanPham.Price, UserId : this.props.thongTinTaiKhoan._id }
         ShopingServices.themGioHang(sanPham).then(res => {
             console.log("thanh cong", res.data);
             Swal.fire({
@@ -50,7 +50,7 @@ class index extends Component {
         })
     }
     render() {
-
+        console.log("sanphammtaiko",this.props.thongTinTaiKhoan);
         const giaGiam = this.props.sanPham.Price / 100 * 35
         const giaThiTruong = Number(this.props.sanPham.Price) + giaGiam
         const giaGiamString = giaGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -170,9 +170,9 @@ class index extends Component {
                                         </div>
                                     </div>
                                     <div className="group-button">
-                                        <NavLink to="/giohang" onClick={this.themGioHang} className="btn btn-danger ml-3">
+                                        <button to="/giohang" onClick={this.themGioHang} className="btn btn-danger ml-3">
                                             <i class="fa fa-cart-plus"></i>
-                                        CHỌN MUA</NavLink>
+                                        CHỌN MUA</button>
                                     </div>
                                 </div>
 
@@ -243,6 +243,7 @@ class index extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    sanPham: state.productReducers.chiTietSanPham
+    sanPham: state.productReducers.chiTietSanPham,
+    thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
 })
 export default connect(mapStateToProps)(index);

@@ -10,7 +10,7 @@ export const DangNhap = (data) => {
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Đăng nhập thành công ! ',
+            title: res.data.message,
             showConfirmButton: false,
             timer: 1500
         });
@@ -22,7 +22,7 @@ export const DangNhap = (data) => {
         Swal.fire({
             position: 'center',
             icon: 'error',
-            title: err.response.data.message,
+            title: err.response?.data.message,
             showConfirmButton: false,
             timer: 1200
         });

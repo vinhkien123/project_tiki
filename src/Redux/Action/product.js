@@ -1,6 +1,6 @@
 import { ProductsService } from "../../Services"
 import { createAction } from "."
-import { DANHSACHSANPHAM, CHITIETSANPHAM, SREACHPRODUCTAPI, DANHMUCSANPHAM } from "./type"
+import { DANHSACHSANPHAM, CHITIETSANPHAM, SREACHPRODUCTAPI, DANHMUCSANPHAM, SREACHTHEODANHMUC } from "./type"
 import Swal from 'sweetalert2'
 
 
@@ -103,7 +103,10 @@ export const DanhMucSanPham = ()=>{
 export const DanhSachSanPhamTheoDanhMuc = (id)=>{
     return dispatch =>{
         ProductsService.danhSachSanPhamTheoDanhMuc(id).then(res=>{
-            dispatch(createAction())
+            console.log("resdata",res.data);
+            dispatch(createAction(SREACHTHEODANHMUC,res.data))
+        }).catch(err=>{
+            console.log(err);
         })
     }
 }

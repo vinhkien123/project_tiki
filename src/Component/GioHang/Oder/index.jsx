@@ -9,6 +9,12 @@ class index extends Component {
         this.state = {
             visible: false,
             now: new Date(),
+            oder : {
+                hoTen : "",
+                soDienThoai : "",
+                diaChi: "",
+
+            }
         }
     }
     showModal = () => {
@@ -54,7 +60,7 @@ class index extends Component {
                                 <div className="bar-progress_2">
                                     <div className="text">Địa chỉ giao hàng  </div>
                                     <div className="progress_bar" role="progressbar">
-                                        <div className="fill-color" style={{ width: "100%" }} />
+                                        <div className="fill-color" />
                                     </div>
                                     <div className="circle">2</div>
                                 </div>
@@ -62,9 +68,9 @@ class index extends Component {
                                 <div className="bar-progress_3">
                                     <div className="text">Thanh toán &amp; Đặt mua</div>
                                     <div className="progress_bar" role="progressbar">
-                                        <div className="fill-color" style={{ background: "#006d90", width: "100%" }} />
+                                        <div className="fill-color" />
                                     </div>
-                                    <div className="circle" style={{ background: "#006d90", color: "white" }}>3</div>
+                                    <div className="circle">3</div>
                                 </div>
                             </div>
                             <div className="col-12 col-md-3 col-lg-3 hotline d-flex">
@@ -124,71 +130,54 @@ class index extends Component {
                                 <p className="title-address_custom">Bạn muốn giao hàng đến địa chỉ khác? <a href="#">Thêm địa chỉ giao hàng mới</a></p>
                             </div>
                         </div> */}
-                        <div className=" formUser mb-3 py-5">
-                            <div className="row test">
-                                <div className="col-12 col-md-8 ba" >
-                                    <div className="bg-left">
-                                        <h4>Hình thức thanh toán</h4>
-                                        <form action="">
-                                            <input type="radio" /> &nbsp;
-                                      Thanh toán tiền mặt khi nhận hàng
-                                     </form>
+                        <div className="container formUser mb-3 py-5">
+                            <form action="" className="w-50 pb-5" >
+                                <div className="row">
+                                    <div className="col-12 col-md-3">
+                                        <label htmlFor=""><b>Họ và tên  : </b></label>
+                                    </div>
+                                    <div className="col-12 col-md-9 ">
+                                        <input className="form-control" type="text" placeholder="Nguyễn Văn A" />
+                                    </div>
+                                </div>
 
+                                <div className="row mt-3">
+                                    <div className="col-12 col-md-3">
+                                        <label htmlFor=""><b>Số điện thoại  : </b></label>
+                                    </div>
+                                    <div className="col-12 col-md-9 ">
+                                        <input className="form-control" type="text" placeholder="Số điện thoại" />
                                     </div>
                                 </div>
-                                <div className="col-12 col-md-4 tinhTien">
-                                    <div className="title">
-                                        <span>Đơn hàng (0 sản phẩm)</span>
-                                        <button>Sửa</button>
+                                <div className="row mt-3">
+                                    <div className="col-12 col-md-3">
+                                        <label htmlFor=""><b>Địa chỉ  : </b></label>
                                     </div>
-                                    <div className="oder">
-                                        <div className="sanPham">
-                                            <div className="flex">
-                                                <div className="info">
-                                                    dây sạc
-                                             </div>
-                                                <div className="price">
-                                                    100.000 đ
-                                               </div>
-                                            </div>
-                                        </div>
-                                        <div className="total">
-                                            <div className="tamTinh">
-                                                <div className="inlineFlex">
-                                                    <div className="name">
-                                                        Tạm tính
-                                                </div>
-                                                    <div className="value">
-                                                        2.585.222 đ
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div className="tamTinh">
-                                                <div className="inlineFlex">
-                                                    <div className="name">
-                                                        Phí vận chuyễn
-                                                </div>
-                                                    <div className="value">
-                                                        4.000 đ
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div className="thanhToan">
-                                                <div className="name">
-                                                    <b>Thành tiền</b>
-                                                </div>
-                                                <div className="value">
-                                                    2.819.000 đ
-                                                    <i>
-                                                        (Đã bao gồm VAT nếu có)
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <button className="btn btn-danger float-right mt-3" >Thanh toán</button>
-                                        </div>
+                                    <div className="col-12 col-md-9 ">
+                                        <textarea rows="4" cols="50" className="form-control " placeholder="Nhập đỉa chỉ giao hàng">
+
+                                        </textarea>
                                     </div>
+
                                 </div>
-                            </div>
+                                {/* MODEL */}
+                                {/* <div className="form-group add__account-form">
+                                    <label htmlFor="inputEmail4">Họ tên</label>
+                                    <input type="text" className="form-control" name="FullName" onChange={this.onChange} id="inputEmail4" placeholder="Nhập họ tên" />
+                                </div>
+                                <div className="form-group add__account-form-number ">
+                                    <label htmlFor="inputNumber4">SĐT</label>
+                                    <input type="text" className="form-control " name="Phone" onChange={this.onChange} placeholder="Nhập số điện thoại" />
+                                </div>
+                                <div className="form-group add__account-form-number  " style={{ clear: "both" }}>
+                                    <label htmlFor="inputNumber4">Địa chỉ</label>
+                                    <textarea rows="4" cols="50" className="form-control " placeholder="Nhập đỉa chỉ giao hàng">
+
+                                    </textarea>
+                                </div> */}
+                                <button className="btn btn-primary float-right mt-3">Tiếp theo</button>
+
+                            </form>
 
                         </div>
 

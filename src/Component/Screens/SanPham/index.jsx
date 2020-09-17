@@ -6,6 +6,10 @@ import { createAction } from '../../../Redux/Action';
 import { SREACHAZ, SREACHZA } from '../../../Redux/Action/type';
 import { Flip, Slide } from 'react-reveal'
 class index extends Component {
+    constructor(props){
+        super(props)
+
+    }
     sreachAZ = (ds) => {
         ///// Sắp xếp sản phẩm theo giá từ a -> z
         const az = ds.sort((a, b) => {
@@ -20,12 +24,16 @@ class index extends Component {
         })
         this.props.dispatch(createAction(SREACHZA, za))
     }
+    componentDidMount(){
+        // this.props.dispatch()
+    }
     render() {
+        console.log(this.props.idDanhMuc,"id danh muc");
         console.log("API ", this.props.sreachProductApi);
         return (
             <div className="viewContent" style={{ overflow: "hidden" }}>
                 <Flip>
-                    <Slidebar />
+                    <Slidebar title={this.props.match.params.title}/>
                 </Flip>
                 <Slide top>
                     <div className="content col-12 col-lg-9">
@@ -34,7 +42,10 @@ class index extends Component {
                                 this.props.keyWord != "" ?
 
                                     <h3 className="text-sreach">Kết quả tìm kiếm cho '{this.props.keyWord}': <span>{this.props.sreachKeyWord.length} sản phẩm</span></h3>
-                                    : ""
+                                    : 
+                                    
+                                    <h3 className="text-sreach">Kết quả tìm kiếm danh mục cho '{this.props.match.params.title}': <span>{this.props.idDanhMuc.data?.count} sản phẩm</span></h3>
+
                             }
                             <div className="button-option">
                                 <span>Ưu tiên xem : </span>
@@ -62,7 +73,7 @@ class index extends Component {
                         </div>
                         <div style={{ paddingLeft: "20px" }}>
                             <div className="row">
-                                <DanhSachSanPham sreachPrice={this.props.sreachPrice} sreachProductApi={this.props.sreachProductApi}/>
+                                <DanhSachSanPham sreachPrice={this.props.sreachPrice} status={true} sreachTheoDanhMuc={this.props.idDanhMuc.data?.products} sreachProductApi={this.props.sreachProductApi}/>
 
                             </div>
                         </div>
@@ -79,7 +90,9 @@ const mapStateToProps = state => ({
     danhSachSanPham: state.productReducers.danhSachSanPham,
     sreachKeyWord: state.productReducers.sreachKeyWord,
     keyWord: state.productReducers.keyWord,
-    sreachProductApi : state.productReducers.sreachProductApi
+    sreachProductApi : state.productReducers.sreachProductApi,
+    idDanhMuc : state.productReducers.idDanhMuc
+    
 
 })
 export default connect(mapStateToProps)(index);

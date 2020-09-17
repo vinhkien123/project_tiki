@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import { ThemSanPham } from '../../../../../Redux/Action/product';
+import { connect } from 'react-redux'
 const schema = yup.object().shape({
     Name: yup.string().required("Vui lòng không bỏ trống"),
     Price: yup.number().required("Vui lòng không bỏ trống"),
@@ -22,7 +23,7 @@ class index extends Component {
         }
     }
     handleFileUpload = (event) => {
-        this.setState({ useravtar: event.currentTarget.files[0] },()=>{
+        this.setState({ useravtar: event.currentTarget.files[0] }, () => {
             console.log(this.state)
         })
     };
@@ -33,6 +34,13 @@ class index extends Component {
         })
     }
     render() {
+        console.log("danh mucsanpham", this.props.danhMucSanPham);
+        const elementDanhMuc = this.props.danhMucSanPham.map((item, index) => {
+            return (
+                <option value={item._id} key={index} >{item.title}</option>
+
+            )
+        })
         return (
             <>
 
@@ -40,7 +48,7 @@ class index extends Component {
 
                 <Formik onSubmit={(value) => {
                     value.ImageList.push(value.Image)
-                    
+
                     ThemSanPham(value)
                 }}
                     initialValues={{
@@ -48,7 +56,7 @@ class index extends Component {
                         Name: "",
                         IdUser: "5f5f3a4b394537001728c385",
                         IdShop: "5f5f3a4b394537001728c385",
-                        IdCategory: "5f5f3a4b394537001728c385",
+                        IdCategory: "5f60727110312900173437a0",
                         IdCategorySub: "5f5f3a4b394537001728c385",
                         Price: "",
                         Model: "Iphone",
@@ -109,9 +117,8 @@ class index extends Component {
                                     <ErrorMessage name="ExpirationDateStatusSale">{(mes) => (<div className="alert alert-danger">{mes}</div>)}</ErrorMessage>
                                     <div className="form-group">
                                         <label > Danh mục sản phẩm </label>
-                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="Model">
-                                            <option value="Iphone">Iphone</option>
-                                            <option value="Android">Android</option>
+                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="IdCategory">
+                                            {elementDanhMuc}
                                         </Field>
                                     </div>
                                     <div className="form-group">
@@ -135,21 +142,24 @@ class index extends Component {
 /////////////////Uload hình ảnh /////////////////////////////////
 function Step1(props) {
     console.log(props.useravtar)
-      if (props.currentStep !== 1) {
+    if (props.currentStep !== 1) {
         return null
-      } 
-    
-      return(
+    }
+
+    return (
         <div className="upload">
             <label htmlFor="profile">
-              <div className="imgbox">
-                <img src="images/trans_116X116.png" alt="" />
-                <img src={props.useravtar} className="absoImg" alt="" />
-              </div>
+                <div className="imgbox">
+                    <img src="images/trans_116X116.png" alt="" />
+                    <img src={props.useravtar} className="absoImg" alt="" />
+                </div>
             </label>
-    <input id="file" name="file" type="file" accept="image/*" onChange={props.handleFileUpload}/>
+            <input id="file" name="file" type="file" accept="image/*" onChange={props.handleFileUpload} />
             <span className="guide_leb">Add your avatar</span>
-          </div>
-      )
-    }
-export default index;
+        </div>
+    )
+}
+const mapStateToProps = state => ({
+    danhMucSanPham: state.productReducers.danhMucSanPham
+})
+export default connect(mapStateToProps)(index);

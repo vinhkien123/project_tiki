@@ -279,3 +279,58 @@
     -o-border-radius: $border-radius_50;
     margin-right: $mg-1;
 }
+////////////// THANH TOAN //////////////////
+
+@mixin progressbar($width-auto-10, $position) {
+    width: $width-auto-10;
+    position: $position;
+}
+
+@mixin bar-custom($position, $mg-9, $hover-bg-button) {
+    position: $position;
+    margin: $mg-9;
+    background-color: $hover-bg-button;
+}
+
+@mixin circle-number($position-1, $width-number, $height-number, $display-1, $bg-sreach, $border-radius_50, $fs-0, $txt-center, $color-white-0, $mg-circle) {
+    position: $position-1;
+    width: $width-number;
+    height: $height-number;
+    display: $display-1;
+    background-color: $bg-sreach;
+    border-radius: $border-radius_50;
+    -webkit-border-radius: $border-radius_50;
+    -moz-border-radius: $border-radius_50;
+    -ms-border-radius: $border-radius_50;
+    -o-border-radius: $border-radius_50;
+    font-size: $fs-0;
+    text-align: $txt-center;
+    color: $color-white-0;
+    margin-top: $mg-circle;
+    margin-left: $mg-circle;
+}
+
+@mixin address-list($position, $bg-button, $border-auto, $pd-top-bot, $pd-right-left, $border-radius_1) {
+    position: $position;
+    background-color: $bg-button;
+    border: $border-auto;
+    padding: $pd-top-bot $pd-right-left;
+    border-radius: $border-radius_1;
+    -webkit-border-radius: $border-radius_1;
+    -moz-border-radius: $border-radius_1;
+    -ms-border-radius: $border-radius_1;
+    -o-border-radius: $border-radius_1;
+}
+
+@mixin defaut-title($position-1, $display-1, $fs-0, $color-defaut-title) {
+    position: $position-1;
+    display: $display-1;
+    font-size: $fs-0;
+    color: $color-defaut-title;
+}
+
+@mixin tablet {
+    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+      @content;
+    }
+  }

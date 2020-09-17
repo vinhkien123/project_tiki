@@ -14,6 +14,7 @@ import { Redirect } from 'react-router-dom'
 import logoMarket from '../../asset/data/imgHeader/market.png'
 import uuDaiDoiTac from '../../asset/data/imgHeader/uudaidoitac.png'
 import Slider from "react-slick";
+import { DanhSachSanPhamTheoDanhMuc } from '../../Redux/Action/product';
 // import { LOGINFACEBOOK } from '../../Redux/Action/type';
 
 class index extends Component {
@@ -38,6 +39,9 @@ class index extends Component {
     }
     Reload = (link) => {
 
+    }
+    SreachTheoDanhMuc = (id)=>{
+        this.props.dispatch(DanhSachSanPhamTheoDanhMuc(id))
     }
     render() {
         const settings = {
@@ -176,7 +180,8 @@ class index extends Component {
 
         const danhMucSanPham = this.props.danhMucSanPham.map((item, index) => {
             return (
-                <a className="dropdown-item" href="#" ><img src={item.icon} width={20} className="mr-1" alt="" />{item.title}</a>
+                
+                <NavLink to={`/sanPham/${item.title}`} className="dropdown-item"  onClick={()=>this.SreachTheoDanhMuc(item._id)} ><img src={item.icon} width={20} className="mr-1" alt="" />{item.title}</NavLink>
 
             )
         })

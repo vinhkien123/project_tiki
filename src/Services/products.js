@@ -5,32 +5,32 @@ class productsServices {
 
     danhSachSanPham (){
         return axios({
-            url : `${APILink}api/product/list?limit=20&page=1`,
+            url : `${APICor}${APILink}api/product/list?limit=20&page=1`,
             method: `GET`,
         })
     }
     themSanPham (data){
         return axios({
-            url : `${APILink}api/product`,
+            url : `${APICor}${APILink}api/product`,
             method : `POST`,
             data
         })
     }
     chiTietSanPham(id){
         return axios({
-            url : `${APILink}api/product?id=${id}`,
+            url : `${APICor}${APILink}api/product?id=${id}`,
             method: `GET`,
         })
     }
     xoaSanPham (id){
         return axios({
-            url :`${APILink}api/product/delete/${id}`,
+            url :`${APICor}${APILink}api/product/delete/${id}`,
             method : `POST`,
         })
     }
     timKiemSanPham(tenSanPham){
         return axios({
-            url :`${APILink}api/product/search?search=${tenSanPham}`,
+            url :`${APICor}${APILink}api/product/search?search=${tenSanPham}`,
             method : `GET`,
             data : tenSanPham
             
@@ -38,13 +38,13 @@ class productsServices {
     }
     danhMucSanPham(){
         return axios({
-            url:`${APILink}api/category/get`,
+            url:`${APICor}${APILink}api/category/get`,
             method : `GET`,
         })
     }
     danhSachSanPhamTheoDanhMuc(id){
         return axios({
-            url:`${APILink}api/product/category/search?IdCategory=${id}`,
+            url:`${APICor}${APILink}api/product/category/search?IdCategory=${id}`,
             method:`GET`,
             data : id
         })

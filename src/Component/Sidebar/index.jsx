@@ -69,11 +69,11 @@ class index extends Component {
                     <div className="panel-heading">
                         <h3 className="panel-title">
                             <a href="#" className="panel-link">
-                                Danh mục sản phẩm
+                                {this.props.title}
                             </a>
                         </h3>
                     </div>
-                    <div className="panel-content">
+                    {/* <div className="panel-content">
                         <div className="list-group">
                             <div className="top">
                                 <a href="#" className="item">
@@ -104,7 +104,7 @@ class index extends Component {
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="panel" style={{ borderTop: "2px solid #f7f7f7" }}>
                     <div className="panel-heading">

@@ -34,6 +34,10 @@ import { connect } from 'react-redux'
 import { DanhMucSanPham } from './Redux/Action/product';
 import DanhSachDanhMucSanPham from './Component/Admin/Page/DanhSachDanhMuc';
 import {ThongTinTaiKhoan} from './Redux/Action/user';
+import { LayDanhSachGioHangUser } from './Redux/Action/shopingcart';
+import ThanhToan from './Component/GioHang/ThanhToan'
+import AddDiaChi from './Component/EditUser/DiaChi'
+import Oder from './Component/GioHang/Oder'
 class App extends Component {
   render() {
     return (
@@ -50,10 +54,13 @@ class App extends Component {
             <HomeTemplate path="/movie/chitietphim/:id" exact Component={ChiTietPhim} />
             <HomeTemplate path="/giohang" exact Component={GioHang} />
             <HomeTemplate path="/sanpham" exact Component={PageSanPham} />
+            <HomeTemplate path="/sanpham/:title" exact Component={PageSanPham} />
             <HomeTemplate path="/khuyenmai" exact Component={KhuyenMai} />
-
+            <Route path ="/checkout/oder" exact component={Oder}/>
             <Route path="/dangkybanhang" exact component={DangKyBanHang} />
+            <Route path="/checkout/thanhtoan" exact component={ThanhToan} />
             <UserTemplate path="/user" exact Component={User} />
+            <UserTemplate path="/diachi" exact Component={AddDiaChi}/>
             <HomeTemplate path="/test" exact Component={Test} />
             <AdminTemplate path="/admin/themsanpham" exact Component={ThemSanPham} />
             <AdminTemplate path="/admin/suasanpham/:id" Component={SuaSanPham} />
@@ -75,9 +82,13 @@ class App extends Component {
     this.props.dispatch(DanhMucSanPham())
     let user = localStorage.getItem("user")
     if (user) {
-    console.log("userrr",user);
       let userObj = JSON.parse(user)
-      this.props.dispatch(ThongTinTaiKhoan(userObj.token))
+    console.log("userrr",userObj);
+
+      this.props.dispatch(ThongTinTaiKhoan(userObj?.token))
+      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user.id))
+      
+
     }
   }
 }

@@ -45,7 +45,7 @@ class index extends Component {
             ///// KHI HẾT NGÀY GIẢM GIÁ SẼ TỰ CẬP NHẬT TRẠNG THÁI
             if(ngay<0){
                 ///// CẬP NHẬT TRẠNG THÁI GIẢM GIÁ
-                this.props.item.sale = false
+                this.props.item.StatusSale = false
                 ///// ĐẨY LÊN API
                 axios({
                     url: `https://5f474cbc95646700168d9187.mockapi.io/danhSachSanPham/${this.props.id}`,

@@ -18,6 +18,7 @@ $color-yellow: #ffc120;
 $color-gray-5:#8f8f8f;
 $color-gray-4: rgb(239, 239, 239);
 
+$color-defaut-title: rgb(0, 153, 0);
 
 ////////////////////
 $hover-bg-button :  rgb(236, 236, 236);
@@ -30,7 +31,7 @@ $fw-normal: normal;
 $fw-bold-1: 700;    
 ///////Hegight//////////@include
 $height-1: 40px;
-
+$height-2: 100%;
 //////////Width /////////////
 $width-button : 30px;
 
@@ -45,6 +46,9 @@ $width-auto-2: 20%;
 $width-auto-3: 80%;
 $width-auto-5: 50%;
 $width-auto-8: 30%;
+$width-auto-10: 33%;
+$width-number: 26px;
+
 /////// width img //////////@at-root
 $width-img : 45px;
 $width-img-svg: 24px;
@@ -53,6 +57,8 @@ $height-a-img-i:20px;
 $height-banner:80px;
 $height : 30px;
 $height-1: 40px;
+$height-number: 26px;
+
 $height-img-svg: 24px;
 ///// Font-size ///// 
 $font-size-1 : 12px;
@@ -63,6 +69,7 @@ $font-size-icon-star : 18px;
 $fs-0: 15px; //default
 $fs-1: 12px;
 $fs-2: 20px;
+$fs-3: 14px;
 $fs-4: 40px;
 $fs-review : 13px;
 //////////////////////// Marginn ///////////////
@@ -74,8 +81,11 @@ $mg-3 : 0;
 $mg-4 : 9px;
 $mg-5 : 3px;
 $mg-auto: auto;
+$mg-8: 32px;
 $mg-6: 15px;
-
+$mg-9: 20px 0;
+$mg-circle: -15px;
+$mg-7: 22px;
 
 //////////////////////////////// Padding ///////////////////
 $pd-2: 15px;
@@ -131,6 +141,7 @@ $border-1 : none;
 $border-2 : 1px solid #ccc;
 $border-3: 2px solid #ffffff;
 $border-bottom: 1px solid rgb(27, 168, 255);
+$border-auto: 1px dashed rgb(0, 153, 0);
 
 //variable text-alighn
 $txt-center: center;

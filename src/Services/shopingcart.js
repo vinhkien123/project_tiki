@@ -2,17 +2,19 @@ import axios from 'axios'
 const APICor = `https://cors-anywhere.herokuapp.com/`
 const APILink = `https://marketplacedata.herokuapp.com/`
 class shoppingServices {
-    themGioHang (data){
+    themGioHang(data) {
         return axios({
-            url : `${APILink}api/cart/add`,
-            method : "POST",
-            data
+            url: `${APICor}${APILink}api/cart/add`,
+            method: "POST",
+            data,
+            
         })
     }
-    layDanhSachGioHang (){
+    layDanhSachGioHangTheoUser(id) {
         return axios({
-            url : `${APILink}api/cart/get`,
-            method: "GET"
+            url: `${APICor}${APILink}api/cart?UserId=${id}`,
+            method: "GET",
+           
         })
     }
 }

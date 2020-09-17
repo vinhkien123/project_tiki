@@ -67,7 +67,7 @@ class index extends Component {
 
             )
         })
-        let softPrice, sreachPrice, sreachKeyWord, renderKeyWord;
+        let softPrice, sreachPrice, sreachKeyWord, renderKeyWord,sreachTheoDanhMuc;
 
         // softPrice = this.props.sreachPrice.sort((a, b) => {
         //     return a.giaSanPham - b.giaSanPham;
@@ -93,8 +93,13 @@ class index extends Component {
         //         this.renderDanhSachSanPham(item, index)
         //     )
         // })
-
-        let render
+        console.log("steachdanhmuc",this.props);
+        sreachTheoDanhMuc = this.props.sreachTheoDanhMuc?.map((item,index)=>{
+            return(
+                this.renderDanhSachSanPham(item,index)
+            )
+        })
+        let render,sanPhamSreach
         // if (this.props.sreachPrice.length >= 1) {
         //     //// render khi người dùng sreach giá từ a -> b
         //     render = sreachPrice
@@ -104,11 +109,13 @@ class index extends Component {
         // }
         render = danhSachSanPham
         if (this.props.keyWord != "") {
-            render = sreachKeyWord
+            sanPhamSreach = sreachKeyWord
+        }else if(this.props.sreachTheoDanhMuc !=""){
+            sanPhamSreach = sreachTheoDanhMuc
         }
         return (
             <>
-                {render}
+                {this.props.status==true?sanPhamSreach:render}
             </>
         );
     }

@@ -1,4 +1,4 @@
-import { DANHSACHSANPHAM, CHITIETSANPHAM, FLAG, SREACHPRICE, SREACHAZ, SREACHZA, KEYWORD, SREACHPRODUCTAPI, DANHMUCSANPHAM } from "../Action/type"
+import { DANHSACHSANPHAM, CHITIETSANPHAM, FLAG, SREACHPRICE, SREACHAZ, SREACHZA, KEYWORD, SREACHPRODUCTAPI, DANHMUCSANPHAM, SREACHTHEODANHMUC } from "../Action/type"
 
 const initialState = {
     danhSachSanPham: [],
@@ -10,7 +10,8 @@ const initialState = {
     keyWord : "",
     sreachKeyWord : [],
     sreachProductApi : [],
-    danhMucSanPham : []
+    danhMucSanPham : [],
+    idDanhMuc : "",
 
 
 }
@@ -21,8 +22,9 @@ const productReducers = (state = initialState, action) => {
             return{...state}
         case KEYWORD:
             state.keyWord = action.payload
+            console.log(state.danhSachSanPham,"Rsd");
             state.sreachKeyWord = state.danhSachSanPham.filter(
-            item => item.tenSanPham?.toLowerCase().indexOf(state.keyWord) != -1
+            item => item.Name?.toLowerCase().indexOf(state.keyWord) != -1
             )
             return {...state}
         case DANHSACHSANPHAM:
@@ -54,6 +56,9 @@ const productReducers = (state = initialState, action) => {
                 state.sreachAz = []
             }
             return { ...state }
+        case SREACHTHEODANHMUC:
+            state.idDanhMuc = action.payload
+            return {...state}
         default:
             return { ...state }
     }
