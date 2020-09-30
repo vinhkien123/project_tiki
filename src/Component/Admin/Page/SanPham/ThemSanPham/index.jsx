@@ -1,8 +1,10 @@
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { Component } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as yup from 'yup'
-import { ThemSanPham } from '../../../../../Redux/Action/product';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import * as yup from 'yup';
+import { createAction } from '../../../../../Redux/Action';
+import { SaveDanhMucCon, ThemSanPham } from '../../../../../Redux/Action/product';
+import { SAVEDANHMUCCON } from '../../../../../Redux/Action/type';
 const schema = yup.object().shape({
     Name: yup.string().required("Vui lòng không bỏ trống"),
     Price: yup.number().required("Vui lòng không bỏ trống"),
@@ -19,12 +21,14 @@ class index extends Component {
                 userid: '',
                 useravtar: '',
                 attachement_id: '',
-            }
+            },
+            IdCategory : this.props.danhMucCon[0]?._id,
+            IdCategorySub : this.props.danhMucCon[0]?.ListSubCategory[0]._id
+   
         }
     }
     handleFileUpload = (event) => {
         this.setState({ useravtar: event.currentTarget.files[0] }, () => {
-            console.log(this.state)
         })
     };
     handleChange = event => {
@@ -33,12 +37,29 @@ class index extends Component {
             [name]: value
         })
     }
+    onChangeDanhMuc = (e) => {
+        console.log(e.target.value, "??");
+        this.setState({
+            [e.target.name] : e.target.value,
+            idDanhMucCon : this.props.danhMucCon[0]?.ListSubCategory[0]._id
+        },()=>{
+            this.props.dispatch(SaveDanhMucCon(this.state.IdCategory))
+            console.log(this.state.IdCategorySub,"id danh muc con",this.state.IdCategory,"danh mục cha");
+        })
+        // this.props.dispatch(createAction(SAVEDANHMUCCON,danhMucCon))
+    }
+    
     render() {
-        console.log("danh mucsanpham", this.props.danhMucSanPham);
+        console.log(this.props.danhMucCon, "?MSDCONE??ddd");
         const elementDanhMuc = this.props.danhMucSanPham.map((item, index) => {
             return (
-                <option value={item._id} key={index} >{item.title}</option>
+                <option value={item._id} key={index} >{item.Title}</option>
 
+            )
+        })
+        const elementDanhMucCon = this.props.danhMucCon[0]?.ListSubCategory.map((item,index)=>{
+            return(
+                <option value={item._id} key={index}>{item.Title}</option>
             )
         })
         return (
@@ -48,16 +69,16 @@ class index extends Component {
 
                 <Formik onSubmit={(value) => {
                     value.ImageList.push(value.Image)
-
                     ThemSanPham(value)
+                    this.props.history.push("/admin/danhsachsanpham")
                 }}
                     initialValues={{
 
                         Name: "",
                         IdUser: "5f5f3a4b394537001728c385",
                         IdShop: "5f5f3a4b394537001728c385",
-                        IdCategory: "5f60727110312900173437a0",
-                        IdCategorySub: "5f5f3a4b394537001728c385",
+                        IdCategory: this.state.IdCategory,
+                        IdCategorySub: this.state.IdCategorySub,
                         Price: "",
                         Model: "Iphone",
                         Image: "",
@@ -67,10 +88,14 @@ class index extends Component {
                         StatusSale: false,
                         ExpirationDateSale: "",
                         soLuongBan: 0,
+                        Warranty: true,
 
                     }}
+                    handleChange={() => {
+                        console.log("okokk");
+                    }}
                     validationSchema={schema}
-                    render={(formikProps) => {
+                    render={(formikProps, handleBlur) => {
                         return (
                             <>
                                 <h3 className="text-primary text-center">Thêm sản phẩm</h3>
@@ -88,7 +113,13 @@ class index extends Component {
 
                                     <div className="form-group">
                                         <label > Mô tả : </label>
-                                        <Field className="form-control" type="type" onChange={formikProps.handleChange} name="DetailedDescription" />
+                                        <Field
+                                            className="form-control"
+                                            component="textarea"
+                                            name="dayWiseItinerary"
+                                            rows="6"
+                                            placeholder="Gõ </br> để xuống dòng"
+                                            onChange={formikProps.handleChange} name="DetailedDescription" />
                                     </div>
                                     <ErrorMessage name="DetailedDescription">{(mes) => (<div className="alert alert-danger">{mes}</div>)}</ErrorMessage>
                                     <div className="form-group">
@@ -108,17 +139,26 @@ class index extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label > Ngày hết hạn giảm giá : </label>
-                                        <Field className="form-control" type="date" onChange={formikProps.handleChange} name="ExpirationDateStatusSale" />
+                                        <Field className="form-control" type="date" onChange={formikProps.handleChange} name="ExpirationDateSale" />
                                     </div>
                                     <div className="form-group">
                                         <label > Số lượng bán giảm giá : </label>
-                                        <Field className="form-control" type="text" onChange={formikProps.handleChange} name="soLuongBan" />
+                                        <Field className="form-control" type="text"  onChange={formikProps.handleChange} name="soLuongBan" />
                                     </div>
                                     <ErrorMessage name="ExpirationDateStatusSale">{(mes) => (<div className="alert alert-danger">{mes}</div>)}</ErrorMessage>
                                     <div className="form-group">
                                         <label > Danh mục sản phẩm </label>
-                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="IdCategory">
+                                       
+                                        <Field name="IdCategory" component="select" className="form-control" onChange={formikProps.handleChange} onClick={this.onChangeDanhMuc} id="">
                                             {elementDanhMuc}
+                                        </Field>
+
+                                    </div>
+                                    <div className="form-group">
+                                        <label > Danh mục con </label>
+                                        <Field name="IdCategorySub" className="form-control" component="select" onChange={formikProps.handleChange} onClick={this.onChangeDanhMuc} id="">
+
+                                            {elementDanhMucCon}
                                         </Field>
                                     </div>
                                     <div className="form-group">
@@ -126,6 +166,13 @@ class index extends Component {
                                         <Field className="form-control" component="select" onChange={formikProps.handleChange} name="StatusSale">
                                             <option value={false}>False</option>
                                             <option value={true}>True</option>
+                                        </Field>
+                                    </div>
+                                    <div className="form-group">
+                                        <label > Sản phẩm mới </label>
+                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="Warranty">
+                                            <option value={true}>True</option>
+                                            <option value={false}>False</option>
                                         </Field>
                                     </div>
                                     <ErrorMessage name="Model">{(mes) => (<div className="alert alert-danger">{mes}</div>)}</ErrorMessage>
@@ -141,7 +188,6 @@ class index extends Component {
 }
 /////////////////Uload hình ảnh /////////////////////////////////
 function Step1(props) {
-    console.log(props.useravtar)
     if (props.currentStep !== 1) {
         return null
     }
@@ -150,8 +196,8 @@ function Step1(props) {
         <div className="upload">
             <label htmlFor="profile">
                 <div className="imgbox">
-                    <img src="images/trans_116X116.png" alt="" />
-                    <img src={props.useravtar} className="absoImg" alt="" />
+                    <img src="images/trans_116X116.png" alt="test" />
+                    <img src={props.useravtar} className="absoImg" alt="test" />
                 </div>
             </label>
             <input id="file" name="file" type="file" accept="image/*" onChange={props.handleFileUpload} />
@@ -160,6 +206,7 @@ function Step1(props) {
     )
 }
 const mapStateToProps = state => ({
-    danhMucSanPham: state.productReducers.danhMucSanPham
+    danhMucSanPham: state.productReducers.danhMucSanPham,
+    danhMucCon: state.productReducers.saveDanhMucCon
 })
 export default connect(mapStateToProps)(index);

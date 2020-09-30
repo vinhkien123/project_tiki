@@ -1,7 +1,6 @@
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { Component } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as yup from 'yup'
-import { ThemSanPham } from '../../../../Redux/Action/product';
+import * as yup from 'yup';
 import { ThemPhim } from '../../../../Redux/Action/movie';
 const schema = yup.object().shape({
     tenPhim: yup.string().required("Vui lòng không bỏ trống"),

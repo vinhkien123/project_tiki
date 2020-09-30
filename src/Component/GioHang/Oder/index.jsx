@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import logo from '../../../asset/data/img/FONT-3.png'
-import hotline from '../../../asset/data/img/hotline.png'
-import { Modal, Button } from 'antd';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import logo from '../../../asset/data/img/FONT-3.png';
+import hotline from '../../../asset/data/img/hotline.png';
+import { createAction } from '../../../Redux/Action';
+import { THONGTINGIAOHANG } from '../../../Redux/Action/type';
 class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            visible: false,
-            now: new Date(),
-            oder : {
-                hoTen : "",
-                soDienThoai : "",
-                diaChi: "",
 
-            }
+
+            Name: "",
+            Phone: "",
+            Address: "",
+
+
         }
     }
+
     showModal = () => {
         this.setState({
             visible: true,
@@ -35,9 +36,30 @@ class index extends Component {
             visible: false,
         });
     };
+    onChange = (e) => {
+        this.setState({
+
+            [e.target.name]: e.target.value,
+
+        }, () => {
+            // console.log(this.state.oder);
+        })
+    }
+    onClick = (e) => {
+        e.preventDefault();
+        const data = {
+            ...this.state,
+            //  IdCart : this.props.danhSachGioHangTheoUser._id ,
+            //  Products : this.props.danhSachGioHangTheoUser.ListProduct,
+            //  UserId : this.props.thongTinTaiKhoan._id
+        }
+
+        this.props.dispatch(createAction(THONGTINGIAOHANG, data))
+        this.props.history.push("thanhtoan")
+    }
     render() {
-        const nextDay = new Date(this.state.now.getFullYear(), this.state.now.getMonth(), this.state.now.getDate() + 2)
-        let str = ` ${nextDay}`
+        // const nextDay = new Date(this.state.now.getFullYear(), this.state.now.getMonth(), this.state.now.getDate() + 2)
+        // let str = ` ${nextDay}`
         console.log("user", this.props.thongTinTaiKhoan);
         return (
             <div className="oder">
@@ -45,8 +67,8 @@ class index extends Component {
                     <div className="container header-col">
                         <div className="row">
                             <div className="col-12 col-md-3 col-lg-3 logo d-flex">
-                                <a href="#" className="logo-shipping">
-                                    <img src={logo} alt />
+                                <a href="# " className="logo-shipping">
+                                    <img src={logo} alt="test" />
                                 </a>
                             </div>
                             <div className="col-12 col-md-6 col-lg-6 progress_custom d-flex">
@@ -67,14 +89,14 @@ class index extends Component {
 
                                 <div className="bar-progress_3">
                                     <div className="text">Thanh toán &amp; Đặt mua</div>
-                                    <div className="progress_bar" role="progressbar">
+                                    <div className="progress_bar" role="progressbar" style={{ margin: 0 }}>
                                         <div className="fill-color" />
                                     </div>
                                     <div className="circle">3</div>
                                 </div>
                             </div>
                             <div className="col-12 col-md-3 col-lg-3 hotline d-flex">
-                                <img src={hotline} alt />
+                                <img src={hotline} alt="test" />
                             </div>
                         </div>
                     </div>
@@ -127,7 +149,7 @@ class index extends Component {
                                 </div>
                                 Ngày giao hàng : {str}
 
-                                <p className="title-address_custom">Bạn muốn giao hàng đến địa chỉ khác? <a href="#">Thêm địa chỉ giao hàng mới</a></p>
+                                <p className="title-address_custom">Bạn muốn giao hàng đến địa chỉ khác? <a href="/">Thêm địa chỉ giao hàng mới</a></p>
                             </div>
                         </div> */}
                         <div className="container formUser mb-3 py-5">
@@ -137,7 +159,7 @@ class index extends Component {
                                         <label htmlFor=""><b>Họ và tên  : </b></label>
                                     </div>
                                     <div className="col-12 col-md-9 ">
-                                        <input className="form-control" type="text" placeholder="Nguyễn Văn A" />
+                                        <input className="form-control" name="Name" onChange={this.onChange} value={this.state.Name} type="text" placeholder="Nguyễn Văn A" />
                                     </div>
                                 </div>
 
@@ -146,15 +168,15 @@ class index extends Component {
                                         <label htmlFor=""><b>Số điện thoại  : </b></label>
                                     </div>
                                     <div className="col-12 col-md-9 ">
-                                        <input className="form-control" type="text" placeholder="Số điện thoại" />
+                                        <input className="form-control" type="text" name="Phone" onChange={this.onChange} value={this.state.Phone} placeholder="Số điện thoại" />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-12 col-md-3">
-                                        <label htmlFor=""><b>Địa chỉ  : </b></label>
+                                        <label htmlFor="" ><b>Địa chỉ  : </b></label>
                                     </div>
                                     <div className="col-12 col-md-9 ">
-                                        <textarea rows="4" cols="50" className="form-control " placeholder="Nhập đỉa chỉ giao hàng">
+                                        <textarea rows="4" cols="50" className="form-control " onChange={this.onChange} value={this.state.Address} name="Address" placeholder="Nhập đỉa chỉ giao hàng">
 
                                         </textarea>
                                     </div>
@@ -175,7 +197,7 @@ class index extends Component {
 
                                     </textarea>
                                 </div> */}
-                                <button className="btn btn-primary float-right mt-3">Tiếp theo</button>
+                                <button onClick={this.onClick} className="btn btn-primary float-right mt-3">Tiếp theo</button>
 
                             </form>
 
@@ -189,11 +211,11 @@ class index extends Component {
                             Bằng việc tiến hành Đặt Mua, khách hàng đồng ý với các Điều Kiện Giao Dịch Chung được ban hành bởi Marketplace:
       </p>
                         <p className="term">
-                            <a href="#">Quy chế hoạt động</a>
-                            <a href="#">Chính sách giải quyết khiếu nại</a> |
-                            <a href="#">Chính sách bảo hành</a> |
-                            <a href="#">Chính sách bảo mật thanh toán</a> |
-                            <a href="#">Chính sách bảo mật thông tin cá nhân</a>
+                            <a href="/">Quy chế hoạt động</a>
+                            <a href="/">Chính sách giải quyết khiếu nại</a> |
+                            <a href="/">Chính sách bảo hành</a> |
+                            <a href="/">Chính sách bảo mật thanh toán</a> |
+                            <a href="/">Chính sách bảo mật thông tin cá nhân</a>
                         </p>
                         <p className="copyright">© 2019 - Bản quyền của Công Ty Cổ Phần Marketplace</p>
                     </div>
@@ -204,6 +226,7 @@ class index extends Component {
     }
 }
 const mapStateToProps = state => ({
-    thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan
+    thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
+    danhSachGioHangTheoUser: state.shoppingcartReducers.danhSachGioHangTheoUser,
 })
 export default connect(mapStateToProps)(index);

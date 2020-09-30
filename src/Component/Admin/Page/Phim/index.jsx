@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { connect, shallowEqual } from 'react-redux'
-import { DanhSachSanPham } from '../../../../Redux/Action/product';
-import productsServices from '../../../../Services/products';
-import Swal from 'sweetalert2'
-import { ProductsService, MoviesServices } from '../../../../Services';
-import { DanhSachPhim } from '../../../../Redux/Action/movie';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { DanhSachPhim } from '../../../../Redux/Action/movie';
+import { MoviesServices } from '../../../../Services';
 
 class index extends Component {
     constructor(props) {
@@ -26,7 +24,7 @@ class index extends Component {
         }, () => {
 
             let danhSachTimKiem = this.props.danhSachPhim.filter(item =>
-                item.tenPhim.toLowerCase().indexOf(this.state.keyWord) != -1
+                item.tenPhim.toLowerCase().indexOf(this.state.keyWord) !== -1
             )
             this.setState({
                 danhSachTimKiem,
@@ -60,7 +58,7 @@ class index extends Component {
             <tr key={index}>
                 <td>{index+1}</td>
                 <td>{item.tenPhim}</td>
-                <td><img src={item.img} alt="" /></td>
+                <td><img src={item.img} alt="test" /></td>
                 <td>{item.theLoai} </td>
                 <td><button className="btn btn-danger" onClick={()=>this.xoaSanPham(item.id)}>Xóa</button></td>
             </tr>

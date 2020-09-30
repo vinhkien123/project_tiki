@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import img from '../../../asset/data/img/556b075fd896c32ff38a3526bba0d3bc.jpg'
+import img from '../../../asset/data/img/556b075fd896c32ff38a3526bba0d3bc.jpg';
 class index extends Component {
     render() {
         return (
@@ -21,7 +21,7 @@ class index extends Component {
                                         <i className="fa fa-star" />
                                         <i className="fa fa-star-half-o" />
                                     </p>
-                                    <a href="#">(19 nhận xét)</a>
+                                    <a href="/">(19 nhận xét)</a>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-4 py-4 border-middle">
@@ -141,13 +141,13 @@ class index extends Component {
           </p>
                                     <p className="content">Quyển 2,3 thì có bọc nhựa nhưng quyển 4 này k có bọc nên phía dưới quyển sách bị dơ dính dấu tay.</p>
                                     <div className="images-infor">
-                                        <img src={img} alt />
+                                        <img src={img} alt="test" />
                                     </div>
                                     <div className="buttons-link d-flex align-items-center mt-2">
-                                        <a href="#">Trả lời</a>
-                                        <a href="#">Chia sẻ trên facebook</a>
+                                        <a href="/">Trả lời</a>
+                                        <a href="/">Chia sẻ trên facebook</a>
                                         <p>Nhận xét này hữu ích với bạn?</p>
-                                        <a href="#" className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
+                                        <a href="# " className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
                                     </div>
                                 </div>
                             </div>
@@ -175,10 +175,10 @@ class index extends Component {
           </p>
                                     <p className="content">mua 3 quyển mà 1 quyển bị bóc mất bao ngoài rồi shop,nhưng vẫn oke ạ,giao nhanh</p>
                                     <div className="buttons-link d-flex align-items-center mt-2">
-                                        <a href="#">Trả lời</a>
-                                        <a href="#">Chia sẻ trên facebook</a>
+                                        <a href="/">Trả lời</a>
+                                        <a href="/">Chia sẻ trên facebook</a>
                                         <p>Nhận xét này hữu ích với bạn?</p>
-                                        <a href="#" className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
+                                        <a href="# " className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Header from '../../Component/AdminUser'
 import ScrollMemory from 'react-router-scroll-memory'
+import Header from '../../Component/AdminUser'
 import { LayoutHeader } from '../HomeTemplate/'
 const TayoutHeader = (props) => {
     return (

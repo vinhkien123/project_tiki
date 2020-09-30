@@ -28,7 +28,7 @@ class index extends Component {
                         
                         Hi,&nbsp; <strong>Kiên</strong>
                         <li className="nav-item dropdown d-none d-xl-inline-block user-dropdown">
-                            <a className="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" id="UserDropdown" href="# " data-toggle="dropdown" aria-expanded="false">
                                 <img className="img-xs rounded-circle" src={avatar} alt="Profile image" /> </a>
                             <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                                 <div className="dropdown-header text-center">

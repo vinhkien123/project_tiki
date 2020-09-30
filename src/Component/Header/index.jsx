@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import Sreach from '../Sreach'
-import Logo from '../../asset/data/img/logo.jpg'
-import Logo1 from '../../asset/data/img/header-logo.png'
-import { Link, NavLink } from 'react-router-dom';
+import { faBars, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartArrowDown, faBell, faUser, faBars, faMapMarkerAlt, faAngleDown, faGift, faMedal, faUndoAlt } from "@fortawesome/free-solid-svg-icons";
-import Model from '../Model';
-import logoSale from '../../asset/data/imgHeader/khuyenmaihot.png'
-import { connect } from 'react-redux'
-import { ThongTinTaiKhoan } from '../../Redux/Action/user';
-import { Popover, Button } from 'antd';
-import { Redirect } from 'react-router-dom'
-import logoMarket from '../../asset/data/imgHeader/market.png'
-import uuDaiDoiTac from '../../asset/data/imgHeader/uudaidoitac.png'
-import Slider from "react-slick";
+import { Button, Menu, Modal, Popover } from 'antd';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import Logo1 from '../../asset/data/img/header-logo.png';
+import iconmarketship from "../../asset/data/img/iconmarketship.png";
+import logoSale from '../../asset/data/imgHeader/khuyenmaihot.png';
+import logoMarket from '../../asset/data/imgHeader/market.png';
+import uuDaiDoiTac from '../../asset/data/imgHeader/uudaidoitac.png';
 import { DanhSachSanPhamTheoDanhMuc } from '../../Redux/Action/product';
+import Model from '../Model';
+import Sreach from '../Sreach';
+import DanhMucCon from './DanhMucCon';
+import DanhMucSanPham from './DanhMucSanPham';
+import DoiTra from '../../asset/data/img/doitra.png'
+
 // import { LOGINFACEBOOK } from '../../Redux/Action/type';
 
 class index extends Component {
@@ -26,6 +27,27 @@ class index extends Component {
 
     }
 
+    state = { visible: false };
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
     DangXuat = () => {
         if (localStorage.getItem("user")) {
             localStorage.removeItem("user");
@@ -40,8 +62,11 @@ class index extends Component {
     Reload = (link) => {
 
     }
-    SreachTheoDanhMuc = (id)=>{
+    SreachTheoDanhMuc = (id) => {
         this.props.dispatch(DanhSachSanPhamTheoDanhMuc(id))
+    }
+    onClickLink = (link) => {
+        this.props.history.push(`/sanpham/${link}`)
     }
     render() {
         const settings = {
@@ -77,37 +102,36 @@ class index extends Component {
                 }
             ]
         };
+
+
+        //////// SẢN PHẨM ĐÃ XEM ////////////
         let elementSanPham;
         let sanPham = localStorage.getItem("sanPham")
-
         if (sanPham) {
             let sanPhamObj = JSON.parse(sanPham)
             elementSanPham = sanPhamObj.map((item, index) => {
-                return (
-                    <Link to={`/chitietsanpham/${item.id}`} onClick={this.Reload} className="col-6 col-md-4 col-lg-2" key={index}>
-                        <div className="card text-left" >
+                if (index < 5) {
+                    return (
+                        <a href={`/chitietsanpham/${item._id}`} onClick={this.Reload} className="col-6 col-md-4 col-lg-2" key={index}>
                             <img className="card-img-top" src={item.Image} alt />
-                            <div className="card-body">
 
-                                <h4 className="card-title" style={{ fontSize: "12px", textAlign: "center", fontWeight: "200" }}>{item.Name?.length > 44 ? item.Name.slice(0, 44) + "...." : item.Name}</h4>
-
-                                {/* <Time /> */}
-
-                            </div>
-                        </div>
-                    </Link>
-                )
+                        </a>
+                    )
+                }
             })
 
         }
         const text = <span className="text-center">Sản phẩm đã xem</span>;
         const content = (
             <div className="row">
-                {elementSanPham ? elementSanPham.length > 6 ?
-
+                {elementSanPham ? elementSanPham.length > 5 ?
+                    /// NẾU SẢN PHẨM NHIỀU HƠN 5
                     <>
+                        {elementSanPham}
+                        <NavLink to="/sanphamdaxem" style={{ height: "39px", marginLeft: "30px", marginTop: "40px" }} className="btn btn-outline-primary">Xem tất cả</NavLink>
                     </>
                     :
+                    ////// sản phẩm ít hơn 5
                     <>
                         {elementSanPham}
                     </>
@@ -134,7 +158,7 @@ class index extends Component {
                         </p>
                     </div>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <NavLink to="/user" className="dropdown-item" href="#">Thông tin tài khoản</NavLink>
+                        <a href="/user" className="dropdown-item">Thông tin tài khoản</a>
 
                         <a className="dropdown-item view" href="#">Email : {this.props.user.Email}</a>
                         <a className="dropdown-item view" href="#">Điện thoại : {this.props.user.Phone}</a>
@@ -176,216 +200,253 @@ class index extends Component {
         }
 
 
-        console.log("THONGTINTAIKHOAN", this.props.thongTinTaiKhoan);
 
-        const danhMucSanPham = this.props.danhMucSanPham.map((item, index) => {
+        function handleClick(e) {
+            console.log('click', e);
+        }
+
+        const { SubMenu } = Menu;
+        ////// Danh mục ///////////////
+        const danhMucSanPham = this.props.danhMucSanPham?.map((item, index) => {
             return (
-                
-                <NavLink to={`/sanPham/${item.title}`} className="dropdown-item"  onClick={()=>this.SreachTheoDanhMuc(item._id)} ><img src={item.icon} width={20} className="mr-1" alt="" />{item.title}</NavLink>
 
+                <a href={`sanpham/danhmuc/${item.Title}/${item._id}`} key={index}>
+                    <Menu onClick={handleClick} style={{ width: 256, height: 35 }} mode="vertical">
+                        <SubMenu key="sub4"
+
+                            con={
+                                <img src={item.Icon}
+                                    width={18} className="mr-1" alt="test" />
+                            } title={
+                                item.Title
+                            }>
+
+                            <DanhMucCon ListSubCategory={item.ListSubCategory} MenuItem={<Menu.Item></Menu.Item>} />
+
+                        </SubMenu>
+                    </Menu>
+                </a >
             )
         })
         ///////////////////////////////// renderrr/////////////////////
-
-        console.log(this.props.user,"useertest");
-
+        const height = 35 * this.props.danhMucSanPham.length
+        const link = window.location.href
         return (
             //// HEADER //////
-            <section className="container-fuild header">
-                <div className="headerTop ">
-                    <div className="text-HeaderTop container row">
+            <>
 
-                        <NavLink to="movie"  >
-                            <img src={uuDaiDoiTac} width={18} style={{ marginRight: 4 }} />
+                <section className="container-fuild header">
+                    <div className="headerTop ">
+                        <div className="text-HeaderTop container row">
+
+                            <a href="movie"  >
+                                <img src={uuDaiDoiTac} alt="test" width={18} style={{ marginRight: 4 }} />
                             Ưu đãi đối tác
-                         </NavLink>
-                        <NavLink to="/khuyenmai" onClick={this.Reload} >
-                            <img src={logoSale} width={18} style={{ marginRight: 4 }} />
+                         </a>
+                            <a href="/khuyenmai" onClick={this.Reload} >
+                                <img src={logoSale} width={18} alt="test" style={{ marginRight: 4 }} />
                             Khuyến mãi HOT
-                         </NavLink>
-                        <NavLink to="/dangkybanhang" >
-                            <img src="https://salt.tikicdn.com/ts/upload/42/f9/5e/7ccf8b09de0e051cc9054bd535f7b1a1.png" width={18} style={{ marginRight: 4 }} />
-                            Bán hàng cùng Tiki
-                         </NavLink>
-                        {/* <a href="#">
+                         </a>
+                            <a href="/dangkybanhang" >
+                                <img src="https://salt.tikicdn.com/ts/upload/42/f9/5e/7ccf8b09de0e051cc9054bd535f7b1a1.png" alt="test" width={18} style={{ marginRight: 4 }} />
+                            Bán hàng cùng QT-Data
+                             </a>
+                            {/* <a href="/">
                             <img src="https://salt.tikicdn.com/media/upload/2019/01/30/736dfae48db88034a73e7fdb7f72756b.png" width={18} style={{ marginRight: 4 }} />
                             Trợ lý Tiki
                             </a>
-                        <a href="#">
+                        <a href="/">
                             <img src="https://salt.tikicdn.com/media/upload/2019/01/30/736dfae48db88034a73e7fdb7f72756b.png" width={18} style={{ marginRight: 4 }} />
 
                             Ưu đãi đối tác
                         </a>
-                        <a href="#">
+                        <a href="/">
                             <img src="https://salt.tikicdn.com/media/upload/2019/01/30/736dfae48db88034a73e7fdb7f72756b.png" width={18} style={{ marginRight: 4 }} />
 
                             Đặt vé máy bay
                         </a>
-                        <a href="#">
+                        <a href="/">
                             <img src="https://salt.tikicdn.com/media/upload/2019/01/30/736dfae48db88034a73e7fdb7f72756b.png" width={18} style={{ marginRight: 4 }} />
 
                             Khuyến mãi HOT
                         </a>
-                        <a href="#">
+                        <a href="/">
                             <img src="https://salt.tikicdn.com/media/upload/2019/01/30/736dfae48db88034a73e7fdb7f72756b.png" width={18} style={{ marginRight: 4 }} />
 
                             Hàng quốc tế
                         </a>
-                        <a href="#">
+                        <a href="/">
                             <img src="https://salt.tikicdn.com/media/upload/2019/01/30/736dfae48db88034a73e7fdb7f72756b.png" width={18} style={{ marginRight: 4 }} />
 
                             Bán hàng cùng Tiki
                         </a> */}
+                        </div>
                     </div>
-                </div>
-                <div className="container headerMid">
-                    <div className="midLeft row">
-                        <div className="logo col-4 col-md-2 col-lg-1">
+                    <div className="container headerMid">
+                        <div className="midLeft row">
+                            <div className="logo col-12 col-md-2 col-lg-1">
 
-                            <NavLink to="/" onClick={this.Reload}>
-                                <img src={Logo1} height={33} alt="" />
-                            </NavLink>
-                        </div>
-                        <div className="form-sreach col-8 col-md-10 col-lg-6 mt-3" style={{ marginLeft: "40px" }}>
-                            <Sreach />
-                        </div>
-                        <div className="header-link col-12 col-md-10 col-lg-5 mt-2">
-                            <a href="#" className="item">
-                                <i className="icon-tracking"></i>
+                                <a href="/" onClick={this.Reload}>
+                                    <img src={Logo1} height={33} alt="test" />
+                                </a>
+                            </div>
+                            <div className="form-sreach col-12 col-md-10 col-lg-6 mt-3" >
+                                <Sreach />
+                            </div>
+                            <div className="header-link col-12 col-md-10 col-lg-5 mt-2">
+                                <a href="# " className="item">
+                                    <i className="icon-tracking"></i>
                                 Theo dõi <br></br>
                                 đơn hàng
                             </a>
-                            <a href="#" className="item">
-                                <i className="icon-tracking"></i>
+                                <a href="# " className="item">
+                                    <i className="icon-tracking"></i>
                                 Thông báo <br></br>
                                 của tôi
                             </a>
 
-                            {/* MODEL */}
-                            {showLogin}
+                                {/* MODEL */}
+                                {showLogin}
 
 
-                            <div className="header-cart">
-                                <NavLink to="/giohang" onClick={this.Reload} className="item">
-                                    <i class="fa fa-shopping-cart"></i>
+                                <div className="header-cart">
+                                    <a href="/giohang" onClick={this.Reload} className="item">
+                                        <i class="fa fa-shopping-cart"></i>
                                     Giỏ hàng
-                                    <span className="card-count"></span>
-                                </NavLink>
+                                    <span className="card-count" style={{
+                                            background: "rgb(253, 216, 53)",
+                                            color: "rgb(74, 74, 74)",
+                                            textAlign: "center",
+                                            fontSize: "12px",
+                                            marginLeft: "9px",
+                                            height: "20px",
+                                            lineHeight: "20px",
+                                            padding: "0px 6px"
+                                        }}>
+                                            {this.props.danhSachGioHangTheoUser.ListProduct?.length > 0 ? this.props.danhSachGioHangTheoUser.ListProduct.length : 0}
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="headerBottom container">
-                    <div className="row">
-                        <div className="menu col-12 col-md-6 col-lg-2">
-                            <a href="#" type="button" className="btn btn-primary dropdown-toggle" style={{ background: "none", border: "none" }} id="dropdownMenuOffset" data-toggle="dropdown">
-                                <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
-                           </a>
-                            <div className="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                {danhMucSanPham}
-                            </div>
-                        </div>
-                        <div className="viTri col-6 col-md-6 col-lg-2">
+                    <div className="headerBottom container">
+                        <div className="row">
+                            <div className="menu col-12 col-md-6 col-lg-2">
 
-                            <a href="#" type="button" className=" viTriGiaoHang" data-toggle="modal" data-target="#giaoHang">
-                                &nbsp;
-                                &nbsp;
+
+
+                                {link == "http://localhost:3000/" ?
+                                    <>
+                                        <a href="# " type="button" className="btn btn-primary dropdown-toggle" style={{ background: "none", border: "none" }} >
+                                            <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
+                                        </a>
+                                        {/* <div className="position">
+                                            {danhMucSanPham}
+                                        </div> */}
+                                    </>
+                                    :
+                                    <>
+                                        <a href="# " type="button" className="btn btn-primary dropdown-toggle" style={{ background: "none", border: "none" }} id="dropdownMenuOffset" data-toggle="dropdown">
+                                            <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
+                                        </a>
+                                        <DanhMucSanPham />
+                                    </>}
+
+
+
+                            </div>
+                            <div className="viTri col-12 col-md-6 col-lg-2" style={{ margin: "0" }}>
+                                <Button type="primary" style={{ padding: 0, boxShadow: "none" }} className=" viTriGiaoHang" onClick={this.showModal}>
+                                    &nbsp;
+                                    &nbsp;
                                 <FontAwesomeIcon icon={faMapMarkerAlt} style={{ color: "red" }} />
                                 &nbsp;
                                 <span>Bạn muốn giao hàng tới đâu</span>
-                            </a>
-                            {/* Modal */}
-                            <div className="modal fade" id="giaoHang" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                        <div className="modal-header">
-                                            <h5 className="modal-title" id="exampleModalLabel">Địa chỉ giao hàng</h5>
-                                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div className="modal-body">
-                                            <p>Hãy chọn địa chỉ nhận hàng để được dự báo thời gian giao hàng cùng phí đóng gói, vận chuyển một
+
+                                </Button>
+                                <Modal
+                                    title="Basic Modal"
+                                    visible={this.state.visible}
+                                    onOk={this.handleOk}
+                                    onCancel={this.handleCancel}
+                                >
+                                    <p>Hãy chọn địa chỉ nhận hàng để được dự báo thời gian giao hàng cùng phí đóng gói, vận chuyển một
                                                 cách chính xác nhất.</p>
-                                            <div className="button-sign">
-                                                <button className="btn btn--yellow-1 btn-warning">Đăng nhập để chọn địa chỉ giao hàng</button>
-                                                <div className="text_sign d-flex">
-                                                    <p>hoặc</p>
-                                                </div>
-                                            </div>
-                                            <div className="form-check check-sign_form">
-                                                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" defaultValue="option1" defaultChecked />
-                                                <label className="form-check-label" htmlFor="exampleRadios1">
-                                                    Chọn khu vực giao hàng
-            </label>
-                                            </div>
-                                            <form className="form-sign_in">
-                                                <div className="form-group row">
-                                                    <label htmlFor="inputEmail3" className="col-sm-3 col-form-label">Tỉnh/Thành phố</label>
-                                                    <div className="col-sm-9">
-                                                        <select id="inputState" className="form-control">
-                                                            <option selected>Vui lòng chọn tỉnh/thành phố</option>
-                                                            <option>Hồ Chí Minh</option>
-                                                            <option>Hà Nội</option>
-                                                            <option>Đà Nẵng</option>
-                                                            <option>An Giang</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <fieldset disabled>
-                                                    <div className="form-group row">
-                                                        <label htmlFor="disabledTextInput" className="col-sm-3 col-form-label">Quận/Huyện</label>
-                                                        <div className="col-sm-9">
-                                                            <select id="disabledSelect" className="form-control">
-                                                                <option>Vui lòng chọn quận/huyện</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-group row">
-                                                        <label htmlFor="disabledTextInput" className="col-sm-3 col-form-label">Phường/Xã</label>
-                                                        <div className="col-sm-9">
-                                                            <select id="disabledSelect" className="form-control">
-                                                                <option>Vui lòng chọn phường/xã</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </form></div>
-                                        <div className="modal-footer form-sign_btn">
-                                            <button type="button" className="btn btn--red-1 btn-danger" data-dismiss="modal">GIAO ĐẾN ĐỊA CHỈ NÀY</button>
+                                    <div className="button-sign">
+                                        <Model />
+                                        <div className="text_sign d-flex">
+                                            <p>hoặc</p>
                                         </div>
                                     </div>
-                                </div>
+                                    <div className="form-check check-sign_form">
+                                        <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" defaultValue="option1" defaultChecked />
+                                        <label className="form-check-label" htmlFor="exampleRadios1">
+                                            Chọn khu vực giao hàng
+            </label>
+                                    </div>
+                                    <form className="form-sign_in">
+                                        <div className="form-group row">
+                                            <label htmlFor="inputEmail3" className="col-sm-3 col-form-label">Tỉnh/Thành phố</label>
+                                            <div className="col-sm-9">
+                                                <select id="inputState" className="form-control">
+                                                    <option selected>Vui lòng chọn tỉnh/thành phố</option>
+                                                    <option>Hồ Chí Minh</option>
+                                                    <option>Hà Nội</option>
+                                                    <option>Đà Nẵng</option>
+                                                    <option>An Giang</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <fieldset disabled>
+                                            <div className="form-group row">
+                                                <label htmlFor="disabledTextInput" className="col-sm-3 col-form-label">Quận/Huyện</label>
+                                                <div className="col-sm-9">
+                                                    <select id="disabledSelect" className="form-control">
+                                                        <option>Vui lòng chọn quận/huyện</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className="form-group row">
+                                                <label htmlFor="disabledTextInput" className="col-sm-3 col-form-label">Phường/Xã</label>
+                                                <div className="col-sm-9">
+                                                    <select id="disabledSelect" className="form-control">
+                                                        <option>Vui lòng chọn phường/xã</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </Modal>
                             </div>
-
-                        </div>
-                        <div style={{ paddingTop: "0px" }} className="sanPhamDaXem col-6 col-md-6 col-lg-2">
-                            <Popover placement="bottom" title={text} content={content} trigger="click">
-                                <Button>Sản phẩm bạn đã xem</Button>
-                            </Popover>
-                        </div>
-                        <div className="link col-12 col-md-6 col-lg-6">
-                            <NavLink to="/movie" onClick={this.Reload}>
-                                <img src="https://frontend.tikicdn.com/_desktop-next/static/img/tiki-card.svg" alt="" />
-                                <span>Bán vé rạp phim</span>
-                            </NavLink>
-                            <NavLink to="/khuyenmai" onClick={this.Reload}>
-                                <img src={logoMarket} alt="" />
-                                <span>
-                                    Sản phẩm khuyến mãi
+                            <div style={{ paddingTop: "0px" }} className="sanPhamDaXem col-12 col-md-6 col-lg-2">
+                                <Popover placement="bottom" title={text} content={content} trigger="click">
+                                    <Button>Sản phẩm bạn đã xem</Button>
+                                </Popover>
+                            </div>
+                            <div className="link col-12 col-md-6 col-lg-6">
+                                <a href="/movie" onClick={this.Reload}>
+                                    <img src={iconmarketship} alt="test" />
+                                    <span>Giao hàng</span>
+                                </a>
+                                <a href="/sanphammoi" onClick={this.Reload}>
+                                    <img src={logoMarket} alt="test" />
+                                    <span>
+                                        Sản phẩm Mới
                                 </span>
-                            </NavLink>
-                            <a href="#">
-                                <img src="https://salt.tikicdn.com/ts/upload/c1/cc/d0/6dc657167181c1b6b93c8da654dddac3.png" alt="" />
-                                <span>
-                                    Đổi trả
+                                </a>
+                                <a href="/doitra">
+                                    <img src={DoiTra} alt="test" />
+                                    <span>
+                                        Đổi trả
                                 </span>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </section>
+                </section>
+            </>
         );
     }
 }
@@ -393,7 +454,9 @@ const mapStateToProps = state => ({
     user: state.userReducers.thongTinTaiKhoan,
     loginFacebook: state.userReducers.loginFacebook,
     thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
-    danhMucSanPham: state.productReducers.danhMucSanPham
+    danhMucSanPham: state.productReducers.danhMucSanPham,
+    danhSachGioHangTheoUser: state.shoppingcartReducers.danhSachGioHangTheoUser,
+
 
 })
 export default connect(mapStateToProps)(index);

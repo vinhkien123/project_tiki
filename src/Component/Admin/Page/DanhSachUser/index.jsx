@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { connect, shallowEqual } from 'react-redux'
-import { DanhSachSanPham } from '../../../../Redux/Action/product';
-import productsServices from '../../../../Services/products';
-import Swal from 'sweetalert2'
-import { ProductsService } from '../../../../Services';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { createAction } from '../../../../Redux/Action';
+import { DanhSachSanPham } from '../../../../Redux/Action/product';
+import { LAYTHONGTINUSER } from '../../../../Redux/Action/type';
+import { UserServices } from '../../../../Services';
 
 class index extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class index extends Component {
         }, () => {
 
             let danhSachTimKiem = this.props.danhSachSanPham.filter(item =>
-                item.tenSanPham.toLowerCase().indexOf(this.state.keyWord) != -1
+                item.tenSanPham.toLowerCase().indexOf(this.state.keyWord) !== -1
             )
             this.setState({
                 danhSachTimKiem,
@@ -34,47 +35,61 @@ class index extends Component {
         })
 
     }
-    xoaSanPham = (id) => {
-        ProductsService.xoaSanPham(id).then(res => {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Xóa thành công ! ',
-                showConfirmButton: false,
-                timer: 1200
-            });
-            this.props.history.push("/admin")
-        }).catch(err => {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Xóa thất bại ! ',
-                showConfirmButton: false,
-                timer: 1200
-            });
-        })
+    xoaNguoiDung = (id) => {
+        const user = localStorage.getItem('user')
+        if (user) {
+            let objUser = JSON.parse(user)
+            let token = objUser.token
+            UserServices.xoaNguoiDung(id, token).then(res => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Xóa thành công ! ',
+                    showConfirmButton: false,
+                    timer: 1200
+                });
+                this.props.history.push("/admin")
+            }).catch(err => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Xóa thất bại ! ',
+                    showConfirmButton: false,
+                    timer: 1200
+                });
+            })
+        }
+
+    }
+    LayThongTinUser = (user) =>{
+        this.props.dispatch(createAction(LAYTHONGTINUSER,user))
     }
     renderSanPham = (item, index) => {
         return (
             <tr key={index}>
-                <td>{index+1}</td>
-                <td>{item.tenSanPham.length > 44 ? item.tenSanPham.slice(0, 44)
-                 + "...." : item.tenSanPham}</td>
-                <td><img src={item.img} alt="" /></td>
-                <td>{item.giaSanPham} Đồng</td>
-                <td><button className="btn btn-danger" onClick={()=>this.xoaSanPham(item.id)}>Xóa</button></td>
-                <td><NavLink to={`/admin/suasanpham/${item.id}`} className="btn btn-warning">Sửa</NavLink></td>
+                <td>{index + 1}</td>
+                <td>{item.FullName?.length > 44 ? item.FullName.slice(0, 44)
+                    + "...." : item.FullName}</td>
+                <td><img src={item.Address} alt="test" /></td>
+                <td>{item.Phone} </td>
+                <td>{item.Email}</td>
+                <td>{item.Gender == 0 ? "Nam" : "Nữ"}</td>
+                <td>
+                    <NavLink to={`/admin/suanguoidung/${item._id}`} onClick={()=>this.LayThongTinUser(item)} className="btn btn-warning">Sửa</NavLink>
+                    <button className="btn btn-danger ml-3" onClick={() => this.xoaNguoiDung(item._id)}>Xóa</button>
+                </td>
+
             </tr>
         )
     }
     render() {
-        const eleSanPham = this.props.danhSachSanPham.map((item, index) => {
+        const eleDachSachNguoiDung = this.props.danhSachNguoiDung.map((item, index) => {
             return this.renderSanPham(item, index)
         })
-        const eleSreachSanPham = this.state.danhSachTimKiem.map((item, index) => {
-            return this.renderSanPham(item, index)
+        // const eleSreachSanPham = this.state.danhSachTimKiem.map((item, index) => {
+        //     return this.renderSanPham(item, index)
 
-        })
+        // })
         return (
             <div>
                 <form>
@@ -87,10 +102,10 @@ class index extends Component {
                         </div>
                     </div>
                 </form>
-                <NavLink to="./themuser" className="btn btn-success my-2">Thêm User </NavLink>
+                <NavLink to="admin/themuser" className="btn btn-success my-2">Thêm User </NavLink>
 
                 <table className="table">
-                    
+
                     <th>
                         <tr>
                             <td>STT</td>
@@ -101,7 +116,8 @@ class index extends Component {
                             <td>Giới tính</td>
                             <td>Thao tác</td>
                         </tr>
-                        {this.state.keyWord ? eleSreachSanPham : eleSanPham}
+                        {/* {this.state.keyWord ? eleSreachSanPham : eleSanPham} */}
+                        {eleDachSachNguoiDung}
                     </th>
                     <tbody>
 
@@ -115,7 +131,6 @@ class index extends Component {
 
 
 const mapStateToProps = state => ({
-    danhSachSanPham: state.productReducers.danhSachSanPham
-
+    danhSachNguoiDung: state.userReducers.danhSachUser
 })
 export default connect(mapStateToProps)(index);

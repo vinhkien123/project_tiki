@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Slidebar from '../../Sidebar'
-import DanhSachSanPham from '../../DanhSachSanPham'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Flip, Slide } from 'react-reveal';
 import { createAction } from '../../../Redux/Action';
+import { DanhSachDanhMucCon, DanhSachSanPhamTheoDanhMuc, SreachSanPham } from '../../../Redux/Action/product';
 import { SREACHAZ, SREACHZA } from '../../../Redux/Action/type';
-import { Flip, Slide } from 'react-reveal'
+import DanhSachSanPham from '../../DanhSachSanPham';
+import Slidebar from '../../Sidebar';
 class index extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
     }
@@ -24,26 +25,41 @@ class index extends Component {
         })
         this.props.dispatch(createAction(SREACHZA, za))
     }
-    componentDidMount(){
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (this.props.idDanhMuc !== nextProps.idDanhMuc) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+    componentDidMount() {
         // this.props.dispatch()
+        if (this.props.match.params.keyWord) {
+            this.props.dispatch(SreachSanPham(this.props.match.params.keyWord))
+
+        }
+        else if (this.props.match.params.title != "") {
+
+            this.props.dispatch(DanhSachSanPhamTheoDanhMuc(this.props.match.params.id))
+            this.props.dispatch(DanhSachDanhMucCon(this.props.match.params.id))
+
+        }
     }
     render() {
-        console.log(this.props.idDanhMuc,"id danh muc");
-        console.log("API ", this.props.sreachProductApi);
         return (
             <div className="viewContent" style={{ overflow: "hidden" }}>
                 <Flip>
-                    <Slidebar title={this.props.match.params.title}/>
+                    <Slidebar title={this.props.match.params.title} danhSachDanhMucCon={this.props.danhSachDanhMucCon} />
                 </Flip>
                 <Slide top>
                     <div className="content col-12 col-lg-9">
                         <div className="option">
                             {
-                                this.props.keyWord != "" ?
+                                this.props.match.params.keyWord ?
 
-                                    <h3 className="text-sreach">Kết quả tìm kiếm cho '{this.props.keyWord}': <span>{this.props.sreachKeyWord.length} sản phẩm</span></h3>
-                                    : 
-                                    
+                                    <h3 className="text-sreach">Kết quả tìm kiếm cho '{this.props.match.params.keyWord}': <span>{this.props.sreachProductApi.length} sản phẩm</span></h3>
+                                    :
+
                                     <h3 className="text-sreach">Kết quả tìm kiếm danh mục cho '{this.props.match.params.title}': <span>{this.props.idDanhMuc.data?.count} sản phẩm</span></h3>
 
                             }
@@ -51,29 +67,32 @@ class index extends Component {
                                 <span>Ưu tiên xem : </span>
                                 <ul className="sort-list">
                                     {/* <li>
-                                    <a href="#">HÀNG MỚI</a>
+                                    <a href="/">HÀNG MỚI</a>
                                 </li>
                                 <li>
-                                    <a href="#">BÁN CHẠY</a>
+                                    <a href="/">BÁN CHẠY</a>
                                 </li>
                                 <li>
-                                    <a href="#">GIẢM GIÁ NHIỀU</a>
+                                    <a href="/">GIẢM GIÁ NHIỀU</a>
                                 </li> */}
                                     <li>
-                                        <a href="#" onClick={() => this.sreachAZ(this.props.danhSachSanPham)}>GIÁ THẤP ĐẾN CAO</a>
+                                        <a href="# " onClick={() => this.sreachAZ(this.props.danhSachSanPham)}>GIÁ THẤP ĐẾN CAO</a>
                                     </li>
                                     <li>
-                                        <a href="#" onClick={this.sreachZA}>GIÁ CAO ĐẾN THẤP</a>
+                                        <a href="# " onClick={this.sreachZA}>GIÁ CAO ĐẾN THẤP</a>
                                     </li>
                                     {/* <li>
-                                    <a href="#">CHỌN LỌC</a>
+                                    <a href="/">CHỌN LỌC</a>
                                 </li> */}
                                 </ul>
                             </div>
                         </div>
                         <div style={{ paddingLeft: "20px" }}>
                             <div className="row">
-                                <DanhSachSanPham sreachPrice={this.props.sreachPrice} status={true} sreachTheoDanhMuc={this.props.idDanhMuc.data?.products} sreachProductApi={this.props.sreachProductApi}/>
+                                <DanhSachSanPham
+                                    sreachPrice={this.props.sreachPrice} keyWordPage={this.props.match.params.keyWord}
+                                    status={true} sreachTheoDanhMuc={this.props.idDanhMuc.data?.products}
+                                    sreachProductApi={this.props.sreachProductApi} />
 
                             </div>
                         </div>
@@ -85,14 +104,17 @@ class index extends Component {
         );
     }
 }
+
 const mapStateToProps = state => ({
     sreachPrice: state.productReducers.sreachPrice,
     danhSachSanPham: state.productReducers.danhSachSanPham,
     sreachKeyWord: state.productReducers.sreachKeyWord,
     keyWord: state.productReducers.keyWord,
-    sreachProductApi : state.productReducers.sreachProductApi,
-    idDanhMuc : state.productReducers.idDanhMuc
-    
+    sreachProductApi: state.productReducers.sreachProductApi,
+    idDanhMuc: state.productReducers.idDanhMuc,
+    danhSachDanhMucCon: state.productReducers.danhSachDanhMucCon
+
+
 
 })
 export default connect(mapStateToProps)(index);

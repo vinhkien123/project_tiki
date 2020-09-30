@@ -1,4 +1,4 @@
-import {DANHSACHPHIM, CHITIETSANPHAM, CHITIETPHIM} from '../Action/type'
+import { CHITIETPHIM, DANHSACHPHIM } from '../Action/type';
 
 
 const initialState = {

@@ -69,3 +69,27 @@
         }
     }
 }
+.testHinh{
+    position: relative;
+    .slick-slider{
+        // .slick-prev{
+        //     &::before{
+        //         @include buttonCarousel();
+               
+        //     }
+         
+        // }
+        // .slick-next{
+        //     &::before{
+        //         @include buttonCarousel();
+               
+        //     }
+        // }
+    }
+    .position{
+        position: absolute;
+        left: 10%;
+        top: 0;
+        z-index: 10;
+    }
+}

@@ -1,7 +1,7 @@
-import { MoviesServices } from "../../Services";
-import { DANHSACHPHIM, CHITIETPHIM } from "./type";
-import { createAction } from ".";
 import Swal from 'sweetalert2';
+import { createAction } from ".";
+import { MoviesServices } from "../../Services";
+import { CHITIETPHIM, DANHSACHPHIM } from "./type";
 
 
 

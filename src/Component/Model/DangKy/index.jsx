@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import { DangKy } from '../../../Redux/Action/user';
 
 class index extends Component {
@@ -6,7 +7,7 @@ class index extends Component {
         super(props);
         this.state = {
             FullName: "",
-            
+
             Password: "",
             Phone: "",
             Email: "",
@@ -15,18 +16,34 @@ class index extends Component {
     }
 
     onChange = (e) => {
+
         let input = e.target
+
         this.setState({
             [input.name]: input.value
         }, () => {
-            console.log(this.state);
         })
     }
 
 
     onClickDangKy = (e) => {
         e.preventDefault();
-        DangKy(this.state)
+        let messenger, validation
+        validation = /^\d{10}$/
+        if (this.state.Phone.match(/^\d{10}$/)) {
+            // messenger = true
+            DangKy(this.state)
+
+        } else {
+            messenger = "Số điện thoại không hợp lệ"
+            Swal.fire({
+                title : messenger,
+                time : 1200,
+                icon : "error",
+                position: 'center',
+                showConfirmButton: true,
+            })
+        }
 
     }
     render() {

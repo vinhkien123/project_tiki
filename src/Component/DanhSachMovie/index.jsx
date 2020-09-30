@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DanhSachPhim } from '../../Redux/Action/movie';
+import { Flip } from 'react-reveal';
 import { Link } from 'react-router-dom';
-import { Flip } from 'react-reveal'
+import { DanhSachPhim } from '../../Redux/Action/movie';
 class index extends Component {
 
     render() {

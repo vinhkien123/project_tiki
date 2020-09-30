@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ChiTietPhim } from '../../Redux/Action/movie';
+import { Flip, Rotate } from 'react-reveal';
 import Swal from 'sweetalert2';
-import { Rotate, Flip } from 'react-reveal';
+import { ChiTietPhim } from '../../Redux/Action/movie';
 class index extends Component {
     play = (iframe) => {
         Swal.fire({
@@ -20,7 +20,7 @@ class index extends Component {
                 <div className="container-fuild contenta " >
 
                     <div className="img">
-                        <img src={this.props.chiTietPhim.img} alt="" />
+                        <img src={this.props.chiTietPhim.img} alt="test" />
                     </div>
                     <div className="bg" >
 
@@ -30,7 +30,7 @@ class index extends Component {
                         <div className="row">
                             <div className="col-4 image">
                                 <Rotate top left>
-                                    <img src={this.props.chiTietPhim.img} />
+                                    <img src={this.props.chiTietPhim.img} alt="test"/>
 
                                 </Rotate>
                             </div>

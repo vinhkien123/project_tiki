@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { Button, Modal, Tabs } from 'antd';
 import 'antd/dist/antd.css';
-import { Modal, Button, Tabs } from 'antd';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Sticky, StickyContainer } from 'react-sticky';
+import SignUp from './DangKy';
 import Login from './DangNhap';
-import { StickyContainer, Sticky } from 'react-sticky';
-import {connect} from 'react-redux'
-import SignUp from './DangKy'
 class index extends Component {
     state = { visible: false };
 
@@ -42,7 +41,7 @@ class index extends Component {
         );
         return (
             <>
-                <Button type="primary" className="designButton" onClick={this.showModal}>
+                <Button type="primary" className="designButton" style={{boxShadow:"none"}} onClick={this.showModal}>
           
                                 Đăng nhập <br></br>
                                 tài khoản

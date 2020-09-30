@@ -1,4 +1,4 @@
-@mixin hoverCard($width){
+@mixin hoverCard($width) {
     width: $width;
 }
 @mixin text($color, $fs, $fw) {
@@ -6,12 +6,12 @@
     font-size: $fs;
     font-weight: $fw;
 }
-@mixin hoverDeteleLine(){
-    &:hover{
+@mixin hoverDeteleLine() {
+    &:hover {
         text-decoration: none;
     }
 }
-@mixin inputPrice(){
+@mixin inputPrice() {
     width: 95px;
     height: 30px;
     padding: 0 8px;
@@ -22,7 +22,7 @@
     outline: 0;
     font-size: 13px;
 }
-@mixin buttonPhim(){
+@mixin buttonPhim() {
     height: 40px;
     font-weight: bold;
     font-size: 16px;
@@ -33,25 +33,25 @@
     opacity: 0;
     transition: 0.5 all;
 }
-@mixin buttonCarousel(){
+@mixin buttonCarousel() {
     font-size: 20px;
-  height: 30px;
-   width: 30px;
+    height: 30px;
+    width: 30px;
     color: black;
 }
-@mixin  title() {
+@mixin title() {
     color: rgb(51, 51, 51);
     font-size: 18px;
     font-weight: 400;
     margin: 0px 0px 10px;
 }
-@mixin buttonSoLuong (){
+@mixin buttonSoLuong() {
     cursor: pointer;
     width: $width-button;
     background-color: $bg-button;
     border: $border-button;
 }
-@mixin hoverButtonSoLuong(){
+@mixin hoverButtonSoLuong() {
     background: $hover-bg-button;
 }
 @mixin subtext($color, $fs, $fw) {
@@ -83,7 +83,7 @@
     padding-right: $pad;
 }
 
-@mixin  mrmainfooter($mrg) {
+@mixin mrmainfooter($mrg) {
     margin-bottom: $mrg;
 }
 
@@ -115,12 +115,15 @@
     padding-top: $pd-3;
     padding-bottom: $pd-3;
 }
-@mixin  mrmainfooter($mrg) {
+@mixin mrmainfooter($mrg) {
     margin-bottom: $mrg;
 }
 @mixin mediaQuery($screen) {
     @if map-has-key($map: $breakpoints, $key: $screen) {
-        $value: map-get($map: $breakpoints, $key: $screen);
+        $value: map-get(
+            $map: $breakpoints,
+            $key: $screen,
+        );
         @media screen and (max-width: $value) {
             @content;
         }
@@ -134,7 +137,7 @@
     background-color: $bgr-color-5;
     font-size: $font-size-4;
 }
-@mixin danhmuc($list-style-1, $txt-center, $pd-4, $pd-5, $border-2,$fs-1) {
+@mixin danhmuc($list-style-1, $txt-center, $pd-4, $pd-5, $border-2, $fs-1) {
     list-style: $list-style-1;
     text-align: $txt-center;
     padding-top: $pd-4;
@@ -292,7 +295,18 @@
     background-color: $hover-bg-button;
 }
 
-@mixin circle-number($position-1, $width-number, $height-number, $display-1, $bg-sreach, $border-radius_50, $fs-0, $txt-center, $color-white-0, $mg-circle) {
+@mixin circle-number(
+    $position-1,
+    $width-number,
+    $height-number,
+    $display-1,
+    $bg-sreach,
+    $border-radius_50,
+    $fs-0,
+    $txt-center,
+    $color-white-0,
+    $mg-circle
+) {
     position: $position-1;
     width: $width-number;
     height: $height-number;
@@ -331,6 +345,100 @@
 
 @mixin tablet {
     @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
-      @content;
+        @content;
     }
+}
+@mixin topbar-seller($display-4, $list-style-1, $mg-3) {
+    display: $display-4;
+    list-style: $list-style-1;
+    margin: $mg-3;
+}
+
+@mixin button-2($bg, $fs, $color, $pd-top-bot, $pd-right-left, $border-radius_1, $fw, $border-bottom) {
+    background-color: $bg;
+    font-size: $fs;
+    color: $color;
+    padding: $pd-top-bot $pd-right-left;
+    border-radius: $border-radius_1;
+    -webkit-border-radius: $border-radius_1;
+    -moz-border-radius: $border-radius_1;
+    -ms-border-radius: $border-radius_1;
+    -o-border-radius: $border-radius_1;
+    font-weight: $fw;
+    border: $border-bottom;
+    &:hover {
+        color: $color;
+    }
+}
+
+@mixin register-footer($bg, $pd-border-1) {
+    background-color: $bg;
+    padding: $pd-border-1;
+}
+@mixin bg-container($bg-header){
+    background: $bg-header;
+}
+
+@mixin table-doitra($txt-center, $text-transform-1, $border-color, $border-top-1) {
+    text-align: $txt-center;
+    text-transform: $text-transform-1;
+    border-color: $border-color;
+    border-top: $border-top-1;
+}
+
+@mixin text-doitra($color, $fs, $fw, $txt-center, $text-transform-1) {
+    color: $color;
+    font-size: $fs;
+    font-weight: $fw;
+    text-align: $txt-center;
+    text-transform: $text-transform-1;
+}
+
+@mixin text-mr($mg-8) {
+    margin-top: $mg-8;
+    margin-bottom: $mg-8;
+}
+
+@mixin mr-card($mg-10) {
+    margin-top: $mg-10;
+}
+
+@mixin br-card($border-auto-1, $border-radius_3) {
+    border: $border-auto-1;
+    border-radius: $border-radius_3;
+    -webkit-border-radius: $border-radius_3;
+    -moz-border-radius: $border-radius_3;
+    -ms-border-radius: $border-radius_3;
+    -o-border-radius: $border-radius_3;
+}
+
+@mixin tablet {
+  @media only screen and (max-width: #{$desktop-width }) and (min-width: #{$tablet-width}) {
+    @content;
   }
+}
+
+@mixin mediaQuery-1($screen) {
+    @if map-has-key($map: $breakpoints, $key: $screen) {
+        $value: map-get($map: $breakpoints, $key: $screen);
+        @media screen and (min-width: $value) {
+            @content;
+        }
+    }
+    else {
+        @warn "`#($screen)` khong ton tai";
+    }
+}
+
+@mixin mediaQuery-2($screen) {
+    @if map-has-key($map: $breakpoints, $key: $screen) {
+        $value: map-get($map: $breakpoints, $key: $screen);
+        @media only screen and (max-width: $value) {
+            @content;
+        }
+    }
+    else {
+        @warn "`#($screen)` khong ton tai";
+    }
+}
+

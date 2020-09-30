@@ -1,5 +1,5 @@
 import axios from "axios"
-const APICor = `https://cors-anywhere.herokuapp.com/`
+// const APICor = `https://cors-anywhere.herokuapp.com/`
 const APILink = `http://localhost:4000/`
 class userServices {
     dangNhap(data) {
@@ -20,12 +20,27 @@ class userServices {
             headers:{'Authorization':  token}
         })
     }
+    xoaNguoiDung(id,token){
+        console.log("??token",token);
+        return axios({
+            method: "POST",
+            url: `${APILink}api/users/delete/${id}`,
+            headers : {'Authorization':  token}
+        })
+    }
     dangKy(data){
         console.log(data);
         return axios({
             method : "POST",
             url : `${APILink}api/users`,
             data
+        })
+    }
+    danhSachNguoiDung(){
+        return axios({
+            method: "GET",
+            url : `${APILink}api/users/search`,
+            
         })
     }
     capNhatThongTin(token,data,id){

@@ -13,8 +13,8 @@
 //         </>
 //     );
 // };
-import axios from 'axios'
 import React, { Component } from 'react';
+import { ProductsService } from '../../Services';
 
 class index extends Component {
     constructor(props) {
@@ -46,14 +46,19 @@ class index extends Component {
             if(ngay<0){
                 ///// CẬP NHẬT TRẠNG THÁI GIẢM GIÁ
                 this.props.item.StatusSale = false
-                ///// ĐẨY LÊN API
-                axios({
-                    url: `https://5f474cbc95646700168d9187.mockapi.io/danhSachSanPham/${this.props.id}`,
-                    method: "PUT",
-                    data : this.props.item
-                }).then(res=>{
+                ProductsService.capNhatSanPham(this.props.item._id,this.props.item).then(res=>{
+                        console.log("ok");
                 }).catch(err=>{
+                    console.log(err,"kon");
                 })
+                ///// ĐẨY LÊN API
+                // axios({
+                //     url: `https://5f474cbc95646700168d9187.mockapi.io/danhSachSanPham/${this.props.id}`,
+                //     method: "PUT",
+                //     data : this.props.item
+                // }).then(res=>{
+                // }).catch(err=>{
+                // })
             }
             this.setState({
                 sale: ngay.toString() + " Ngày " + gio.toString() + ":" + phut.toString() + ":" + giay.toString()
@@ -64,7 +69,7 @@ class index extends Component {
     render() {
         return (
             <>
-               <p className="time" style={{width: 90, marginLeft: 10}}>{this.state.sale}</p>
+               <p className="time" style={{width: 100, marginLeft: 10}}>{this.state.sale}</p>
 
             </>
         );

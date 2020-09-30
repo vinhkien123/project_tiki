@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TinhThanhServices } from '../../../Services';
 
 class index extends Component {
     render() {
@@ -6,10 +7,43 @@ class index extends Component {
             <div className="container formUser">
                 <h2>Thêm địa chỉ </h2>
                 <div className="form-group add__account-form">
-                    <label htmlFor="inputEmail4">Địa chỉ</label>
+                    <label htmlFor="inputEmail4">Họ và tên</label>
                     <input type="text" className="form-control" name="FullName" onChange={this.onChange} id="inputEmail4" placeholder="Nhập họ tên" />
                 </div>
-
+                <div className="form-group add__account-form">
+                    <label htmlFor="inputEmail4">Công ty</label>
+                    <input type="text" className="form-control" name="FullName" onChange={this.onChange} id="inputEmail4" placeholder="Nhập họ tên" />
+                </div>
+                <div className="form-group add__account-form">
+                    <label htmlFor="inputEmail4">Số điện thoại</label>
+                    <input type="text" className="form-control" name="FullName" onChange={this.onChange} id="inputEmail4" placeholder="Nhập họ tên" />
+                </div>
+                <div className="form-group add__account-form">
+                    <label htmlFor="inputEmail4">Tỉnh/Thành phố</label>
+                    <select name="" id="">
+                        <option value="Hồ Chí Minh">Hồ chí Minh</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                    </select>
+                </div>
+                <div className="form-group add__account-form">
+                    <label htmlFor="inputEmail4">Quận huyện</label>
+                    <select name="" id="">
+                        <option value="Hồ Chí Minh">Hồ chí Minh</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                    </select>
+                </div>
+                <div className="form-group add__account-form">
+                    <label htmlFor="inputEmail4">Phường xã</label>
+                    <select name="" id="">
+                        <option value="Hồ Chí Minh">Hồ chí Minh</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                    </select>
+                </div>
+                <div className="form-group add__account-form" style={{display:"flex"}}>
+                    <label htmlFor="inputEmail4">Địa chỉ</label>
+                    <textarea type="text" className="form-control" rows="5" name="FullName" onChange={this.onChange} id="inputEmail4" placeholder="Nhập địa chỉ">
+                    </textarea>
+                </div>
                 {/* <div className="form-group add__account-form">
                 <label htmlFor="inputCity">Ngày sinh</label>
                 <div className="form-row">
@@ -50,6 +84,11 @@ class index extends Component {
             </div>
         );
     }
+    componentDidMount(){
+        TinhThanhServices.layDanhSachTinh().then(res=>{
+        }).catch(err=>{
+        })
+    }
 }
 
-export default index;
+export default index;   

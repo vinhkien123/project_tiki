@@ -25,7 +25,7 @@ const LayoutAdmin = (props) => {
                         {props.children}
                     </div>
                     <BotFoter />
-
+                                                            
                 </div>
             </div>
 

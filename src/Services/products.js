@@ -1,11 +1,47 @@
 import axios from 'axios'
-const APICor = `https://cors-anywhere.herokuapp.com/`
+// const APICor = `https://cors-anywhere.herokuapp.com/`
 const APILink = `http://localhost:4000/`
 class productsServices {
+    capNhatSanPham(id,data){
+        return axios({
+            url: `${APILink}api/product/update/${id}`,
+            method: `POST`,
+            data
 
+        })
+    }
+    xoaNhieuSanPhan(data){
+        return axios({
+            url:`${APILink}api/product/list/delete`,
+            method:`POST`,
+            data
+        })
+    }
+    danhSachSanPhamPhanTrang(limit,page) {
+        return axios({
+            url: `${APILink}api/product/list?limit=${limit}&page=${page}`,
+            method: `GET`,
+            // headers: { 
+            //     'x-apikey': '59a7ad19f5a9fa0808f11931',
+            //     'Access-Control-Allow-Origin' : '*',
+            //     'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            //   }
+            headers: {
+                'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+    danhSachDanhMucCon (id){
+        return axios({
+            url :`${APILink}api/category/detail/${id}`,
+            method : `GET`,
+        })
+    }
     danhSachSanPham() {
         return axios({
-            url: `${APILink}api/product/list?limit=20&page=1`,
+            url: `${APILink}api/product/list`,
             method: `GET`,
             // headers: { 
             //     'x-apikey': '59a7ad19f5a9fa0808f11931',
@@ -42,6 +78,13 @@ class productsServices {
             }
         })
     }
+    themDanhMuc(data){
+        return axios({
+            url: `${APILink}api/category/create`,
+            method: `POST`,
+            data
+        })
+    }
     xoaSanPham(id) {
         return axios({
             url: `${APILink}api/product/delete/${id}`,
@@ -51,6 +94,13 @@ class productsServices {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json'
             }
+        })
+    }
+    xoaDanhMuc(id){
+        return axios({
+            url : `${APILink}api/category/delete`,
+            method : `POST`,
+            data : id
         })
     }
     timKiemSanPham(tenSanPham) {
@@ -72,6 +122,18 @@ class productsServices {
             url: `${APILink}api/product/category/search?IdCategory=${id}`,
             method: `GET`,
             data: id
+        })
+    }
+    sreachDanhMucCon(id){
+        return axios({
+            url : `${APILink}api/product/search/query?idCategorySub=${id}`,
+            method : `GET`,
+            headers: {
+                'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                
+            }
         })
     }
 

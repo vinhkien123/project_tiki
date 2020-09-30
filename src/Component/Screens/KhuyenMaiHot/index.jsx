@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import Slidebar from '../../Sidebar';
+import { Roll } from 'react-reveal';
 import SellTime from '../../SellTime';
-import {Roll} from 'react-reveal'
+import Slidebar from '../../Sidebar';
+import {connect} from 'react-redux'
 class index extends Component {
     render() {
+        const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == true)
+
         return (
             <>
                 <div className="viewContent" style={{ overflow: "hidden" }}>
@@ -25,35 +28,35 @@ class index extends Component {
 
                                 <ul className="sort-list">
                                     {/* <li>
-                                    <a href="#">HÀNG MỚI</a>
+                                    <a href="/">HÀNG MỚI</a>
                                 </li>
                                 <li>
-                                    <a href="#">BÁN CHẠY</a>
+                                    <a href="/">BÁN CHẠY</a>
                                 </li>
                                 <li>
-                                    <a href="#">GIẢM GIÁ NHIỀU</a>
+                                    <a href="/">GIẢM GIÁ NHIỀU</a>
                                 </li> */}
                                     <li>
-                                        <a href="#" >Đang bán</a>
+                                        <a href="# " >Đang bán</a>
                                     </li>
                                     <li>
-                                        <a href="#" >Sắp bán</a>
+                                        <a href="# " >Sắp bán</a>
                                     </li>
                                     <li>
-                                        <a href="#" >Theo dõi</a>
+                                        <a href="# " >Theo dõi</a>
                                     </li>
                                     <li>
-                                        <a href="#" >Cháy hàng</a>
+                                        <a href="# " >Cháy hàng</a>
                                     </li>
                                     {/* <li>
-                                    <a href="#">CHỌN LỌC</a>
+                                    <a href="/">CHỌN LỌC</a>
                                 </li> */}
                                 </ul>
                             </div>
                         </div>
                         <div style={{ paddingLeft: "20px" }}>
                             <div className="row">
-                                <SellTime />
+                                <SellTime danhSachSanPham={danhSachSale} />
                             </div>
                         </div>
 
@@ -64,5 +67,8 @@ class index extends Component {
         );
     }
 }
+const mapStateToProps = state => ({
+    danhSachSanPham: state.productReducers.danhSachSanPham,
 
-export default index;
+})
+export default connect(mapStateToProps) (index);

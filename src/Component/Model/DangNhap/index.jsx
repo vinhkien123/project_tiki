@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { DangNhap } from '../../../Redux/Action/user';
 // import FacebookLogin from 'react-facebook-login';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux';
 import { createAction } from '../../../Redux/Action';
 import { LOGINFACEBOOK } from '../../../Redux/Action/type';
+import { DangNhap } from '../../../Redux/Action/user';
 class index extends Component {
     constructor(props) {
         super(props);
@@ -25,13 +25,9 @@ class index extends Component {
         DangNhap(this.state)
     }
     componentClicked = () => {
-        console.log("Facebook");
     }
     render() {
-        const responseFacebook = (response) => {
-            ///// fb trả về obj response
-            this.props.dispatch(createAction(LOGINFACEBOOK,response))
-        }
+     
         return (
             <form>
 

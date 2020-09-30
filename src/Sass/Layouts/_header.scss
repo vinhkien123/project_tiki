@@ -57,13 +57,13 @@
                 .item{
                     color: #fff;
                     font-size: 12px;
-                    padding: 14px 0 0 0px;
+                    padding: 14px 0 0 10px;
                     position: relative;
                     vertical-align: top;
                     font-weight: 400;
                     display: inline-block;
                     letter-spacing: .9px;
-                    margin-left: 20px;
+                    
                 }
                 .login{
                     p{ 
@@ -149,10 +149,54 @@
     .headerBottom{
         padding-bottom: 10px;
         .menu{
+           
             padding: 0;
             button{
                 font-size: 13px;
                 padding: 0;
+            }
+            .showMenu{
+                position: absolute;
+                left: 0;
+                top: 50px;
+                z-index: 1000;
+                background: #fff;
+
+                box-shadow: 0 0 4px 0 rgba(0,0,0,.25);
+
+                .hover{
+                    background: white;
+                    position: relative;
+                    height: 35px;
+                    &:hover{
+                        
+                            background-color: #eceff1 !important;
+                    //    .showMenu{
+                    //        .menuRight{
+                    //         display: block;
+                    //     }
+                        
+                        &::after{
+                            margin-right: 4px;
+                            color: $bg-header;
+                            font-size: 16px;
+                            float: right;
+                              content: '>';
+                            font-style: normal;
+                        }
+                    }
+                }
+                .menuRight{
+                    display: block;
+                    position: absolute;
+                    left: 300px;
+                    width: 300px;
+                    padding: 8px 0 12px;
+                    top: 0;
+                    list-style: none;
+                    background: #fff;
+                    box-shadow: 0 0 4px 0 rgba(0,0,0,.25);
+                }
             }
         }
         .viTri{

@@ -1,25 +1,34 @@
-import React, { Component, useState, useEffect } from 'react';
-import { connect } from 'react-redux'
-import '../../Sass/main.scss'
-import { DanhSachSanPham, ThemSanPham } from '../../Redux/Action/product';
-import { Link, NavLink } from 'react-router-dom';
-import { Fade } from "react-awesome-reveal";
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import '../../Sass/main.scss';
+import Time from '../Time'
+import New from '../../asset/data/img/logomoi.png';
 
 class index extends Component {
 
     componentDidMount() {
-        this.props.dispatch(DanhSachSanPham())
-        console.log();
+
     }
+
     onClickSave = (sanPham) => {
-        let array
+        let array, flag
         ///// Kiểm tra có chuỗi JSON sản phẩm không
         if (localStorage.getItem('sanPham')) {
             // chuyển từ chuỗi JSON sang array chứa object sản phẩm
             array = JSON.parse(localStorage.getItem('sanPham'))
-            // thêm vô 1 object sản phẩm vào array chứa object sản phẩm
-            array.push(sanPham)
+            /////Kiểm tra những sản phẩm có trong array hay không
+            flag = true
+            for (let i = 0; i < array.length; i++) {
+                if (sanPham._id == array[i]._id) {
+                    flag = false
+                }
+            }
+            //// Nếu không bằng sẽ thêm vào array
+            if (flag == true) {
+                // thêm vô 1 object sản phẩm vào array chứa object sản phẩm
+                array.push(sanPham)
+            }
+
             /////// chuyển từ array sang chuỗi json =>>> đưa chuỗi json lên localStorage 
             localStorage.setItem('sanPham', JSON.stringify(array))
         }
@@ -30,17 +39,108 @@ class index extends Component {
             localStorage.setItem('sanPham', JSON.stringify(array))
 
         }
+        // setTimeout(() => {
+        //     window.location.reload(false);
+        // }, 1)
         setTimeout(() => {
-            window.location.reload(false);
-        }, 1)
+            localStorage.removeItem('sanPham')
+        }, 1800)
 
     }
+    renderDanhSachSanPhamSell = (item, index) => {
+        const giaGiam = (item.Price - (item.Price / 100 * item.Sale)).toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
+        const giaSanPham = item.Price.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
 
+        return (
+            <a href={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
+                <div className="card text-left" >
+                    <img className="card-img-top" src={item.Image} alt />
+                    <div className="card-body">
+
+                        <h4 className="card-title">{item.Name.length > 44 ? item.Name.slice(0, 44) + "...." : item.Name}</h4>
+                        <div className="price">
+                            <p className="card-text text-danger gia-hover">{giaGiam}&nbsp; ₫</p>
+
+                            <p className="sellPrice">{giaSanPham} ₫</p>
+
+                        </div>
+                        <span className="giamGia">-{item.Sale}%</span>
+                        <div className="bottom">
+                            <div className="sellTime">
+                                <div className="sell">
+                                    <div className="products">
+                                        <div className="width-sell" style={{ width: "20%" }}></div>
+                                        <div className="content-sell">
+                                            <span><i class="fa fa-fire"></i></span>
+                                            <p className="text">Đã bán 1</p>
+                                        </div>
+                                    </div>
+                                    <Time time={item.ExpirationDateSale} id={item._id} item={item} />
+                                </div>
+                            </div>
+                        </div>
+                        {/* <Time /> */}
+
+                    </div>
+                </div>
+            </a>
+        )
+    }
+    renderDanhSachSanPhamNew = (item, index) => {
+        const giaGiam = (item.Price - (item.Price / 100 * item.Sale)).toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
+        const giaSanPham = item.Price.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
+
+        return (
+            <a href={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
+                <div className="card text-left" >
+                    <img className="card-img-top" src={item.Image} alt />
+                    <div className="card-body">
+
+                        <h4 className="card-title">{item.Name.length > 44 ? item.Name.slice(0, 44) + "...." : item.Name}</h4>
+                        <div className="price">
+                            <p className="card-text text-danger text-center gia-hover">{giaGiam}&nbsp; ₫</p>
+
+                            {item.StatusSale == true ?
+                                <p className="sellPrice">{giaSanPham} ₫</p>
+                                : <> </>
+                            }
+                        </div>
+                        <span className="new">
+                            <img src={New} width={40} height={36} alt="test" />
+                        </span>
+                        {item.StatusSale == true ?
+                            <span className="giamGia">-{item.Sale}%</span> : ""
+                        }
+
+                        <div className="bottom">
+                            <div className="sellTime">
+                                <div className="sell">
+                                    <div className="products">
+                                        <div className="width-sell" style={{ width: "20%" }}></div>
+                                        <div className="content-sell">
+                                            <span><i class="fa fa-fire"></i></span>
+                                            <p className="text">Đã bán 1</p>
+                                        </div>
+                                    </div>
+                                    {item.StatusSale == true ?
+                                        <Time time={item.ExpirationDateSale} id={item._id} item={item} />
+                                        : ""
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        {/* <Time /> */}
+
+                    </div>
+                </div>
+            </a>
+        )
+    }
     renderDanhSachSanPham = (item, index) => {
         const giaSanPham = item.Price?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
 
         return (
-            <Link onClick={() => this.onClickSave(item)} to={`/chitietsanpham/${item._id}`} className="col-12 col-md-6 col-lg-3 card-tiki" key={index}>
+            <a onClick={() => this.onClickSave(item)} href={`/chitietsanpham/${item._id}`} className="col-12 col-md-6 col-lg-3 card-tiki" key={index}>
                 <div className="card text-left" >
                     <img className="card-img-top" src={item.ImageList[0]} alt />
                     <div className="card-body">
@@ -48,26 +148,41 @@ class index extends Component {
                         <h4 className="card-title">{item.Name?.length > 44 ? item.Name?.slice(0, 44) + "...." : item.Name}</h4>
                         <p className="card-text text-danger gia-hover">{giaSanPham}&nbsp; ₫</p>
 
-                        <button className="btn btn-success">Mua sản phẩm</button>
                         {/* <Time /> */}
 
                     </div>
                 </div>
 
-            </Link>
+            </a>
         )
     }
     render() {
-        console.log("danhsach", this.props.danhSachSanPham);
-        const danhSach = this.props.danhSachSanPham.filter(item => item.StatusSale == true)
-        const danhSachSanPham = this.props.danhSachSanPham.map((item, index) => {
+        const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == false)
+        const danhSachPhanTrang = this.props.danhSachSanPhamPhanTrang.filter(item => item.StatusSale == false)
+        const danhSachSanPhamPhanTrang = danhSachPhanTrang.map((item, index) => {
             return (
 
                 this.renderDanhSachSanPham(item, index)
 
             )
         })
-        let softPrice, sreachPrice, sreachKeyWord, renderKeyWord,sreachTheoDanhMuc;
+        const danhSachSanPham = this.props.danhSachSanPhamPhanTrang.map((item, index) => {
+            let render;
+            if (item.StatusSale == true) {
+                render = this.renderDanhSachSanPhamSell(item, index)
+            } else if (item.Warranty == true) {
+                render = this.renderDanhSachSanPhamNew(item,index)
+            }
+            else {
+                render = this.renderDanhSachSanPham(item, index)
+            }
+            return (
+
+                render
+
+            )
+        })
+        let softPrice, sreachPrice, sreachKeyWord, renderKeyWord, sreachTheoDanhMuc;
 
         // softPrice = this.props.sreachPrice.sort((a, b) => {
         //     return a.giaSanPham - b.giaSanPham;
@@ -77,7 +192,6 @@ class index extends Component {
         //         this.renderDanhSachSanPham(item, index)
         //     )
         // })
-        console.log("???????",this.props.sreachProductApi);
         sreachKeyWord = this.props.sreachProductApi?.map((item, index) => {
             return (
                 this.renderDanhSachSanPham(item, index)
@@ -93,13 +207,12 @@ class index extends Component {
         //         this.renderDanhSachSanPham(item, index)
         //     )
         // })
-        console.log("steachdanhmuc",this.props);
-        sreachTheoDanhMuc = this.props.sreachTheoDanhMuc?.map((item,index)=>{
-            return(
-                this.renderDanhSachSanPham(item,index)
+        sreachTheoDanhMuc = this.props.sreachTheoDanhMuc?.map((item, index) => {
+            return (
+                this.renderDanhSachSanPham(item, index)
             )
         })
-        let render,sanPhamSreach
+        let render, sanPhamSreach
         // if (this.props.sreachPrice.length >= 1) {
         //     //// render khi người dùng sreach giá từ a -> b
         //     render = sreachPrice
@@ -107,15 +220,25 @@ class index extends Component {
         //     //// render khi không có yêu cầu gì 
         //     render = danhSachSanPham
         // }
-        render = danhSachSanPham
-        if (this.props.keyWord != "") {
+        if (this.props.statusShow == true) {
+            let sanPham = JSON.parse(localStorage.getItem('sanPham'))
+            render = sanPham.map((item, index) => {
+                return this.renderDanhSachSanPham(item, index)
+            })
+        }
+        else {
+            render = danhSachSanPham
+
+        }
+        if (this.props.keyWordPage) {
             sanPhamSreach = sreachKeyWord
-        }else if(this.props.sreachTheoDanhMuc !=""){
+        } else if (this.props.sreachTheoDanhMuc) {
             sanPhamSreach = sreachTheoDanhMuc
         }
+
         return (
             <>
-                {this.props.status==true?sanPhamSreach:render}
+                {this.props.status == true ? sanPhamSreach : render}
             </>
         );
     }
@@ -124,6 +247,7 @@ class index extends Component {
 
 const mapStateToProps = state => ({
     danhSachSanPham: state.productReducers.danhSachSanPham,
+    danhSachSanPhamPhanTrang: state.productReducers.danhSachSanPhamPhanTrang,
     sreachAz: state.productReducers.sreachAz,
     sreachZa: state.productReducers.sreachZa,
     sreachPrice: state.productReducers.sreachPrice,

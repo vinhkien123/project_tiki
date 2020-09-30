@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Header from '../../Component/Header'
-import Footer from '../../Component/Foter'
 import ScrollMemory from 'react-router-scroll-memory'
+import Footer from '../../Component/Foter'
+import Header from '../../Component/Header'
 export const LayoutHeader = (props) => {
     return (
         <>

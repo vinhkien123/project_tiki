@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import appStore from '../../asset/data/img/appstore.png'
-import playStore from '../../asset/data/img/playstore.png'
-import boCongThuong2 from '../../asset/data/img/bo-cong-thuong-2.png'
-import boCongThuong1 from '../../asset/data/img/bo-cong-thuong.svg'
+import appStore from '../../asset/data/img/appstore.png';
+import boCongThuong2 from '../../asset/data/img/bo-cong-thuong-2.png';
+import boCongThuong1 from '../../asset/data/img/bo-cong-thuong.svg';
+import playStore from '../../asset/data/img/playstore.png';
 class index extends Component {
     render() {
         return (
@@ -42,16 +42,16 @@ class index extends Component {
                                 </div>
                                 <div className="content">
                                     <ul>
-                                        <li><a href="#">Các câu hỏi thường gặp</a></li>
-                                        <li><a href="#">Gửi yêu cầu hỗ trợ</a></li>
-                                        <li><a href="#">Hướng dẫn đặt hàng</a></li>
-                                        <li><a href="#">Phương thức vận chuyển</a></li>
-                                        <li><a href="#">Chính sách đổi trả</a></li>
-                                        <li><a href="#">Hướng dẫn mua trả góp</a></li>
-                                        <li><a href="#">Chính sách hàng nhập khẩu</a></li>
+                                        <li><a href="/">Các câu hỏi thường gặp</a></li>
+                                        <li><a href="/">Gửi yêu cầu hỗ trợ</a></li>
+                                        <li><a href="/">Hướng dẫn đặt hàng</a></li>
+                                        <li><a href="/">Phương thức vận chuyển</a></li>
+                                        <li><a href="/">Chính sách đổi trả</a></li>
+                                        <li><a href="/">Hướng dẫn mua trả góp</a></li>
+                                        <li><a href="/">Chính sách hàng nhập khẩu</a></li>
                                     </ul>
-                                    <p>Hỗ trợ khách hàng: <a href="#">hotro@marketplace.vn</a></p>
-                                    <p>Báo lỗi bảo mật: <a href="#">security@marketplace.vn</a></p>
+                                    <p>Hỗ trợ khách hàng: <a href="/">hotro@marketplace.vn</a></p>
+                                    <p>Báo lỗi bảo mật: <a href="/">security@marketplace.vn</a></p>
                                 </div>
                             </div>
                             <div className="col-footer_link">
@@ -62,14 +62,14 @@ class index extends Component {
                                 </div>
                                 <div className="content">
                                     <ul>
-                                        <li><a href="#">Giới thiệu Tiki</a></li>
-                                        <li><a href="#">Tuyển Dụng</a></li>
-                                        <li><a href="#">Chính sách bảo mật thanh toán</a></li>
-                                        <li><a href="#">Chính sách bảo mật thông tin cá nhân</a></li>
-                                        <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
-                                        <li><a href="#">Điều khoản sử dụng</a></li>
-                                        <li><a href="#">Giới thiệu Tiki Xu</a></li>
-                                        <li><a href="#">Bán hàng doanh nghiệp</a></li>
+                                        <li><a href="/">Giới thiệu QT-Data</a></li>
+                                        <li><a href="/">Tuyển Dụng</a></li>
+                                        <li><a href="/">Chính sách bảo mật thanh toán</a></li>
+                                        <li><a href="/">Chính sách bảo mật thông tin cá nhân</a></li>
+                                        <li><a href="/">Chính sách giải quyết khiếu nại</a></li>
+                                        <li><a href="/">Điều khoản sử dụng</a></li>
+                                        <li><a href="/">Giới thiệu QT-Data Xu</a></li>
+                                        <li><a href="/">Bán hàng doanh nghiệp</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -81,8 +81,8 @@ class index extends Component {
                                 </div>
                                 <div className="content">
                                     <ul>
-                                        <li><a href="#">Quy chế hoạt động Sàn GDTMĐT</a></li>
-                                        <li><a href="#">Bán hàng cùng Tiki</a></li>
+                                        <li><a href="/">Quy chế hoạt động Sàn GDTMĐT</a></li>
+                                        <li><a href="/">Bán hàng cùng QT-Data</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -94,10 +94,10 @@ class index extends Component {
                                 </div>
                                 <div className="content">
                                     <ul>
-                                        <li><a href="#">Liên hệ, góp ý</a></li>
-                                        <li><a href="#">Giải thưởng</a></li>
-                                        <li><a href="#">Tin tức</a></li>
-                                        <li><a href="#">Mã giảm giá</a></li>
+                                        <li><a href="/">Liên hệ, góp ý</a></li>
+                                        <li><a href="/">Giải thưởng</a></li>
+                                        <li><a href="/">Tin tức</a></li>
+                                        <li><a href="/">Mã giảm giá</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -109,19 +109,19 @@ class index extends Component {
                                 </div>
                                 <div className="content">
                                     <ul>
-                                        <li><a href="#"><i className="fa fa-youtube-play ic-footer" aria-hidden="true" /></a></li>
-                                        <li><a href="#"><i className="fa fa-facebook ic-footer ic-footer_face" aria-hidden="true" /></a></li>
-                                        <li><a href="#"><i className="fa fa-instagram ic-footer" aria-hidden="true" /></a></li>
-                                        <li><a href="#"><span><img src="img/zalo-min.png" alt /></span></a></li>
+                                        <li><a href="/"><i className="fa fa-youtube-play ic-footer" aria-hidden="true" /></a></li>
+                                        <li><a href="/"><i className="fa fa-facebook ic-footer ic-footer_face" aria-hidden="true" /></a></li>
+                                        <li><a href="/"><i className="fa fa-instagram ic-footer" aria-hidden="true" /></a></li>
+                                        <li><a href="/"><span><img src="img/zalo-min.png" alt="test"  /></span></a></li>
                                     </ul>
                                 </div>
                                 <div className="store">
                                     <h4>TẢI ỨNG DỤNG TRÊN ĐIỆN THOẠI</h4>
-                                    <a href="#">
-                                        <img src={appStore} alt width={134} />
+                                    <a href="/">
+                                        <img src={appStore} alt="test"  width={134} />
                                     </a>
-                                    <a href="#">
-                                        <img src={playStore} alt width={134} />
+                                    <a href="/">
+                                        <img src={playStore} alt="test"  width={134} />
                                     </a>
                                 </div>
                             </div>
@@ -153,11 +153,11 @@ class index extends Component {
                             </div>
                             <div className="col-12 col-md-6 col-lg-6 text-right">
                                 <div className="img-right">
-                                    <a href="#">
-                                        <img src={boCongThuong2} alt width={36} />
+                                    <a href="/">
+                                        <img src={boCongThuong2} alt="test"  width={36} />
                                     </a>
-                                    <a href="#">
-                                        <img src={boCongThuong1} alt width={120} />
+                                    <a href="/">
+                                        <img src={boCongThuong1} alt="test"  width={120} />
                                     </a>
                                 </div>
                             </div>

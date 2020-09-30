@@ -1,7 +1,7 @@
-import { ProductsService } from "../../Services"
-import { createAction } from "."
-import { DANHSACHSANPHAM, CHITIETSANPHAM, SREACHPRODUCTAPI, DANHMUCSANPHAM, SREACHTHEODANHMUC } from "./type"
 import Swal from 'sweetalert2'
+import { createAction } from "."
+import { ProductsService } from "../../Services"
+import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHSANPHAM, DANHSACHSANPHAMPHANTRANG, SAVEDANHMUCCON, SREACHPRODUCTAPI, SREACHTHEODANHMUC } from "./type"
 
 
 export const DanhSachSanPham = () => {
@@ -14,6 +14,35 @@ export const DanhSachSanPham = () => {
         })
     }
 }
+export const DanhSachDanhMucCon = (id) =>{
+    return dispatch => {
+        ProductsService.danhSachDanhMucCon(id).then(res => {
+            dispatch(createAction(DANHSACHDANHMUCCON,res.data.data))
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+}
+export const SaveDanhMucCon = (id) =>{
+    return dispatch => {
+        ProductsService.danhSachDanhMucCon(id).then(res => {
+            dispatch(createAction(SAVEDANHMUCCON,res.data.data))
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+}
+export const DanhSachSanPhamPhanTrang = (limit,page) => {
+    return dispatch => {
+        ProductsService.danhSachSanPhamPhanTrang(limit,page).then(res => {
+            console.log(res.data);
+            dispatch(createAction(DANHSACHSANPHAMPHANTRANG, res.data.data.products))
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+}
+
 // export const XoaSanPham = (id) => {
 //         ProductsService.xoaSanPham(id).then(res => {
 //             Swal.fire({
@@ -37,26 +66,43 @@ export const DanhSachSanPham = () => {
 export const ThemSanPham = (data) => {
 
     ProductsService.themSanPham(data).then(res => {
-        console.log(res.data, "thhêm thành công");
         Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Thêm sản phẩm thành công ! ',
             showConfirmButton: false,
-            timer: 800
+            timer: 1200
         });
 
     }).catch(err => {
-        console.log(err, "thhêm thất bại");
         Swal.fire({
             position: 'center',
             icon: 'error',
             title: err.response.data.message,
             showConfirmButton: false,
-            timer: 800
+            timer: 1200
         });
     })
 
+}
+export const CapNhatSanPham = (id,item)=>{
+    ProductsService.capNhatSanPham(id,item).then(res=>{
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sửa sản phẩm thành công ! ',
+            showConfirmButton: false,
+            timer: 1200
+        });
+    }).catch(err=>{
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1200
+        });
+    })
 }
 export const ChiTietSanPham = (id) => {
     return dispatch => {
@@ -68,6 +114,26 @@ export const ChiTietSanPham = (id) => {
             console.log(err);
         })
     }
+}
+export const ThemDanhMuc = (data) =>{
+    ProductsService.themDanhMuc(data).then(res => {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thêm danh mục thành công ! ',
+            showConfirmButton: false,
+            timer: 1200
+        });
+
+    }).catch(err => {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1200
+        });
+    })
 }
 export const SreachSanPham = (keyWord) =>{
     return dispatch => {
@@ -84,7 +150,7 @@ export const SreachSanPham = (keyWord) =>{
             Swal.fire({
                 position: 'center',
                 icon: 'error',
-                title: err.response.data.message,
+                title: err.response?.data.message,
                 showConfirmButton: false,
                 timer: 1200
             });
@@ -103,10 +169,19 @@ export const DanhMucSanPham = ()=>{
 export const DanhSachSanPhamTheoDanhMuc = (id)=>{
     return dispatch =>{
         ProductsService.danhSachSanPhamTheoDanhMuc(id).then(res=>{
-            console.log("resdata",res.data);
             dispatch(createAction(SREACHTHEODANHMUC,res.data))
         }).catch(err=>{
             console.log(err);
         })
     }
+}
+export const SreachTheoDanhMucCon = (id) =>{
+    
+        ProductsService.sreachDanhMucCon(id).then(res=>{
+            // dispatch()
+            console.log(res.data, "test sreach danh mc");
+        }).catch(err=>{
+            console.log(err);
+        })
+    
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+
 class index extends Component {
     render() {
         return (
@@ -15,6 +16,8 @@ class index extends Component {
                 <NavLink to="admin/danhsachdanhmuc" className="mt-2 btn btn-success">Danh mục sản phẩm</NavLink>
             </div>
         );
+    }
+    componentDidMount(){
     }
 }
 
