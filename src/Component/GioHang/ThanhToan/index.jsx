@@ -35,10 +35,13 @@ class index extends Component {
         this.setState({
             [e.target.name]: e.target.value
         }, () => {
+            console.log(this.state.Payment);
         })
     }
     onClick = (e) => {
         e.preventDefault();
+        const user = JSON.parse(localStorage.getItem('user'))
+
         const data = {
             ...this.props.thongTinGiaoHang,
 
@@ -46,9 +49,11 @@ class index extends Component {
             Products: this.props.danhSachGioHangTheoUser.ListProduct,
             UserId: this.props.thongTinTaiKhoan._id,
             Price: this.props.danhSachGioHangTheoUser.SubPrice,
-            Payment: this.state.Payment
+            Payment: this.state.Payment,
+            Email : user.user.Email
         }
-        ShopingServices.oderGioHang(data).then(res => {
+        console.log(data,"email");
+        ShopingServices.oderGioHang(data,user.token).then(res => {
             Swal.fire({
                 position: 'center',
                 icon: 'success',

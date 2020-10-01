@@ -18,6 +18,7 @@ class index extends Component {
         //         </tr>
         //     )
         // })
+        console.log(this.props.quanLyDonHang.order, "view don hang");
         const elmDonHang = this.props.quanLyDonHang.order?.map((item, index) => {
             return (
                 //  Address Name
@@ -26,8 +27,14 @@ class index extends Component {
                     <td>{index + 1}</td>
                     <td>{item.Name?.length > 44 ? item.Name?.slice(0, 44) + "...." : item.Name}</td>
                     <td>{item.Address}</td>
+                    <td>{item.Email}</td>
+                    <td>{item.Phone}</td>
+                    <td>{item.Payment}</td>
+                    <td>{item.IntoMoney}</td>
                     <td>
-                        <NavLink to={`/user/thongtindonhang/${item._id}`} className="btn btn-warning ml-2">Xem thông tin</NavLink>
+                        <NavLink to={`/user/thongtindonhang/${item._id}`} className="btn btn-info ml-2">Xem thông tin</NavLink>
+                        <NavLink to={`/user/thongtindonhang/${item._id}`} className="btn btn-warning ml-2">Thay đổi</NavLink>
+
                     </td>
                 </tr>
             )
@@ -40,6 +47,10 @@ class index extends Component {
                         <td>STT</td>
                         <td>Tên người nhận</td>
                         <td>Địa chỉ nhận</td>
+                        <td>Email</td>
+                        <td>Số điện thoại</td>
+                        <td>Hình thức thanh toán</td>
+                        <td>Tổng tiền</td>
                         <td>Thao tác</td>
                     </tr>
                     {elmDonHang}

@@ -15,14 +15,18 @@ class index extends Component {
             UserId: userId,
             ProductId: productId
         }
-        ShopingServices.xoaGioHang(data).then(res => {
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        ShopingServices.xoaGioHang(data,user.token).then(res => {
             window.location.reload(false);
         }).catch(err => {
             console.log(err);
         })
     }
     tangGiamSoLuong(SoLuong) {
-        ShopingServices.themGioHang(SoLuong).then(res => {
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        ShopingServices.themGioHang(SoLuong,user.token).then(res => {
 
 
             window.location.reload(false);
@@ -50,8 +54,8 @@ class index extends Component {
             ProductId: item._id,
             UserId: this.props.thongTinTaiKhoan._id
         }
-
-        ShopingServices.giamSoLuongGioHang(giamSoLuong).then(res => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        ShopingServices.giamSoLuongGioHang(giamSoLuong,user.token).then(res => {
             console.log(res);
             window.location.reload(false);
         }).catch(err => {

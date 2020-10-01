@@ -7,10 +7,10 @@ import { DANHSACHGIOHANGTHEOUSER, DONHANG, QUANLYDONHANG } from "./type";
 
 
 
-export const LayDanhSachGioHangUser = (id)=>{
+export const LayDanhSachGioHangUser = (id,token)=>{
     return dispatch =>{
         console.log("API giỏ hàng");
-        ShopingServices.layDanhSachGioHangTheoUser(id).then(res=>{
+        ShopingServices.layDanhSachGioHangTheoUser(id,token).then(res=>{
             console.log("redux",res.data.data.ListProduct);
             dispatch(createAction(DANHSACHGIOHANGTHEOUSER,res.data.data))
         }).catch(err=>{
@@ -19,9 +19,9 @@ export const LayDanhSachGioHangUser = (id)=>{
         })
     }
 }
-export const QuanLyDonHang = (id)=>{
+export const QuanLyDonHang = (id,token)=>{
     return dispatch =>{
-        ShopingServices.quanLyDonHang(id).then(res=>{
+        ShopingServices.quanLyDonHang(id,token).then(res=>{
             console.log(res.data);
 
             dispatch(createAction(QUANLYDONHANG,res.data.data))

@@ -10,7 +10,7 @@ class index extends Component {
         const danhMucSanPham = this.props.danhMucSanPham.map((item, index) => {
             return (
 
-                <a href={`/sanPham/${item.Title}/${item._id}`} className="dropdown-item hover"
+                <a href={`/sanPham/danhmuc/${item.Title}/${item._id}`} className="dropdown-item hover"
                     onClick={() => this.SreachTheoDanhMuc(item._id)} ><img src={item.Icon}
                         width={20} className="mr-1" alt="test" />
                     {item.Title}

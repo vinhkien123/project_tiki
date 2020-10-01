@@ -46,6 +46,14 @@ import { AdminTemplate } from './Template/AdminTemplate';
 import { HomeTemplate } from './Template/HomeTemplate';
 import { UserTemplate } from './Template/UserTemplate';
 import TatCaSanPham from './Component/Screens/TatCaSanPham'
+import ThongBao from './Component/EditUser/ThongBao';
+import NhanXetCuaToi from './Component/EditUser/NhatXetCuaToi';
+import NhatXetSanPhamDaMua from './Component/EditUser/NhanXetSanPhamDaMua';
+import HoiDap from './Component/EditUser/HoiDap';
+import SanPhamMuaSau from './Component/EditUser/SanPhamMuaSau';
+import SanPhamYeuThich from './Component/EditUser/SanPhamYeuThich';
+import ThongTinThanhToan from './Component/EditUser/ThongTinThanhToan'
+import SanPhamDaXemUser from './Component/EditUser/SanPhamDaXem';
 class App extends Component {
   render() {
     let render
@@ -71,9 +79,16 @@ class App extends Component {
             <AdminTemplate path="/admin/suanguoidung/:id" exact Component={SuaNguoiDung} />
             <UserTemplate path="/user/quanlydonhang" exact Component={QuanLyDonHangCom} />
             <UserTemplate path="/user/thongtindonhang/:_id" exact Component={DonHang} />
+            <UserTemplate path="/user/thongbao" exact Component={ThongBao}/>
             <AdminTemplate path="/admin/themdanhmuc" exact Component={ThemDanhMuc} />
             <AdminTemplate path="/admin/themuser" exact Component={ThemUser} />
-
+            <UserTemplate path="/user/nhanxetcuatoi" exact Component={NhanXetCuaToi}/>
+            <UserTemplate path="/user/nhanxetsanphamdamua" exact Component={NhatXetSanPhamDaMua}/>
+            <UserTemplate path="/user/hoidap" exact Component={HoiDap}/>
+            <UserTemplate path="/user/sanphammuasau" exact Component={SanPhamMuaSau}/>
+            <UserTemplate path="/user/sanphamyeuthich" exact Component={SanPhamYeuThich}/>
+            <UserTemplate path="/user/thongtinthanhtoan" exact Component={ThongTinThanhToan}/>
+            <UserTemplate path="/user/sanphamdaxem" exact Component={SanPhamDaXemUser}/>
           </>
       }
       else if (this.props.thongTinTaiKhoan.Role == "basic") {
@@ -144,7 +159,7 @@ class App extends Component {
       let userObj = JSON.parse(user)
       console.log("userrr", userObj);
       this.props.dispatch(ThongTinTaiKhoan(userObj?.token))
-      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user.id))
+      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user.id,userObj?.token))
       this.props.dispatch(QuanLyDonHang(userObj?.user.id))
       this.props.dispatch(SaveDanhMucCon("5f60727110312900173437a0"))
 

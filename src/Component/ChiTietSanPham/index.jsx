@@ -30,7 +30,8 @@ class index extends Component {
             ProductId: sanPham._id,
             UserId: this.props.thongTinTaiKhoan._id
         }
-        ShopingServices.themGioHang(sanPham).then(res => {
+        let user = JSON.parse(localStorage.getItem("user"))
+        ShopingServices.themGioHang(sanPham,user.token).then(res => {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -42,14 +43,14 @@ class index extends Component {
             window.location.reload(false);
 
         }).catch(err => {
+            console.log(err);
             Swal.fire({
                 position: 'center',
                 icon: 'error',
-                title: "Thêm thất bại",
+                title: "Đăng nhập để mua hàng",
                 showConfirmButton: false,
                 timer: 1200
             });
-            window.location.reload(false);
         })
     }
     render() {

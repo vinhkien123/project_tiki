@@ -4,48 +4,56 @@ const APILink = `http://localhost:4000/`
 
 ///////////// localhost:4000 https://cors-anywhere.herokuapp.com/ https://marketplacedata.herokuapp.com/
 class shoppingServices {
-    themGioHang(data) {
-        console.log("teaa",data);
+    themGioHang(data,token) {
         return axios({
             url: `${APILink}api/cart/add`,
             method: "POST",
             data,
-            
+            headers:{'Authorization':  token},
         })
     }
-    layDanhSachGioHangTheoUser(id) {
+    layDanhSachGioHangTheoUser(id,token) {
+        console.log("test token",token);
         return axios({
             url: `${APILink}api/cart?UserId=${id}`,
             method: "GET",
-           
+            headers:{'Authorization':  token}
         })
     }
-    xoaGioHang(data){
+    xoaGioHang(data,token){
         console.log("du lieu",data);
         return axios({
             url : `${APILink}api/cart/delete`,
             method: "POST",
-            data
+            data,
+            headers:{'Authorization':  token}
+
         })
     }
-    giamSoLuongGioHang(data){
+    giamSoLuongGioHang(data,token){
         return axios({
             url :`${APILink}api/cart/delete-quantity`,
             method: "POST",
-            data
+            data,
+            headers:{'Authorization':  token}
+
         })
     }
-    oderGioHang(data){
+    oderGioHang(data,token){
         return axios({
             url : `${APILink}api/order/create`,
             method: "POST",
-            data
+            data,
+            headers:{'Authorization':  token}
+
         })
     }
-    quanLyDonHang(id){
+    quanLyDonHang(id,token){
         return axios({
             url : `${APILink}api/order/getOrderByUsers?UserId=${id}`,
             method: "GET",
+            headers:{'Authorization':  token}
+
         })
     }
     donHang(url){
