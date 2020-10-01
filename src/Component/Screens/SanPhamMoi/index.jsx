@@ -6,12 +6,11 @@ class index extends Component {
     render() {
         return (
             <>
-                <div className="viewContent" style={{ overflow: "hidden" }}>
+                <div className="viewContent container" style={{ overflow: "hidden" }}>
                     <Roll top >
                         <h3 className="text-primary text-center my-2">Sản phẩm mới</h3>
                     </Roll>
-                    <Slidebar />
-                    <div className="content col-12 col-lg-9">
+                    <div className="content col-12 col-lg-12">
                         <div className="option">
                             {/* {
                                 this.props.keyWord != "" ?

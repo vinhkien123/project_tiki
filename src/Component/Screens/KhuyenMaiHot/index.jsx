@@ -9,14 +9,13 @@ class index extends Component {
 
         return (
             <>
-                <div className="viewContent" style={{ overflow: "hidden" }}>
+                <div className="viewContent container" style={{ overflow: "hidden" }}>
                     <Roll top >
                         <img className="ml-4" src="https://frontend.tikicdn.com/_desktop-next/static/img/giasoc.svg" alt="flash deal" />
                         <img src="https://frontend.tikicdn.com/_desktop-next/static/img/flash.gif" alt="flash deal" />
                         <img src="https://frontend.tikicdn.com/_desktop-next/static/img/homnay.svg" alt="flash deal" />
                     </Roll>
-                    <Slidebar />
-                    <div className="content col-12 col-lg-9">
+                    <div className="content col-12 col-lg-12">
                         <div className="option">
                             {/* {
                                 this.props.keyWord != "" ?

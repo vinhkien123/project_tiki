@@ -33,7 +33,7 @@ class index extends Component {
                     <td>{item.IntoMoney}</td>
                     <td>
                         <NavLink to={`/user/thongtindonhang/${item._id}`} className="btn btn-info ml-2">Xem thông tin</NavLink>
-                        <NavLink to={`/user/thongtindonhang/${item._id}`} className="btn btn-warning ml-2">Thay đổi</NavLink>
+                        <NavLink to={`/user/thaydoithongtin/${item._id}`} className="btn btn-warning ml-2">Thay đổi</NavLink>
 
                     </td>
                 </tr>

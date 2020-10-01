@@ -54,6 +54,7 @@ import SanPhamMuaSau from './Component/EditUser/SanPhamMuaSau';
 import SanPhamYeuThich from './Component/EditUser/SanPhamYeuThich';
 import ThongTinThanhToan from './Component/EditUser/ThongTinThanhToan'
 import SanPhamDaXemUser from './Component/EditUser/SanPhamDaXem';
+import ThayDoiDonHang from './Component/AdminUser/QuanLyDonHang/Update'
 class App extends Component {
   render() {
     let render
@@ -79,19 +80,20 @@ class App extends Component {
             <AdminTemplate path="/admin/suanguoidung/:id" exact Component={SuaNguoiDung} />
             <UserTemplate path="/user/quanlydonhang" exact Component={QuanLyDonHangCom} />
             <UserTemplate path="/user/thongtindonhang/:_id" exact Component={DonHang} />
-            <UserTemplate path="/user/thongbao" exact Component={ThongBao}/>
+            <UserTemplate path="/user/thongbao" exact Component={ThongBao} />
             <AdminTemplate path="/admin/themdanhmuc" exact Component={ThemDanhMuc} />
             <AdminTemplate path="/admin/themuser" exact Component={ThemUser} />
-            <UserTemplate path="/user/nhanxetcuatoi" exact Component={NhanXetCuaToi}/>
-            <UserTemplate path="/user/nhanxetsanphamdamua" exact Component={NhatXetSanPhamDaMua}/>
-            <UserTemplate path="/user/hoidap" exact Component={HoiDap}/>
-            <UserTemplate path="/user/sanphammuasau" exact Component={SanPhamMuaSau}/>
-            <UserTemplate path="/user/sanphamyeuthich" exact Component={SanPhamYeuThich}/>
-            <UserTemplate path="/user/thongtinthanhtoan" exact Component={ThongTinThanhToan}/>
-            <UserTemplate path="/user/sanphamdaxem" exact Component={SanPhamDaXemUser}/>
+            <UserTemplate path="/user/nhanxetcuatoi" exact Component={NhanXetCuaToi} />
+            <UserTemplate path="/user/nhanxetsanphamdamua" exact Component={NhatXetSanPhamDaMua} />
+            <UserTemplate path="/user/hoidap" exact Component={HoiDap} />
+            <UserTemplate path="/user/sanphammuasau" exact Component={SanPhamMuaSau} />
+            <UserTemplate path="/user/sanphamyeuthich" exact Component={SanPhamYeuThich} />
+            <UserTemplate path="/user/thongtinthanhtoan" exact Component={ThongTinThanhToan} />
+            <UserTemplate path="/user/sanphamdaxem" exact Component={SanPhamDaXemUser} />
+            <UserTemplate path="/user/thaydoithongtin/:id" exact Component={ThayDoiDonHang} />
           </>
       }
-      else if (this.props.thongTinTaiKhoan.Role == "basic") {
+      else if (this.props.thongTinTaiKhoan.Role == "user") {
         render =
           <>
             <HomeTemplate path="/giohang" exact Component={GioHang} />
@@ -102,6 +104,16 @@ class App extends Component {
             <AdminBanHangTemplate path="/adminbanhang/trangchu" exact Component={TrangChuAdmin} />
             <UserTemplate path="/user/quanlydonhang" exact Component={QuanLyDonHangCom} />
             <UserTemplate path="/user/thongtindonhang/:_id" exact Component={DonHang} />
+            <UserTemplate path="/user/nhanxetcuatoi" exact Component={NhanXetCuaToi} />
+            <UserTemplate path="/user/nhanxetsanphamdamua" exact Component={NhatXetSanPhamDaMua} />
+            <UserTemplate path="/user/hoidap" exact Component={HoiDap} />
+            <UserTemplate path="/user/sanphammuasau" exact Component={SanPhamMuaSau} />
+            <UserTemplate path="/user/sanphamyeuthich" exact Component={SanPhamYeuThich} />
+            <UserTemplate path="/user/thongtinthanhtoan" exact Component={ThongTinThanhToan} />
+            <UserTemplate path="/user/sanphamdaxem" exact Component={SanPhamDaXemUser} />
+            <UserTemplate path="/user/thongbao" exact Component={ThongBao} />
+
+
           </>
 
       }
@@ -119,9 +131,9 @@ class App extends Component {
           <Switch>
 
             <HomeTemplate path="/" exact Component={Component} />
-            <AdminBanHangTemplate path="/adminbanhang/capnhatthongtin" exact Component={CapNhatThongTinBanHang}/>
+            <AdminBanHangTemplate path="/adminbanhang/capnhatthongtin" exact Component={CapNhatThongTinBanHang} />
             <AdminBanHangTemplate path="/adminbanhang/trangchu" exact Component={TrangChuAdmin} />
-            <AdminBanHangTemplate path="/adminbanhang/sanpham" exact Component={ShopSanPham}/>
+            <AdminBanHangTemplate path="/adminbanhang/sanpham" exact Component={ShopSanPham} />
             <HomeTemplate path="/test" exact Component={Test} />
             <HomeTemplate path="/chitietsanpham/:id" exact Component={ChiTietSanPham} />
             <HomeTemplate path="/movie" exact Component={HomeMovie} />
@@ -147,7 +159,7 @@ class App extends Component {
 
     );
   }
-  
+
   componentDidMount() {
     this.props.dispatch(DanhMucSanPham())
     this.props.dispatch(DanhSachSanPham())
@@ -159,14 +171,14 @@ class App extends Component {
       let userObj = JSON.parse(user)
       console.log("userrr", userObj);
       this.props.dispatch(ThongTinTaiKhoan(userObj?.token))
-      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user.id,userObj?.token))
-      this.props.dispatch(QuanLyDonHang(userObj?.user.id))
+      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user._id, userObj?.token))
+      this.props.dispatch(QuanLyDonHang(userObj?.user._id))
       this.props.dispatch(SaveDanhMucCon("5f60727110312900173437a0"))
 
     }
     let banHang = localStorage.getItem('banHang')
-    if(banHang){
-      
+    if (banHang) {
+
     }
   }
 }

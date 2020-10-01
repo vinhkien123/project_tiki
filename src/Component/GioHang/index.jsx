@@ -17,7 +17,7 @@ class index extends Component {
         }
         const user = JSON.parse(localStorage.getItem('user'))
 
-        ShopingServices.xoaGioHang(data,user.token).then(res => {
+        ShopingServices.xoaGioHang(data, user.token).then(res => {
             window.location.reload(false);
         }).catch(err => {
             console.log(err);
@@ -26,7 +26,7 @@ class index extends Component {
     tangGiamSoLuong(SoLuong) {
         const user = JSON.parse(localStorage.getItem('user'))
 
-        ShopingServices.themGioHang(SoLuong,user.token).then(res => {
+        ShopingServices.themGioHang(SoLuong, user.token).then(res => {
 
 
             window.location.reload(false);
@@ -55,7 +55,7 @@ class index extends Component {
             UserId: this.props.thongTinTaiKhoan._id
         }
         const user = JSON.parse(localStorage.getItem('user'))
-        ShopingServices.giamSoLuongGioHang(giamSoLuong,user.token).then(res => {
+        ShopingServices.giamSoLuongGioHang(giamSoLuong, user.token).then(res => {
             console.log(res);
             window.location.reload(false);
         }).catch(err => {
@@ -65,6 +65,7 @@ class index extends Component {
     }
 
     render() {
+        console.log("giỏ hàng èn bạn",this.props.danhSachGioHangTheoUser.ListProduct);
         const elementGioHang = this.props.danhSachGioHangTheoUser.ListProduct?.map((item, index) => {
             const Total = () => {
                 // for(this.props.danhSachGioHangTheoUser.length)
@@ -74,7 +75,7 @@ class index extends Component {
                     <div className="cart-products__inner">
                         <div className="cart-products__img">
                             <a href="# " className="">
-                                <img src={item.Image} alt="test"  />
+                                <img src={item.Image} alt="test" />
                             </a>
                         </div>
                         <div className="cart-products__content">
