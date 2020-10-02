@@ -5,7 +5,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 });
-app.listen(3005, () => {
-   console.log("server is r  unnig on port 3005");
-   console.log("Open your browser and hit url 'localhost:3005'");
+app.listen(2706, () => {
+   console.log("server is r  unnig on port 2706");
 });
