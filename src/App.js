@@ -55,6 +55,7 @@ import SanPhamYeuThich from './Component/EditUser/SanPhamYeuThich';
 import ThongTinThanhToan from './Component/EditUser/ThongTinThanhToan'
 import SanPhamDaXemUser from './Component/EditUser/SanPhamDaXem';
 import ThayDoiDonHang from './Component/AdminUser/QuanLyDonHang/Update'
+import Header from './Component/Header'
 class App extends Component {
   render() {
     let render
@@ -129,6 +130,7 @@ class App extends Component {
       <>
         <ScrollToTop >
           <Switch>
+            <HomeTemplate path="/tatcasanpham" exact Component={TatCaSanPham} />
 
             <HomeTemplate path="/" exact Component={Component} />
             <AdminBanHangTemplate path="/adminbanhang/capnhatthongtin" exact Component={CapNhatThongTinBanHang} />
@@ -148,7 +150,6 @@ class App extends Component {
             <HomeTemplate path="/khuyenmai" exact Component={KhuyenMai} />
             <HomeTemplate path="/sanphammoi" exact Component={SanPhamMoi} />
             <Route path="/dangkybanhang" exact component={DangKyBanHang} />
-            <HomeTemplate path="/tatcasanpham" exact Component={TatCaSanPham} />
 
             {render}
 
@@ -171,9 +172,9 @@ class App extends Component {
       let userObj = JSON.parse(user)
       console.log("userrr", userObj);
       this.props.dispatch(ThongTinTaiKhoan(userObj?.token))
-      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user._id, userObj?.token))
       this.props.dispatch(QuanLyDonHang(userObj?.user._id))
       this.props.dispatch(SaveDanhMucCon("5f60727110312900173437a0"))
+      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user._id, userObj?.token))
 
     }
     let banHang = localStorage.getItem('banHang')

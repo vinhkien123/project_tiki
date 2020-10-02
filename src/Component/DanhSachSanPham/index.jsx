@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import '../../Sass/main.scss';
 import Time from '../Time'
 import New from '../../asset/data/img/logomoi.png';
+import { NavLink } from 'react-router-dom';
 
 class index extends Component {
 
@@ -52,7 +53,7 @@ class index extends Component {
         const giaSanPham = item.Price.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
 
         return (
-            <a href={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
+            <NavLink to={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
                 <div className="card text-left" >
                     <img className="card-img-top" src={item.Image} alt />
                     <div className="card-body">
@@ -83,7 +84,7 @@ class index extends Component {
 
                     </div>
                 </div>
-            </a>
+            </NavLink>
         )
     }
     renderDanhSachSanPhamNew = (item, index) => {
@@ -91,7 +92,7 @@ class index extends Component {
         const giaSanPham = item.Price.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
 
         return (
-            <a href={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
+            <NavLink to={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
                 <div className="card text-left" >
                     <img className="card-img-top" src={item.Image} alt />
                     <div className="card-body">
@@ -133,14 +134,14 @@ class index extends Component {
 
                     </div>
                 </div>
-            </a>
+            </NavLink>
         )
     }
     renderDanhSachSanPham = (item, index) => {
         const giaSanPham = item.Price?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
 
         return (
-            <a onClick={() => this.onClickSave(item)} href={`/chitietsanpham/${item._id}`} className="col-12 col-md-6 col-lg-3 card-tiki" key={index}>
+            <NavLink onClick={() => this.onClickSave(item)} to={`/chitietsanpham/${item._id}`} className="col-12 col-md-6 col-lg-3 card-tiki" key={index}>
                 <div className="card text-left" >
                     <img className="card-img-top" src={item.ImageList[0]} alt />
                     <div className="card-body">
@@ -153,7 +154,7 @@ class index extends Component {
                     </div>
                 </div>
 
-            </a>
+            </NavLink>
         )
     }
     render() {

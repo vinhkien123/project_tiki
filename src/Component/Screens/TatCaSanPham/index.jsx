@@ -11,6 +11,11 @@ class index extends Component {
             limit: 8,
         }
     }
+    componentDidMount(){
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
+    }
     pageOnChange = (page) => {
         this.setState({
             page,

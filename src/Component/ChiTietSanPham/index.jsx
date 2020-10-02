@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import ReactImageMagnify from 'react-image-magnify';
 import { connect } from 'react-redux';
 import { Fade } from 'react-reveal';
+import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import logo from '../../asset/data/img/logo.jpg';
+import { createAction } from '../../Redux/Action';
 import { ChiTietSanPham } from '../../Redux/Action/product';
+import { LayDanhSachGioHangUser, ThemGioHang } from '../../Redux/Action/shopingcart';
+import { DANHSACHGIOHANGTHEOUSER } from '../../Redux/Action/type';
 import '../../Sass/main.scss';
 import { ShopingServices } from '../../Services';
 import NhanXetSanPham from './NhatXetSanPham';
@@ -31,19 +35,10 @@ class index extends Component {
             UserId: this.props.thongTinTaiKhoan._id
         }
         let user = JSON.parse(localStorage.getItem("user"))
-        ShopingServices.themGioHang(sanPham,user.token).then(res => {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Thêm giỏ hàng thành công ! ',
-                showConfirmButton: false,
-                timer: 1200
-            });
-            this.props.history.push("/giohang")
-            window.location.reload(false);
-
-        }).catch(err => {
-            console.log(err);
+        if (user) {
+            console.log("??????????Fdsf/sdfsdkfk");
+           this.props.dispatch(ThemGioHang(sanPham,user.token))
+        } else {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -51,7 +46,8 @@ class index extends Component {
                 showConfirmButton: false,
                 timer: 1200
             });
-        })
+        }
+
     }
     render() {
         let gia, giaGiam, giaThiTruong, giaGiamString, sale, moTa
@@ -148,7 +144,7 @@ class index extends Component {
                             <hr></hr>
                             <div className=" text-free">
                                 <div className="">
-                                    <img  src="https://salt.tikicdn.com/ts/upload/cd/74/0a/862aa1925b1d4c8b837c544e40e5d4cb.png" alt="free shipping" />
+                                    <img src="https://salt.tikicdn.com/ts/upload/cd/74/0a/862aa1925b1d4c8b837c544e40e5d4cb.png" alt="free shipping" />
                                 </div>
                                 <div className="right">
                                     <div className="title ">
@@ -193,9 +189,9 @@ class index extends Component {
                                         </div>
                                     </div>
                                     <div className="group-button">
-                                        <button to="/giohang" onClick={this.themGioHang} className="btn btn-danger ml-3">
+                                        <NavLink to="/giohang" onClick={this.themGioHang} className="btn btn-danger ml-3">
                                             <i class="fa fa-cart-plus"></i>
-                                        CHỌN MUA</button>
+                                        CHỌN MUA</NavLink>
                                     </div>
                                 </div>
 
@@ -261,9 +257,9 @@ class index extends Component {
         // or
         window.scrollTo(0, 0);
     }
-    componentDidUpdate() {
-        window.scrollTo(0, 0);
-    }
+    // componentDidUpdate() {
+    //     window.scrollTo(0, 0);
+    // }
 }
 const mapStateToProps = (state) => ({
     sanPham: state.productReducers.chiTietSanPham,

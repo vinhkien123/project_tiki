@@ -15,6 +15,7 @@ import Pagination from '../../Pagination'
 import Banner from '../../../asset/data/img/BANNER_SALE.jpg'
 import Banner1 from '../../../asset/data/img/BANNER_SALE_1.jpg'
 import { NavLink } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 class index extends Component {
     constructor(props) {
@@ -89,7 +90,7 @@ class index extends Component {
         const danhMucSanPham = this.props.danhMucSanPham?.map((item, index) => {
             return (
 
-                <a href={`sanpham/danhmuc/${item.Title}/${item._id}`} key={index}>
+                <NavLink to={`sanpham/danhmuc/${item.Title}/${item._id}`} key={index}>
                     <Menu onClick={handleClick} style={{ width: 256, height: 35 }} mode="vertical">
                         <SubMenu key="sub4"
 
@@ -104,7 +105,7 @@ class index extends Component {
 
                         </SubMenu>
                     </Menu>
-                </a >
+                </NavLink >
             )
         })
         const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == true)
@@ -112,9 +113,10 @@ class index extends Component {
 
             <>
                 <div className="testHinh ">
-                    <div className="position">
+                    
+                    {/* <div className="position">
                         {danhMucSanPham}
-                    </div>
+                    </div> */}
 
                     <Slider {...setting}>
                         <div>
@@ -142,7 +144,7 @@ class index extends Component {
                             <SellTime danhSachSanPham={danhSachSale} TrangChu={true}/>
 
                         </div>
-                        <a href="/khuyenmai" className="btn btn-primary float-right">Xem tất cả </a>
+                        <NavLink to="/khuyenmai" className="btn btn-primary float-right">Xem tất cả </NavLink>
 
                     </LightSpeed>
 
@@ -152,7 +154,7 @@ class index extends Component {
                     <div className="row">
                         <SanPhamNew TrangChu={true}/>
                     </div>
-                    <a href="/sanphammoi" className="btn btn-primary float-right">Xem tất cả </a>
+                    <NavLink to="/sanphammoi" className="btn btn-primary float-right">Xem tất cả </NavLink>
 
                 </div>
 
@@ -303,7 +305,7 @@ class index extends Component {
                         <DanhSachSanPhamm />
                         {/* <Pagination defaultCurrent={this.state.page} onChange={this.pageOnChange} total={50} /> */}
                     </div>
-                    <a href="/tatcasanpham" className="btn btn-primary float-right">Xem Tất cả </a>
+                    <NavLink to="/tatcasanpham" className="btn btn-primary float-right">Xem Tất cả </NavLink>
                 </div>
             </>
 

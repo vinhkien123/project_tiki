@@ -3,6 +3,11 @@ import { Roll } from 'react-reveal';
 import SanPhamNew from '../../SanPhamNew';
 import Slidebar from '../../Sidebar';
 class index extends Component {
+    componentDidMount(){
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
+    }
     render() {
         return (
             <>

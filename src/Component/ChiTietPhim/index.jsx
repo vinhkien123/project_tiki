@@ -12,7 +12,7 @@ class index extends Component {
             timer: 0
         });
     }
-
+    
     render() {
 
         return (

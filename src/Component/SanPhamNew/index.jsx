@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import New from '../../asset/data/img/logomoi.png';
 import Time from '../Time';
 class index extends Component {
@@ -37,14 +38,14 @@ class index extends Component {
         // }, 1)
         setTimeout(() => {
             localStorage.removeItem('sanPham')
-        }, 1800)
+        }, 180000)
 
     }
     renderElement(item, index) {
         const giaGiam = (item.Price - (item.Price / 100 * item.Sale)).toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
         const giaSanPham = item.Price.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
         return (
-            <a href={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
+            <NavLink to={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
                 <div className="card text-left" >
                     <img className="card-img-top" src={item.Image} alt />
                     <div className="card-body">
@@ -86,7 +87,7 @@ class index extends Component {
 
                     </div>
                 </div>
-            </a>
+            </NavLink>
         )
     }
     render() {
@@ -109,6 +110,11 @@ class index extends Component {
                 {elementSellTime}
             </>
         );
+    }
+    componentDidMount(){
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
     }
 }
 

@@ -34,6 +34,9 @@ class index extends Component {
     // }
     componentDidMount() {
         // this.props.dispatch()
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
         if (this.props.match.params.keyWord) {
             this.props.dispatch(SreachSanPham(this.props.match.params.keyWord))
 

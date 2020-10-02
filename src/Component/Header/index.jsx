@@ -26,7 +26,8 @@ class index extends Component {
         // }
 
     }
-
+    componentWillUnmount(){
+    }
     state = { visible: false };
 
     showModal = () => {
@@ -48,6 +49,7 @@ class index extends Component {
             visible: false,
         });
     };
+
     DangXuat = () => {
         if (localStorage.getItem("user")) {
             localStorage.removeItem("user");
@@ -112,10 +114,10 @@ class index extends Component {
             elementSanPham = sanPhamObj.map((item, index) => {
                 if (index < 5) {
                     return (
-                        <a href={`/chitietsanpham/${item._id}`} onClick={this.Reload} className="col-6 col-md-4 col-lg-2" key={index}>
+                        <NavLink to={`/chitietsanpham/${item._id}`} onClick={this.Reload} className="col-6 col-md-4 col-lg-2" key={index}>
                             <img className="card-img-top" src={item.Image} alt />
 
-                        </a>
+                        </NavLink>
                     )
                 }
             })
@@ -158,7 +160,7 @@ class index extends Component {
                         </p>
                     </div>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a href="/user" className="dropdown-item">Thông tin tài khoản</a>
+                        <NavLink to="/user" className="dropdown-item">Thông tin tài khoản</NavLink>
 
                         <a className="dropdown-item view" href="#">Email : {this.props.user.Email}</a>
                         <a className="dropdown-item view" href="#">Điện thoại : {this.props.user.Phone}</a>
@@ -231,6 +233,8 @@ class index extends Component {
         ///////////////////////////////// renderrr/////////////////////
         const height = 35 * this.props.danhMucSanPham.length
         const link = window.location.href
+        
+        console.log("daxem",this.props.danhSachSanPhamDaXem);
         return (
             //// HEADER //////
             <>
@@ -239,18 +243,18 @@ class index extends Component {
                     <div className="headerTop ">
                         <div className="text-HeaderTop container row">
 
-                            <a href="movie"  >
+                            <NavLink to="/movie"  >
                                 <img src={uuDaiDoiTac} alt="test" width={18} style={{ marginRight: 4 }} />
                             Ưu đãi đối tác
-                         </a>
-                            <a href="/khuyenmai" onClick={this.Reload} >
+                         </NavLink>
+                            <NavLink to="/khuyenmai" onClick={this.Reload} >
                                 <img src={logoSale} width={18} alt="test" style={{ marginRight: 4 }} />
                             Khuyến mãi HOT
-                         </a>
-                            <a href="/dangkybanhang" >
+                         </NavLink>
+                            <NavLink to="/dangkybanhang" >
                                 <img src="https://salt.tikicdn.com/ts/upload/42/f9/5e/7ccf8b09de0e051cc9054bd535f7b1a1.png" alt="test" width={18} style={{ marginRight: 4 }} />
                             Bán hàng cùng QT-Data
-                             </a>
+                             </NavLink>
                             {/* <a href="/">
                             <img src="https://salt.tikicdn.com/media/upload/2019/01/30/736dfae48db88034a73e7fdb7f72756b.png" width={18} style={{ marginRight: 4 }} />
                             Trợ lý Tiki
@@ -286,31 +290,31 @@ class index extends Component {
                         <div className="midLeft row">
                             <div className="logo col-12 col-md-2 col-lg-1">
 
-                                <a href="/" onClick={this.Reload}>
+                                <NavLink to="/" onClick={this.Reload}>
                                     <img src={Logo1} height={33} alt="test" />
-                                </a>
+                                </NavLink>
                             </div>
                             <div className="form-sreach col-12 col-md-10 col-lg-6 mt-3" >
                                 <Sreach />
                             </div>
                             <div className="header-link col-12 col-md-10 col-lg-5 mt-2">
-                                <a href="# " className="item">
+                                <NavLink to="# " className="item">
                                     <i className="icon-tracking"></i>
                                 Theo dõi <br></br>
                                 đơn hàng
-                            </a>
-                                <a href="# " className="item">
+                            </NavLink>
+                                <NavLink to="# " className="item">
                                     <i className="icon-tracking"></i>
                                 Thông báo <br></br>
                                 của tôi
-                            </a>
+                            </NavLink>
 
                                 {/* MODEL */}
                                 {showLogin}
 
 
                                 <div className="header-cart">
-                                    <a href="/giohang" onClick={this.Reload} className="item">
+                                    <NavLink to="/giohang" onClick={this.Reload} className="item">
                                         <i class="fa fa-shopping-cart"></i>
                                     Giỏ hàng
                                     <span className="card-count" style={{
@@ -325,7 +329,7 @@ class index extends Component {
                                         }}>
                                             {this.props.danhSachGioHangTheoUser.ListProduct?.length > 0 ? this.props.danhSachGioHangTheoUser.ListProduct.length : 0}
                                         </span>
-                                    </a>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
@@ -333,28 +337,10 @@ class index extends Component {
                     <div className="headerBottom container">
                         <div className="row">
                             <div className="menu col-12 col-md-6 col-lg-2">
-
-
-
-                                {link == "http://localhost:3000/" ?
-                                    <>
-                                        <a href="# " type="button" className="btn btn-primary dropdown-toggle" style={{ background: "none", border: "none" }} >
-                                            <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
-                                        </a>
-                                        {/* <div className="position">
-                                            {danhMucSanPham}
-                                        </div> */}
-                                    </>
-                                    :
-                                    <>
-                                        <a href="# " type="button" className="btn btn-primary dropdown-toggle" style={{ background: "none", border: "none" }} id="dropdownMenuOffset" data-toggle="dropdown">
-                                            <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
-                                        </a>
-                                        <DanhMucSanPham />
-                                    </>}
-
-
-
+                                <div type="button" className="btn btn-primary dropdown-toggle" style={{ background: "none", border: "none" }} id="dropdownMenuOffset" data-toggle="dropdown">
+                                    <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
+                                 </div>
+                                <DanhMucSanPham />
                             </div>
                             <div className="viTri col-12 col-md-6 col-lg-2" style={{ margin: "0" }}>
                                 <Button type="primary" style={{ padding: 0, boxShadow: "none" }} className=" viTriGiaoHang" onClick={this.showModal}>
@@ -455,6 +441,8 @@ const mapStateToProps = state => ({
     loginFacebook: state.userReducers.loginFacebook,
     thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
     danhMucSanPham: state.productReducers.danhMucSanPham,
+    danhSachSanPhamDaXem: state.productReducers.danhSachSanPhamDaXem,
+
     danhSachGioHangTheoUser: state.shoppingcartReducers.danhSachGioHangTheoUser,
 
 
