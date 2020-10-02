@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import logo from '../../asset/data/img/logo.jpg';
 import { createAction } from '../../Redux/Action';
-import { ChiTietSanPham } from '../../Redux/Action/product';
+import { ChiTietSanPham, LayDanhSachBinhLuan } from '../../Redux/Action/product';
 import { LayDanhSachGioHangUser, ThemGioHang } from '../../Redux/Action/shopingcart';
 import { DANHSACHGIOHANGTHEOUSER } from '../../Redux/Action/type';
 import '../../Sass/main.scss';
@@ -37,7 +37,7 @@ class index extends Component {
         let user = JSON.parse(localStorage.getItem("user"))
         if (user) {
             console.log("??????????Fdsf/sdfsdkfk");
-           this.props.dispatch(ThemGioHang(sanPham,user.token))
+            this.props.dispatch(ThemGioHang(sanPham, user.token,true))
         } else {
             Swal.fire({
                 position: 'center',
@@ -51,7 +51,7 @@ class index extends Component {
     }
     render() {
         let gia, giaGiam, giaThiTruong, giaGiamString, sale, moTa
-
+        console.log("test binh luan", this.props.binhLuan);
         moTa = this.props.sanPham.DetailedDescription?.split("</br>")
         const elementMoTa = moTa?.map((item, index) => {
             return (
@@ -253,6 +253,11 @@ class index extends Component {
     }
     componentDidMount() {
         this.props.dispatch(ChiTietSanPham(this.props.match.params.id))
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            this.props.dispatch(LayDanhSachBinhLuan(this.props.match.params.id,user.token))
+
+        }
         document.body.scrollTop = 0;
         // or
         window.scrollTo(0, 0);
@@ -264,5 +269,6 @@ class index extends Component {
 const mapStateToProps = (state) => ({
     sanPham: state.productReducers.chiTietSanPham,
     thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
+    binhLuan: state.productReducers.layDanhSachBinhLuan
 })
 export default connect(mapStateToProps)(index);

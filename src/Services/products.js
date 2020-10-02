@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { linkAPI } from './routeAPI'
 // const APICor = `https://cors-anywhere.herokuapp.com/`
-const APILink = `http://103.130.214.106:3005/`
+const APILink = linkAPI
 class productsServices {
     capNhatSanPham(id,data){
         return axios({
@@ -136,6 +137,31 @@ class productsServices {
             }
         })
     }
+    layNhanXetSanPham(id,token){
+        return axios({
+            url : `${APILink}api/comment/comment-product?IdProduct=${id}`,
+            method : `GET`,
+            headers: {
+                'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization':  token
+            }
+        })
+    }
+    sreachTheoKhoangGiaDanhMuc(id,priceStart,priceCome){
+        return axios({
+            url : `${APILink}api/product/search/query?idCategory=${id}&minPrice=${priceStart}&maxPrice=${priceCome}`,
+            method : `GET`,
+        })
+    }
+    sapXepGiaTheoDanhMuc(id,status,name){
+        return axios({
+            url : `${APILink}api/product/search/query?idCategory=${id}&sort={"${name}":${status}}`,
+            method : `GET`
+        })
+    }
+    
 
 }
 export default productsServices

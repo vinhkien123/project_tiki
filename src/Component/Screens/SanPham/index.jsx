@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Flip, Slide } from 'react-reveal';
 import { createAction } from '../../../Redux/Action';
-import { DanhSachDanhMucCon, DanhSachSanPhamTheoDanhMuc, SreachSanPham } from '../../../Redux/Action/product';
+import { DanhSachDanhMucCon, DanhSachSanPhamTheoDanhMuc, SapXepTheoDanhMuc, SreachSanPham } from '../../../Redux/Action/product';
 import { SREACHAZ, SREACHZA } from '../../../Redux/Action/type';
 import DanhSachSanPham from '../../DanhSachSanPham';
 import Slidebar from '../../Sidebar';
@@ -11,19 +11,29 @@ class index extends Component {
         super(props)
 
     }
-    sreachAZ = (ds) => {
+    sreachTenAZ = ()=>{
+        this.props.dispatch(SapXepTheoDanhMuc(this.props.match.params.id,1,"Name"))
+
+    }
+    sreachTenZA = ()=>{
+        this.props.dispatch(SapXepTheoDanhMuc(this.props.match.params.id,-1,"Name"))
+
+    }
+    sreachAZ = () => {
         ///// Sắp xếp sản phẩm theo giá từ a -> z
-        const az = ds.sort((a, b) => {
-            return a.giaSanPham - b.giaSanPham
-        })
-        this.props.dispatch(createAction(SREACHAZ, az))
+        // const az = ds.sort((a, b) => {
+        //     return a.giaSanPham - b.giaSanPham
+        // })
+        // this.props.dispatch(createAction(SREACHAZ, az))
+        this.props.dispatch(SapXepTheoDanhMuc(this.props.match.params.id,1,"Price"))
     }
     sreachZA = () => {
         ///// Sắp xếp sản phẩm theo giá từ a -> z
-        const za = this.props.danhSachSanPham.sort((a, b) => {
-            return b.giaSanPham - a.giaSanPham
-        })
-        this.props.dispatch(createAction(SREACHZA, za))
+        // const za = this.props.danhSachSanPham.sort((a, b) => {
+        //     return b.giaSanPham - a.giaSanPham
+        // })
+        // this.props.dispatch(createAction(SREACHZA, za))
+        this.props.dispatch(SapXepTheoDanhMuc(this.props.match.params.id,-1,"Price"))
     }
     // shouldComponentUpdate(nextProps, nextState) {
     //     if (this.props.idDanhMuc !== nextProps.idDanhMuc) {
@@ -52,7 +62,7 @@ class index extends Component {
         return (
             <div className="viewContent" style={{ overflow: "hidden" }}>
                 <Flip>
-                    <Slidebar title={this.props.match.params.title} danhSachDanhMucCon={this.props.danhSachDanhMucCon} />
+                    <Slidebar title={this.props.match.params.title} idDanhMuc={this.props.match.params.id} danhSachDanhMucCon={this.props.danhSachDanhMucCon} />
                 </Flip>
                 <Slide top>
                     <div className="content col-12 col-lg-9">
@@ -83,6 +93,12 @@ class index extends Component {
                                     </li>
                                     <li>
                                         <a href="# " onClick={this.sreachZA}>GIÁ CAO ĐẾN THẤP</a>
+                                    </li>
+                                    <li>
+                                        <a href="# " onClick={this.sreachTenAZ}>TÊN TỪ A ĐẾN Z</a>
+                                    </li>
+                                    <li>
+                                        <a href="# " onClick={this.sreachTenZA}>TÊN TỪ Z ĐẾN A</a>
                                     </li>
                                     {/* <li>
                                     <a href="/">CHỌN LỌC</a>

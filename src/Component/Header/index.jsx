@@ -26,7 +26,7 @@ class index extends Component {
         // }
 
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
     }
     state = { visible: false };
 
@@ -233,8 +233,8 @@ class index extends Component {
         ///////////////////////////////// renderrr/////////////////////
         const height = 35 * this.props.danhMucSanPham.length
         const link = window.location.href
-        
-        console.log("daxem",this.props.danhSachSanPhamDaXem);
+
+        console.log("daxem", this.props.danhSachSanPhamDaXem);
         return (
             //// HEADER //////
             <>
@@ -327,7 +327,7 @@ class index extends Component {
                                             lineHeight: "20px",
                                             padding: "0px 6px"
                                         }}>
-                                            {this.props.danhSachGioHangTheoUser.ListProduct?.length > 0 ? this.props.danhSachGioHangTheoUser.ListProduct.length : 0}
+                                            {this.props.danhSachGioHangTheoUser?.ListProduct?.length > 0 ? this.props.danhSachGioHangTheoUser.ListProduct.length : 0}
                                         </span>
                                     </NavLink>
                                 </div>
@@ -411,22 +411,22 @@ class index extends Component {
                                 </Popover>
                             </div>
                             <div className="link col-12 col-md-6 col-lg-6">
-                                <a href="/movie" onClick={this.Reload}>
+                                <NavLink to="/movie" onClick={this.Reload}>
                                     <img src={iconmarketship} alt="test" />
                                     <span>Giao hàng</span>
-                                </a>
-                                <a href="/sanphammoi" onClick={this.Reload}>
+                                </NavLink>
+                                <NavLink to="/sanphammoi" onClick={this.Reload}>
                                     <img src={logoMarket} alt="test" />
                                     <span>
                                         Sản phẩm Mới
                                 </span>
-                                </a>
-                                <a href="/doitra">
+                                </NavLink>
+                                <NavLink to="/doitra">
                                     <img src={DoiTra} alt="test" />
                                     <span>
                                         Đổi trả
-                                </span>
-                                </a>
+                                   </span>
+                                </NavLink>
                             </div>
                         </div>
                     </div>

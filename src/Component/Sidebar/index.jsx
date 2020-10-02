@@ -53,7 +53,7 @@ class index extends Component {
                         </h3>
                     </div>
                     {/* sreach khoảng giá */}
-                    <SreachTheoKhoangGia/>
+                    <SreachTheoKhoangGia idDanhMuc={this.props.idDanhMuc}/>
                 </div>
             </div>
         );

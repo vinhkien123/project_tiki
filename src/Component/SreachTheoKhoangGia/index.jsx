@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createAction } from '../../Redux/Action';
 import { connect } from 'react-redux'
 import { DANHSACHSANPHAM } from '../../Redux/Action/type';
+import { SreachTheoKhoangGiaDanhMuc } from '../../Redux/Action/product';
 class index extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +27,8 @@ class index extends Component {
             // this.setState({ sreachPrice }, () => {
             //     this.props.dispatch(createAction(DANHSACHSANPHAM, sreachPrice))
             // })
-            
+            console.log(this.props.idDanhMuc)
+            this.props.dispatch(SreachTheoKhoangGiaDanhMuc(this.props.idDanhMuc,priceStart,priceCome))
 
         }
     }

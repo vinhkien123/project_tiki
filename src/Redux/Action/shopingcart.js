@@ -18,22 +18,24 @@ export const XoaDanhGioHang = (data, token) => {
         })
     }
 }
-export const ThemGioHang = (data, token) => {
+export const ThemGioHang = (data, token, status) => {
     console.log("buoc 0");
     return dispatch => {
         console.log("buoc 1");
         ShopingServices.themGioHang(data, token).then(res => {
-            console.log("them gio hangdddddddddddddddddd", res.data.data);
+            console.log("them gio hangdddddddddddddddddd", res.data);
             dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
 
 
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Thêm giỏ hàng thành công ! ',
-                showConfirmButton: false,
-                timer: 1200
-            });
+            if (status == true) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Thêm giỏ hàng thành công ! ',
+                    showConfirmButton: false,
+                    timer: 1200
+                });
+            }
 
 
         }).catch(err => {
@@ -45,6 +47,30 @@ export const ThemGioHang = (data, token) => {
                 showConfirmButton: false,
                 timer: 1200
             });
+        })
+    }
+}
+export const GiamGioHang = (data, token) => {
+    return dispatch => {
+        ShopingServices.giamSoLuongGioHang(data, token).then(res => {
+            console.log("them gio hangdddddddddddddddddd", res.data);
+            dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
+
+
+
+
+        }).catch(err => {
+
+        })
+    }
+}
+export const SanPhamXoa = (data, token) => {
+    return dispatch => {
+        ShopingServices.xoaGioHang(data, token).then(res => {
+            // window.location.reload(false);
+            dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
+        }).catch(err => {
+            console.log(err);
         })
     }
 }

@@ -1,0 +1,1 @@
+export const linkAPI = `http://localhost:4000/`

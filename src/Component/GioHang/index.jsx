@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DanhSachSanPham } from '../../Redux/Action/product';
-import { LayDanhSachGioHangUser, XoaDanhGioHang } from '../../Redux/Action/shopingcart';
+import { GiamGioHang, LayDanhSachGioHangUser, ThemGioHang, XoaDanhGioHang } from '../../Redux/Action/shopingcart';
 import { ShopingServices } from '../../Services';
 import GioHangRong from "./GioHangRong";
 import { Spin } from 'antd';
+import { NavLink } from 'react-router-dom';
+import {SanPhamXoa} from '../../Redux/Action/shopingcart'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -19,24 +21,17 @@ class index extends Component {
             ProductId: productId
         }
         let user = JSON.parse(localStorage.getItem('user'))
-        ShopingServices.xoaGioHang(data, user.token).then(res => {
-            window.location.reload(false);
-
-        }).catch(err => {
-            console.log(err);
-        })
+        if(user){
+            this.props.dispatch(SanPhamXoa(data,user.token))
+        }
 
     }
     tangGiamSoLuong(SoLuong) {
-        ShopingServices.themGioHang(SoLuong).then(res => {
 
-
-            window.location.reload(false);
-
-        }).catch(err => {
-
-            window.location.reload(false);
-        })
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            this.props.dispatch(ThemGioHang(SoLuong, user.token))
+        }
     }
     tangSoLuong(item) {
         const tangSoLuong = {
@@ -50,20 +45,19 @@ class index extends Component {
 
     }
     giamSoluong(item) {
+        const user = JSON.parse(localStorage.getItem('user'))
 
         const giamSoLuong = {
             Quantity: 1,
             ProductId: item._id,
             UserId: this.props.thongTinTaiKhoan._id
         }
+        if (user) {
+            // this.props.dispatch(ThemGioHang(SoLuong,user.token))
 
-        ShopingServices.giamSoLuongGioHang(giamSoLuong).then(res => {
-            console.log(res);
-            window.location.reload(false);
-        }).catch(err => {
-            console.log(err);
-            window.location.reload(false);
-        })
+            this.props.dispatch(GiamGioHang(giamSoLuong, user.token))
+        }
+
     }
 
     render() {
@@ -154,11 +148,11 @@ class index extends Component {
                                                     {this.props.danhSachGioHangTheoUser.SubPrice?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")}đ <i>(Đã bao gồm VAT nếu có)</i>
                                                 </span>
                                             </p>
-                                            <a href="/checkout/oder" className="cart__submit">Tiến hàng đặt hàng</a>
+                                            <NavLink to="/checkout/oder" className="cart__submit">Tiến hàng đặt hàng</NavLink>
                                             <div className="coupon">
                                                 <p className="coupon-title">
                                                     Mã giảm giá / Quà tặng
-                        </p>
+                                                </p>
                                                 <div className="inner">
                                                     <input type="text" className="coupon-input" placeholder="Nhập ở đây...." />
                                                     <button className="coupon-button" disabled>Đồng ý</button>
