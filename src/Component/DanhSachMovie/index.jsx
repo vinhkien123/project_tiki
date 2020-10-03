@@ -8,7 +8,6 @@ class index extends Component {
     render() {
         const elementDanhSachPhim = this.props.danhSachPhim.map((item, index) => {
             return (
-
                 <Link to={`/movie/chitietphim/${item.id}`} className="col-12 col-md-6 col-lg-3 card-phim" key={index}>
                     <div className="card text-left" >
                         <div className="hinhAnh">
@@ -19,7 +18,6 @@ class index extends Component {
                                 </div>
                                 <div className="center">
                                     <button className="btn btn-outline-success muaVe">Mua vé</button>
-
                                 </div>
                             </div>
                             <div className="bg"></div>

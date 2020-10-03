@@ -1,46 +1,125 @@
 .card-tiki {
     margin: 30px 0px;
+    // &:hover {
+    //     text-decoration: none;
+    //     .card {
+    //         .card-img-top {
+    //             opacity: 0.7;
+    //         }
+    //         .card-body {
+    //             .card-title {
+    //                 opacity: 0;
+    //             }
+    //             .gia-hover {
+    //                 opacity: 0;
+    //             }
+    //             button {
+    //                 transform: translateX(50%) translateY(50%);
+    //                 opacity: 1;
+    //                 top: 0;
+    //             }
+    //         }
+    //     }
+    // }
     &:hover {
-        text-decoration: none;
         .card {
-            height: 420px;
-            .card-img-top {
-                padding: 20px 20px 5px;
-                opacity: 0.7;
-            }
-            .card-body {
-                .card-title {
+            .hinhAnh {
+                .card-body {
+                    opacity: 0;
+                    .card-title {
+                        text-decoration: none;
+                    }
+                    .card-text {
+                        text-decoration: none;
+                    }
+                    .gia-hover{
+                        text-decoration: none;
+                    }
+                    .bottom{
+                        text-decoration: none;
+                    }
                 }
-                .gia-hover {
-                }
-                button {
-                    margin-top: 10px;
-                    margin-bottom: 5px;
+                .bg {
                     opacity: 1;
+                }
+                .button {
+                    z-index: 10;
+                    transform: translateX(-50%);
+                    left: 50%;
+                    .center {
+                        .detail {
+                            opacity: 1;
+                        }
+                        .muaVe {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .hinhAnh {
+        position: relative;
+        .bg {
+            background: linear-gradient(to top, #3ea4ce, transparent 100%);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: 0.5s all;
+        }
+        .button {
+            position: absolute;
+            left: -50%;
+            transform: translateX(0);
+            transition: 0.5 all;
+            .center {
+                margin-bottom: 20px;
+                .detail {
+                    @include buttonPhim();
+
+                    border: 1px solid white;
+                }
+                .muaVe {
+                    @include buttonPhim();
+
+                    background: #000000;
+                    border: beige;
                 }
             }
         }
     }
     .card {
         transition: 0.5s all;
-        
-        height: 400px;
+
         .card-img-top {
             transition: 0.5s all;
             opacity: 1;
+            padding: 10px;
         }
         .card-body {
+            margin-bottom: 10px;
+            transition: 0.5s all;
             padding-bottom: 5px;
             padding-top: 0px;
             .card-title {
+                text-overflow: ellipsis;
+                text-decoration: none;
                 margin: 0px;
+                overflow: hidden;
                 transition: 0.5s all;
                 margin-bottom: 10px;
                 margin-top: 5px;
             }
-
+            .gia-hover {
+                transition: 0.5s all;
+                text-decoration: none;
+            }
             .giamGia {
                 position: absolute;
+                text-decoration: none;
                 top: 15px;
                 left: 25px;
                 display: flex;
@@ -82,6 +161,8 @@
 
             button {
                 opacity: 0;
+                position: absolute;
+                left: 0;
                 transition: 0.5s all;
             }
             .bottom {

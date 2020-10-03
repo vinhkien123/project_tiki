@@ -1,1 +1,1 @@
-export const linkAPI = `http://118.69.32.128:5005/`
+export const linkAPI = `http://118.69.32.128:2706/`

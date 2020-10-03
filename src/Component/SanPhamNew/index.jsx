@@ -47,45 +47,58 @@ class index extends Component {
         return (
             <NavLink to={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
                 <div className="card text-left" >
-                    <img className="card-img-top" src={item.Image} alt />
-                    <div className="card-body">
+                    <div className="hinhAnh">
+                        <img className="card-img-top" src={item.Image} alt />
 
-                        <h4 className="card-title">{item.Name.length > 44 ? item.Name.slice(0, 44) + "...." : item.Name}</h4>
-                        <div className="price">
-                            <p className="card-text text-danger text-center gia-hover">{giaGiam}&nbsp; ₫</p>
+                        <div className="button">
+                            <div className="center">
+                            </div>
+                            <div className="center">
+                                <button className="btn btn-outline-success muaVe">Mua Sản phẩm</button>
 
-                            {item.StatusSale == true ?
-                                <p className="sellPrice">{giaSanPham} ₫</p>
-                                : <> </>
-                            }
-                        </div>
-                        <span className="new">
-                            <img src={New} width={40} height={36} alt="test" />
-                        </span>
-                        {item.StatusSale == true ?
-                            <span className="giamGia">-{item.Sale}%</span> : ""
-                        }
-
-                        <div className="bottom">
-                            <div className="sellTime">
-                                <div className="sell">
-                                    <div className="products">
-                                        <div className="width-sell" style={{ width: "20%" }}></div>
-                                        <div className="content-sell">
-                                            <span><i class="fa fa-fire"></i></span>
-                                            <p className="text">Đã bán 1</p>
-                                        </div>
-                                    </div>
-                                    {item.StatusSale == true ?
-                                        <Time time={item.ExpirationDateSale} id={item._id} item={item} />
-                                        : ""
-                                    }
-                                </div>
                             </div>
                         </div>
-                        {/* <Time /> */}
+                        <div className="bg"></div>
+                        <div className="card-body">
 
+                            <h4 className="card-title">{item.Name.length > 44 ? item.Name.slice(0, 44) + "...." : item.Name}</h4>
+                            <div className="price">
+                                <p className="card-text text-danger text-center gia-hover">{giaGiam}&nbsp; ₫</p>
+
+                                {item.StatusSale == true ?
+                                    <p className="sellPrice">{giaSanPham} ₫</p>
+                                    : <> </>
+                                }
+                            </div>
+                            <span className="new">
+                                <img src={New} width={40} height={36} alt="test" />
+                            </span>
+                            {item.StatusSale == true ?
+                                <span className="giamGia">-{item.Sale}%</span> : ""
+                            }
+
+                            <div className="bottom">
+                                <div className="sellTime">
+                                    <div className="sell">
+                                        <div className="products">
+                                            <div className="width-sell" style={{ width: "20%" }}></div>
+                                            <div className="content-sell">
+                                                <span><i class="fa fa-fire"></i></span>
+                                                <p className="text">Đã bán 1</p>
+                                            </div>
+                                        </div>
+                                        {item.StatusSale == true ?
+                                            <Time time={item.ExpirationDateSale} id={item._id} item={item} />
+                                            : ""
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <Time /> */}
+
+                        </div>
                     </div>
+
                 </div>
             </NavLink>
         )
@@ -111,7 +124,7 @@ class index extends Component {
             </>
         );
     }
-    componentDidMount(){
+    componentDidMount() {
         document.body.scrollTop = 0;
         // or
         window.scrollTo(0, 0);

@@ -83,7 +83,32 @@ class index extends Component {
             autoplay: true,
             speed: 10000,
             autoplaySpeed: 1,
-            cssEase: "linear"
+            cssEase: "linear",
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         };
         const { SubMenu } = Menu;
 
@@ -113,17 +138,17 @@ class index extends Component {
 
             <>
                 <div className="testHinh ">
-                    
+
                     {/* <div className="position">
                         {danhMucSanPham}
                     </div> */}
 
                     <Slider {...setting}>
                         <div>
-                            <img style={{ height: 560, width: 1475 }} src={Banner} alt="test" />
+                            <img src={Banner} alt="test" />
                         </div>
                         <div>
-                            <img style={{ height: 560, width: 1475 }} src={Banner1} alt="test" />
+                            <img src={Banner1} alt="test" />
 
                         </div>
                         {/* <div>
@@ -141,7 +166,7 @@ class index extends Component {
                     <LightSpeed>
 
                         <div className="row">
-                            <SellTime danhSachSanPham={danhSachSale} TrangChu={true}/>
+                            <SellTime danhSachSanPham={danhSachSale} TrangChu={true} />
 
                         </div>
                         <NavLink to="/khuyenmai" className="btn btn-primary float-right">Xem tất cả </NavLink>
@@ -152,7 +177,7 @@ class index extends Component {
                 <div className="container">
                     <h2>Sản phẩm mới</h2>
                     <div className="row">
-                        <SanPhamNew TrangChu={true}/>
+                        <SanPhamNew TrangChu={true} />
                     </div>
                     <NavLink to="/sanphammoi" className="btn btn-primary float-right">Xem tất cả </NavLink>
 

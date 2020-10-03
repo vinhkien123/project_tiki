@@ -7,7 +7,7 @@ import { DANHSACHSANPHAMDAXEM } from '../../Redux/Action/type';
 class index extends Component {
     onClickSave = (sanPham) => {
         let array, flag
-        
+
         ///// Kiểm tra có chuỗi JSON sản phẩm không
         if (localStorage.getItem('sanPham')) {
             // chuyển từ chuỗi JSON sang array chứa object sản phẩm
@@ -28,7 +28,7 @@ class index extends Component {
             /////// chuyển từ array sang chuỗi json =>>> đưa chuỗi json lên localStorage 
             localStorage.setItem('sanPham', JSON.stringify(array))
             // this.props.dispatch(createAction(DANHSACHSANPHAMDAXEM,array))
-            
+
         }
         ///// Nếu không có thì tạo 1 cái array mới
         else {
@@ -52,34 +52,47 @@ class index extends Component {
         return (
             <NavLink to={`/chitietsanpham/${item?._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
                 <div className="card text-left" >
-                    <img className="card-img-top" src={item?.Image} alt />
-                    <div className="card-body">
+                    <div className="hinhAnh">
+                        <img className="card-img-top" src={item?.Image} alt />
 
-                        <h4 className="card-title">{item?.Name.length > 44 ? item?.Name.slice(0, 44) + "...." : item?.Name}</h4>
-                        <div className="price">
-                            <p className="card-text text-danger gia-hover">{giaGiam}&nbsp; ₫</p>
+                        <div className="button">
+                            <div className="center">
+                            </div>
+                            <div className="center">
+                                <button className="btn btn-outline-success muaVe">Mua Sản phẩm</button>
 
-                            <p className="sellPrice">{giaSanPham} ₫</p>
-
-                        </div>
-                        <span className="giamGia">-{item?.Sale}%</span>
-                        <div className="bottom">
-                            <div className="sellTime">
-                                <div className="sell">
-                                    <div className="products">
-                                        <div className="width-sell" style={{ width: "20%" }}></div>
-                                        <div className="content-sell">
-                                            <span><i class="fa fa-fire"></i></span>
-                                            <p className="text">Đã bán 1</p>
-                                        </div>
-                                    </div>
-                                    <Time time={item?.ExpirationDateSale} id={item?._id} item={item} />
-                                </div>
                             </div>
                         </div>
-                        {/* <Time /> */}
+                        <div className="bg"></div>
+                        <div className="card-body">
 
+                            <h4 className="card-title">{item?.Name.length > 44 ? item?.Name.slice(0, 44) + "...." : item?.Name}</h4>
+                            <div className="price">
+                                <p className="card-text text-danger gia-hover">{giaGiam}&nbsp; ₫</p>
+
+                                <p className="sellPrice">{giaSanPham} ₫</p>
+
+                            </div>
+                            <span className="giamGia">-{item?.Sale}%</span>
+                            <div className="bottom">
+                                <div className="sellTime">
+                                    <div className="sell">
+                                        <div className="products">
+                                            <div className="width-sell" style={{ width: "20%" }}></div>
+                                            <div className="content-sell">
+                                                <span><i class="fa fa-fire"></i></span>
+                                                <p className="text">Đã bán 1</p>
+                                            </div>
+                                        </div>
+                                        <Time time={item?.ExpirationDateSale} id={item?._id} item={item} />
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <Time /> */}
+
+                        </div>
                     </div>
+
                 </div>
             </NavLink>
         )
@@ -89,13 +102,13 @@ class index extends Component {
         if (this.props.TrangChu == true) {
             elementSellTime = this.props.danhSachSanPham?.map((item, index) => {
                 if (index < 4) {
-                  return  this.renderElement(item, index)
+                    return this.renderElement(item, index)
                 }
             })
         } else {
             elementSellTime = this.props.danhSachSanPham?.map((item, index) => {
 
-                return  this.renderElement(item, index)
+                return this.renderElement(item, index)
 
             })
         }

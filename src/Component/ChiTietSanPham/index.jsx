@@ -37,7 +37,7 @@ class index extends Component {
         let user = JSON.parse(localStorage.getItem("user"))
         if (user) {
             console.log("??????????Fdsf/sdfsdkfk");
-            this.props.dispatch(ThemGioHang(sanPham, user.token,true))
+            this.props.dispatch(ThemGioHang(sanPham, user.token, true))
         } else {
             Swal.fire({
                 position: 'center',
@@ -170,7 +170,7 @@ class index extends Component {
 
                                 } &nbsp;₫</p>
 
-                                <p className="original-price ">Tiết kiệm: <span>35%</span> ({giaGiamString} ₫)</p>
+                                <p className="original-price ">Tiết kiệm: <span>{this.props.sanPham.Sale}%</span> ({giaGiamString} ₫)</p>
                                 <p className="original-price">Giá thị trường:
                                 {/* CHIA ĐƠN VỊ */}
                                     {giaThiTruong.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ₫
@@ -255,7 +255,7 @@ class index extends Component {
         this.props.dispatch(ChiTietSanPham(this.props.match.params.id))
         const user = JSON.parse(localStorage.getItem('user'))
         if (user) {
-            this.props.dispatch(LayDanhSachBinhLuan(this.props.match.params.id,user.token))
+            this.props.dispatch(LayDanhSachBinhLuan(this.props.match.params.id, user.token))
 
         }
         document.body.scrollTop = 0;
