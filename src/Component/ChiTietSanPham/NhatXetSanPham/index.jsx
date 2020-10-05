@@ -74,12 +74,12 @@ class index extends Component {
                         {/* <div className="images-infor">
                             <img src={img} alt="test" />
                         </div> */}
-                        <div className="buttons-link d-flex align-items-center mt-2">
+                        {/* <div className="buttons-link d-flex align-items-center mt-2">
                             <a href="/">Trả lời</a>
                             <a href="/">Chia sẻ trên facebook</a>
                             <p>Nhận xét này hữu ích với bạn?</p>
                             <a href="# " className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             )
@@ -92,7 +92,7 @@ class index extends Component {
                             <h4>KHÁCH HÀNG NHẬN XÉT</h4>
                         </div>
                         <div className="row bg-rw_dg">
-                            <div className="col-12 col-md-4 col-lg-4 py-4">
+                            <div className="col-12 col-md-4 col-lg-4 py-4 ">
                                 <div className="star-rating text-center">
                                     <h4>Đánh giá trung bình</h4>
                                     <p className="score">4.5/5</p>
@@ -106,7 +106,7 @@ class index extends Component {
                                     <a href="/">(19 nhận xét)</a>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-4 col-lg-4 py-4 border-middle">
+                            <div className="col-12 col-md-4 col-lg-4 py-4 border-middle ">
                                 <div className="star-progress-bar d-flex align-items-center align-self-stretch">
                                     <p className="star-number d-flex align-items-center mb-0">
                                         5 <i className="fa fa-star" />
