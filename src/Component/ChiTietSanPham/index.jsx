@@ -11,6 +11,7 @@ import { LayDanhSachGioHangUser, ThemGioHang } from '../../Redux/Action/shopingc
 import { DANHSACHGIOHANGTHEOUSER } from '../../Redux/Action/type';
 import '../../Sass/main.scss';
 import { ShopingServices } from '../../Services';
+import { ThemBinhLuan } from '../../Redux/Action/product'
 import NhanXetSanPham from './NhatXetSanPham';
 
 class index extends Component {
@@ -48,6 +49,18 @@ class index extends Component {
             });
         }
 
+    }
+    themBinhLuan = (content) => {
+        console.log(content, this.props.match.params.id);
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            const data = {
+                Content: content,
+                IdProduct: this.props.match.params.id,
+                IdUser: user.user._id
+            }
+            this.props.dispatch(ThemBinhLuan(this.props.match.params.id, data, user.token))
+        }
     }
     render() {
         let gia, giaGiam, giaThiTruong, giaGiamString, sale, moTa
@@ -247,7 +260,7 @@ class index extends Component {
                         </Fade>
                     </div>
                 </div>
-                <NhanXetSanPham />
+                <NhanXetSanPham  id={this.props.match.params.id} />
             </div>
         );
     }

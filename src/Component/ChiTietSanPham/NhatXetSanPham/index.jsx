@@ -1,7 +1,89 @@
 import React, { Component } from 'react';
 import img from '../../../asset/data/img/556b075fd896c32ff38a3526bba0d3bc.jpg';
+import './style.scss'
+import { connect } from 'react-redux'
+import { ThemBinhLuan } from '../../../Redux/Action/product';
+import { ProductsService } from '../../../Services';
+import { createAction } from '../../../Redux/Action';
+import { LAYDANHSACHBINHLUAN } from '../../../Redux/Action/type';
 class index extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            Content: ""
+        }
+    }
+    hanldeOnChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+    hanldeOnClick = () => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            const data = {
+                Content: this.state.Content,
+                IdProduct: this.props.id,
+                IdUser: user.user._id
+            }
+
+            this.props.dispatch(ThemBinhLuan(this.props.id, data, user.token))
+            // ProductsService.themBinhLuan(data.IdProduct, data, user.token).then(res => {
+            //     console.log(res.data.data, "data them");
+            //     // dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.comment))
+            //     // this.props.binhLuan.push()
+            //     const dataCmt = [...this.props.binhLuan,res.data.data]
+            //     this.props.dispatch(createAction(LAYDANHSACHBINHLUAN,dataCmt))
+            // }).catch(err => {
+            //     console.log(err);
+            // })
+            
+        }
+    }
+
+    themBinhLuan = (content) => {
+
+    }
     render() {
+        console.log(this.props.binhLuan,"??? view bl");
+        const elmentBinhLuan = this.props.binhLuan?.map((item, index) => {
+            return (
+                <div className="review d-flex" key={index}>
+                    <div className="info-user d-flex text-center">
+                        <div className="avatar">
+                            <p className="icon-avatar d-flex align-items-center justify-content-center">MC</p>
+                            <p className="username">{item.UserName}</p>
+                            <p className="text">6 tháng trước</p>
+                        </div>
+                    </div>
+                    <div className="information">
+                        <div className="title-infor d-flex">
+                            <p className="star-infor">
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star" />
+                            </p>
+                            <span>Hài lòng</span>
+                        </div>
+                        <p className="pur-infor d-flex align-items-center">
+                            <span className="img-pur d-inline-block" /> Đã mua hàng
+                             </p>
+                        <p className="content">{item.Content}</p>
+                        {/* <div className="images-infor">
+                            <img src={img} alt="test" />
+                        </div> */}
+                        <div className="buttons-link d-flex align-items-center mt-2">
+                            <a href="/">Trả lời</a>
+                            <a href="/">Chia sẻ trên facebook</a>
+                            <p>Nhận xét này hữu ích với bạn?</p>
+                            <a href="# " className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
         return (
             <>
                 <div className="bg-background">
@@ -117,71 +199,13 @@ class index extends Component {
                                     </select>
                                 </div>
                             </div>
-                            <div className="review d-flex">
-                                <div className="info-user d-flex text-center">
-                                    <div className="avatar">
-                                        <p className="icon-avatar d-flex align-items-center justify-content-center">MC</p>
-                                        <p className="username">Lâm Mỹ Châu</p>
-                                        <p className="text">6 tháng trước</p>
-                                    </div>
-                                </div>
-                                <div className="information">
-                                    <div className="title-infor d-flex">
-                                        <p className="star-infor">
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                        </p>
-                                        <span>Hài lòng</span>
-                                    </div>
-                                    <p className="pur-infor d-flex align-items-center">
-                                        <span className="img-pur d-inline-block" /> Đã mua hàng
-          </p>
-                                    <p className="content">Quyển 2,3 thì có bọc nhựa nhưng quyển 4 này k có bọc nên phía dưới quyển sách bị dơ dính dấu tay.</p>
-                                    <div className="images-infor">
-                                        <img src={img} alt="test" />
-                                    </div>
-                                    <div className="buttons-link d-flex align-items-center mt-2">
-                                        <a href="/">Trả lời</a>
-                                        <a href="/">Chia sẻ trên facebook</a>
-                                        <p>Nhận xét này hữu ích với bạn?</p>
-                                        <a href="# " className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="review d-flex">
-                                <div className="info-user d-flex text-center">
-                                    <div className="avatar">
-                                        <p className="icon-avatar d-flex align-items-center justify-content-center">LV</p>
-                                        <p className="username">Luyn V</p>
-                                        <p className="text">18 giờ trước</p>
-                                    </div>
-                                </div>
-                                <div className="information">
-                                    <div className="title-infor d-flex">
-                                        <p className="star-infor">
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                            <i className="fa fa-star" />
-                                        </p>
-                                        <span>Hài lòng</span>
-                                    </div>
-                                    <p className="pur-infor d-flex align-items-center">
-                                        <span className="img-pur d-inline-block" /> Đã mua hàng
-          </p>
-                                    <p className="content">mua 3 quyển mà 1 quyển bị bóc mất bao ngoài rồi shop,nhưng vẫn oke ạ,giao nhanh</p>
-                                    <div className="buttons-link d-flex align-items-center mt-2">
-                                        <a href="/">Trả lời</a>
-                                        <a href="/">Chia sẻ trên facebook</a>
-                                        <p>Nhận xét này hữu ích với bạn?</p>
-                                        <a href="# " className="btn btn--yellow-1"><i className="fa fa-thumbs-o-up" /> Cảm ơn</a>
-                                    </div>
-                                </div>
-                            </div>
+
+                            {elmentBinhLuan}
+
+                        </div>
+                        <div className="nhanXet">
+                            <textarea name="Content" id="" cols="30" value={this.state.content} onChange={this.hanldeOnChange} style={{ width: "100%" }} className="Content" placeholder="Bình luận ..." rows="5"></textarea>
+                            <button className="btn btn-primary button" onClick={this.hanldeOnClick}>Nhận xét</button>
                         </div>
                     </div>
                 </div>
@@ -191,4 +215,8 @@ class index extends Component {
     }
 }
 
-export default index;
+const mapStateToProps = state => ({
+    binhLuan: state.productReducers.layDanhSachBinhLuan
+
+})
+export default connect(mapStateToProps)(index);

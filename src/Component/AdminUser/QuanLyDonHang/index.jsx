@@ -29,7 +29,6 @@ class index extends Component {
                     <td>{item.Address}</td>
                     <td>{item.Email}</td>
                     <td>{item.Phone}</td>
-                    <td>{item.Payment}</td>
                     <td>{item.IntoMoney}</td>
                     <td>
                         <NavLink to={`/user/thongtindonhang/${item._id}`} className="btn btn-info ml-2">Xem thông tin</NavLink>
@@ -49,7 +48,6 @@ class index extends Component {
                         <td>Địa chỉ nhận</td>
                         <td>Email</td>
                         <td>Số điện thoại</td>
-                        <td>Hình thức thanh toán</td>
                         <td>Tổng tiền</td>
                         <td>Thao tác</td>
                     </tr>

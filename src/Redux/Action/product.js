@@ -197,6 +197,17 @@ export const LayDanhSachBinhLuan = (id, token) => {
         })
     }
 }
+export const ThemBinhLuan = (id,data,token) =>{
+    return dispatch =>{
+        ProductsService.themBinhLuan(id,data,token).then(res=>{
+            console.log(res.data,"data them");
+            dispatch(createAction(LAYDANHSACHBINHLUAN,res.data.data.comment))
+            window.location.reload(false)
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+}
 export const SreachTheoKhoangGiaDanhMuc = (id, priceStart, come) => {
     return dispatch => {
         ProductsService.sreachTheoKhoangGiaDanhMuc(id, priceStart, come).then(res => {

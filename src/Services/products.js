@@ -161,6 +161,20 @@ class productsServices {
             method : `GET`
         })
     }
+    themBinhLuan(id,data,token){
+        return axios({
+            url : `${APILink}api/comment/comment?IdProduct=${id}`,
+            method: `POST`,
+            data ,
+            headers: {
+                'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization':  token
+            }
+        })
+    }
+    
     
 
 }

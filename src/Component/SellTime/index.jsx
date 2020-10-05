@@ -59,7 +59,7 @@ class index extends Component {
                             <div className="center">
                             </div>
                             <div className="center">
-                                <button className="btn btn-outline-success muaVe">Mua Sản phẩm</button>
+                                <button className="btn btn-outline-success muaVe">Xem chi tiết</button>
 
                             </div>
                         </div>
