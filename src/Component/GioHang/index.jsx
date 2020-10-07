@@ -170,7 +170,7 @@ class index extends Component {
                                 </div>
                             </div>
                         </div> :
-                        <GioHangRong login={true} />
+                        <GioHangRong  />
                 }
 
 
@@ -197,5 +197,6 @@ const mapStateToProps = state => ({
     danhSachSanPham: state.productReducers.danhSachSanPham,
     danhSachGioHangTheoUser: state.shoppingcartReducers.danhSachGioHangTheoUser,
     thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
+    login : state.userReducers.login
 })
 export default connect(mapStateToProps)(index);

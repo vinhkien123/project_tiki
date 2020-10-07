@@ -1,13 +1,17 @@
-import { DANHSACHUSER, LAYTHONGTINUSER, LOGINFACEBOOK, THONGTINTAIKHOAN } from "../Action/type"
+import { DANHSACHUSER, LAYTHONGTINUSER, LOGIN, LOGINFACEBOOK, THONGTINTAIKHOAN } from "../Action/type"
 
 const initialState = {
     thongTinTaiKhoan : {},
     loginFacebook : {},
     danhSachUser : [],
-    layThongTinUser : {}
+    layThongTinUser : {},
+    login : false,
 }
 const userReducers = (state = initialState, action)=>{
     switch(action.type){
+        case LOGIN:
+            state.login = action.payload
+            return {...state}
         case THONGTINTAIKHOAN:
             state.thongTinTaiKhoan = action.payload
             return{...state}

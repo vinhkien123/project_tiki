@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Menu, Modal, Popover } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import Logo1 from '../../asset/data/img/header-logo.png';
 import iconmarketship from "../../asset/data/img/iconmarketship.png";
 import logoSale from '../../asset/data/imgHeader/khuyenmaihot.png';
@@ -15,6 +15,8 @@ import Sreach from '../Sreach';
 import DanhMucCon from './DanhMucCon';
 import DanhMucSanPham from './DanhMucSanPham';
 import DoiTra from '../../asset/data/img/doitra.png'
+import { createAction } from "../../Redux/Action";
+import { LOGIN, THONGTINTAIKHOAN } from "../../Redux/Action/type";
 
 // import { LOGINFACEBOOK } from '../../Redux/Action/type';
 
@@ -53,12 +55,13 @@ class index extends Component {
     DangXuat = () => {
         if (localStorage.getItem("user")) {
             localStorage.removeItem("user");
-
+            this.props.dispatch(createAction(LOGIN, false))
+            this.props.dispatch(createAction(THONGTINTAIKHOAN,{}))
         } else if (this.props.loginFacebook.name != "") {
             let obj = {}
             // this.props.dispatch(LOGINFACEBOOK, obj)
         }
-        window.location.reload(false);
+
 
     }
     Reload = (link) => {
@@ -147,9 +150,9 @@ class index extends Component {
         let showLogin
         //////////////// KIỂM TRA NGƯỜI DÙNG CÓ ĐĂNG NHẬP TÀI KHOÀN WEBSITE NÀO //////////////////////////
         let user = localStorage.getItem("user")
-
+        console.log(this.props.user,"loginnnnn");
         ///////////////////// tài khoản của website ///////////////////
-        if (user) {
+        if (this.props.login == true || user) {
             user = JSON.parse(localStorage.getItem("user"))
             showLogin = <>
                 <div className="dropdown login item">
@@ -442,7 +445,7 @@ const mapStateToProps = state => ({
     thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
     danhMucSanPham: state.productReducers.danhMucSanPham,
     danhSachSanPhamDaXem: state.productReducers.danhSachSanPhamDaXem,
-
+    login: state.userReducers.login,
     danhSachGioHangTheoUser: state.shoppingcartReducers.danhSachGioHangTheoUser,
 
 

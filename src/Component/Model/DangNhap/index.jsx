@@ -22,12 +22,12 @@ class index extends Component {
 
     onClick = (e) => {
         e.preventDefault();
-        DangNhap(this.state)
+        this.props.dispatch(DangNhap(this.state))
     }
     componentClicked = () => {
     }
     render() {
-     
+
         return (
             <form>
 
@@ -61,4 +61,4 @@ class index extends Component {
 const mapStateToProps = state => ({
 
 })
-export default connect(mapStateToProps) (index);
+export default connect(mapStateToProps)(index);
