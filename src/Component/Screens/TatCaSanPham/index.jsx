@@ -33,14 +33,14 @@ class index extends Component {
                     {/* <Pagination defaultCurrent={this.state.page} onChange={this.pageOnChange} total={50} /> */}
                 </div>
                 <Pagination page={this.state.page} danhSachSanPham={this.props.danhSachSanPham}
-                    limit={this.state.limit} pageOnChange={this.pageOnChange} total={Math.ceil(this.props.danhSachSanPham.length / 8)} />
+                    limit={this.state.limit} pageOnChange={this.pageOnChange} total={Math.ceil(this.props.danhSachSanPham.count / 8)} />
             </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    danhSachSanPham: state.productReducers.danhSachSanPham,
+    danhSachSanPham: state.productReducers.danhSachSanPhamPhanTrang,
 
 })
 export default connect(mapStateToProps)(index);

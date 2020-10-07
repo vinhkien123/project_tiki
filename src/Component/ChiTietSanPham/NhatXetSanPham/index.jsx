@@ -37,7 +37,7 @@ class index extends Component {
             // }).catch(err => {
             //     console.log(err);
             // })
-            
+
         }
     }
 
@@ -45,15 +45,36 @@ class index extends Component {
 
     }
     render() {
-        console.log(this.props.binhLuan,"??? view bl");
+        
+        console.log(this.props.binhLuan, "??? view bl");
         const elmentBinhLuan = this.props.binhLuan?.map((item, index) => {
+            const dateNow = new Date() - new Date(item.NewDateAt)
+            // setSeconds(seconds => seconds + 1);
+            let ngay = Math.floor(dateNow / 1000 / 60 / 60 / 24)
+            let gio = Math.floor(dateNow / 1000 / 60 / 60 - ngay * 24)
+            let phut = Math.floor(dateNow / 1000 / 60 - ngay * 24 * 60 - gio * 60)
+            let giay = Math.floor(dateNow / 1000 - ngay * 24 * 60 * 60 - gio * 60 * 60 - phut * 60)
+            let validateGiay = 1000 * 60
+            let validatePhut = validateGiay * 60
+            let validateGio = validatePhut * 24
+            let validateNgay = validateGio*30
+            let str ;
+            if(dateNow<validateGiay){
+                str = `${giay} giây trước`
+            }else if(dateNow<validatePhut){
+                str = `${phut} phút trước`
+            }else if(dateNow<validateGio){
+                str = `${gio} giờ trước`
+            }else if(dateNow<validateNgay){
+                str = `${ngay} ngày trước`
+            }
             return (
                 <div className="review d-flex" key={index}>
                     <div className="info-user d-flex text-center">
                         <div className="avatar">
                             <p className="icon-avatar d-flex align-items-center justify-content-center">MC</p>
                             <p className="username">{item.UserName}</p>
-                            <p className="text">6 tháng trước</p>
+                            <p className="text">{str}</p>
                         </div>
                     </div>
                     <div className="information">
@@ -86,7 +107,7 @@ class index extends Component {
         })
         return (
             <>
-                <div className="bg-background">
+                <div className="bg-background" id="cmt">
                     <div className="container">
                         <div className="row">
                             <h4>KHÁCH HÀNG NHẬN XÉT</h4>
@@ -200,12 +221,14 @@ class index extends Component {
                                 </div>
                             </div>
 
-                            {elmentBinhLuan}
+                            {elmentBinhLuan
+                        
+                            }
 
                         </div>
                         <div className="nhanXet">
                             <textarea name="Content" id="" cols="30" value={this.state.content} onChange={this.hanldeOnChange} style={{ width: "100%" }} className="Content" placeholder="Bình luận ..." rows="5"></textarea>
-                            <button className="btn btn-primary button" onClick={this.hanldeOnClick}>Nhận xét</button>
+                            <a className="btn btn-primary button" href="#cmt" onClick={this.hanldeOnClick}>Nhận xét</a>
                         </div>
                     </div>
                 </div>

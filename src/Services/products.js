@@ -3,7 +3,7 @@ import { linkAPI } from './routeAPI'
 // const APICor = `https://cors-anywhere.herokuapp.com/`
 const APILink = linkAPI
 class productsServices {
-    capNhatSanPham(id,data){
+    capNhatSanPham(id, data) {
         return axios({
             url: `${APILink}api/product/update/${id}`,
             method: `POST`,
@@ -11,14 +11,14 @@ class productsServices {
 
         })
     }
-    xoaNhieuSanPhan(data){
+    xoaNhieuSanPhan(data) {
         return axios({
-            url:`${APILink}api/product/list/delete`,
-            method:`POST`,
+            url: `${APILink}api/product/list/delete`,
+            method: `POST`,
             data
         })
     }
-    danhSachSanPhamPhanTrang(limit,page) {
+    danhSachSanPhamPhanTrang(limit, page) {
         return axios({
             url: `${APILink}api/product/list?limit=${limit}&page=${page}`,
             method: `GET`,
@@ -34,15 +34,15 @@ class productsServices {
             }
         })
     }
-    danhSachDanhMucCon (id){
+    danhSachDanhMucCon(id) {
         return axios({
-            url :`${APILink}api/category/detail/${id}`,
-            method : `GET`,
+            url: `${APILink}api/category/detail/${id}`,
+            method: `GET`,
         })
     }
     danhSachSanPham() {
         return axios({
-            url: `${APILink}api/product/list`,
+            url: `${APILink}api/product/search/query`,
             method: `GET`,
             // headers: { 
             //     'x-apikey': '59a7ad19f5a9fa0808f11931',
@@ -79,7 +79,7 @@ class productsServices {
             }
         })
     }
-    themDanhMuc(data){
+    themDanhMuc(data) {
         return axios({
             url: `${APILink}api/category/create`,
             method: `POST`,
@@ -97,11 +97,11 @@ class productsServices {
             }
         })
     }
-    xoaDanhMuc(id){
+    xoaDanhMuc(id) {
         return axios({
-            url : `${APILink}api/category/delete`,
-            method : `POST`,
-            data : id
+            url: `${APILink}api/category/delete`,
+            method: `POST`,
+            data: id
         })
     }
     timKiemSanPham(tenSanPham) {
@@ -125,57 +125,57 @@ class productsServices {
             data: id
         })
     }
-    sreachDanhMucCon(id){
+    sreachDanhMucCon(id) {
         return axios({
-            url : `${APILink}api/product/search/query?idCategorySub=${id}`,
-            method : `GET`,
+            url: `${APILink}api/product/search/query?idCategorySub=${id}`,
+            method: `GET`,
             headers: {
                 'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                
+
             }
         })
     }
-    layNhanXetSanPham(id,token){
+    layNhanXetSanPham(id, token) {
         return axios({
-            url : `${APILink}api/comment/comment-product?IdProduct=${id}`,
-            method : `GET`,
+            url: `${APILink}api/comment/comment-product?IdProduct=${id}`,
+            method: `GET`,
             headers: {
                 'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                'Authorization':  token
+                'Authorization': token
             }
         })
     }
-    sreachTheoKhoangGiaDanhMuc(id,priceStart,priceCome){
+    sreachTheoKhoangGiaDanhMuc(id, priceStart, priceCome) {
         return axios({
-            url : `${APILink}api/product/search/query?idCategory=${id}&minPrice=${priceStart}&maxPrice=${priceCome}`,
-            method : `GET`,
+            url: `${APILink}api/product/search/query?idCategory=${id}&minPrice=${priceStart}&maxPrice=${priceCome}`,
+            method: `GET`,
         })
     }
-    sapXepGiaTheoDanhMuc(id,status,name){
+    sapXepGiaTheoDanhMuc(id, status, name) {
         return axios({
-            url : `${APILink}api/product/search/query?idCategory=${id}&sort={"${name}":${status}}`,
-            method : `GET`
+            url: `${APILink}api/product/search/query?idCategory=${id}&sort={"${name}":${status}}`,
+            method: `GET`
         })
     }
-    themBinhLuan(id,data,token){
+    themBinhLuan(id, data, token) {
         return axios({
-            url : `${APILink}api/comment/comment?IdProduct=${id}`,
+            url: `${APILink}api/comment/comment?IdProduct=${id}`,
             method: `POST`,
-            data ,
+            data,
             headers: {
                 'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                'Authorization':  token
+                'Authorization': token
             }
         })
     }
-    
-    
+
+
 
 }
 export default productsServices

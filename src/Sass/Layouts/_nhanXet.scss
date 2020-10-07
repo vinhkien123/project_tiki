@@ -122,6 +122,7 @@
                 }
                 .content {
                     @include text($color-black-0, $fs-1 + 2, $fw-normal);
+                    word-break: break-all;
                 }
                 .images-infor {
                     width: 175px;

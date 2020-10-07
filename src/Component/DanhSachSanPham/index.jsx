@@ -198,15 +198,15 @@ class index extends Component {
     }
     render() {
         const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == false)
-        const danhSachPhanTrang = this.props.danhSachSanPhamPhanTrang.filter(item => item.StatusSale == false)
-        const danhSachSanPhamPhanTrang = danhSachPhanTrang.map((item, index) => {
+        const danhSachPhanTrang = this.props.danhSachSanPhamPhanTrang.products?.filter(item => item.StatusSale == false)
+        const danhSachSanPhamPhanTrang = danhSachPhanTrang?.map((item, index) => {
             return (
 
                 this.renderDanhSachSanPham(item, index)
 
             )
         })
-        const danhSachSanPham = this.props.danhSachSanPhamPhanTrang.map((item, index) => {
+        const danhSachSanPham = this.props.danhSachSanPhamPhanTrang.products?.map((item, index) => {
             let render;
             if (item.StatusSale == true) {
                 render = this.renderDanhSachSanPhamSell(item, index)

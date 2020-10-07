@@ -36,7 +36,7 @@ export const DanhSachSanPhamPhanTrang = (limit, page) => {
     return dispatch => {
         ProductsService.danhSachSanPhamPhanTrang(limit, page).then(res => {
             console.log(res.data);
-            dispatch(createAction(DANHSACHSANPHAMPHANTRANG, res.data.data.products))
+            dispatch(createAction(DANHSACHSANPHAMPHANTRANG, res.data.data))
         }).catch(err => {
             console.log(err);
         })
@@ -202,7 +202,6 @@ export const ThemBinhLuan = (id,data,token) =>{
         ProductsService.themBinhLuan(id,data,token).then(res=>{
             console.log(res.data,"data them");
             dispatch(createAction(LAYDANHSACHBINHLUAN,res.data.data.comment))
-            window.location.reload(false)
         }).catch(err =>{
             console.log(err);
         })

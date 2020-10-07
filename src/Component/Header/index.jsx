@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import Logo1 from '../../asset/data/img/header-logo.png';
 import iconmarketship from "../../asset/data/img/iconmarketship.png";
 import logoSale from '../../asset/data/imgHeader/khuyenmaihot.png';
-import logoMarket from '../../asset/data/imgHeader/market.png';
+import logoMarket from '../../asset/data/img/logohoimoi.png';
 import uuDaiDoiTac from '../../asset/data/imgHeader/uudaidoitac.png';
 import { DanhSachSanPhamTheoDanhMuc } from '../../Redux/Action/product';
 import Model from '../Model';

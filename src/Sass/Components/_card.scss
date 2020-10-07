@@ -24,32 +24,41 @@
     // }
     &:hover {
         .card {
+            transition: 0.5s all;
             .hinhAnh {
                 .card-img-top {
                     transform: scale(1.25);
+                    transition: 0.9s all;
                 }
                 .card-body {
                     opacity: 0;
                     .card-title {
                         text-decoration: none;
+                        transition: 0.7s all;
                     }
                     .card-text {
                         text-decoration: none;
+                        transition: 0.7s all;
                     }
                     .gia-hover {
+                        transition: 0.5s all;
                         text-decoration: none;
                     }
                     .bottom {
+                        transition: 0.7s all;
                         text-decoration: none;
                     }
                 }
                 .bg {
                     opacity: 1;
+                    transition: 0.5s all;
                 }
                 .button {
+                    transform-origin: center right;
                     z-index: 10;
                     left: 50%;
                     transform: translateY(-10%) translateX(-50%);
+                    transition: 0.9s all;
                     bottom: 10%;
                     .center {
                         .detail {
@@ -81,6 +90,11 @@
             transition: 0.5s all;
         }
         .button {
+            position: relative;
+            &:after{
+                position: absolute;
+            }
+            transform-origin: center left;
             position: absolute;
             bottom: -25%;
             left: -50%;
@@ -116,9 +130,14 @@
                 padding-top: 0px;
                 .card-title {
                     text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+
+                    overflow: hidden;
+
                     text-decoration: none;
                     margin: 0px;
-                    overflow: hidden;
                     margin-bottom: 10px;
                     margin-top: 5px;
                 }

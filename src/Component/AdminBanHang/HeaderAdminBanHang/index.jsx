@@ -26,7 +26,7 @@ class index extends Component {
         return (
             <Header className="site-layout-sub-header-background thongTinBanHang" style={{ padding: 0 }}>
                 <Dropdown overlay={menu} className="float-right formThongTin" placement="bottomRight">
-                    <Button>{user.EmailOwner}<DownOutlined /></Button>
+                    <Button>{user?.EmailOwner}<DownOutlined /></Button>
                 </Dropdown>
             </Header>
         );

@@ -12,8 +12,9 @@ import DanhMucCon from '../../Header/DanhMucCon';
 import SanPhamNew from '../../SanPhamNew';
 import SellTime from '../../SellTime';
 import Pagination from '../../Pagination'
-import Banner from '../../../asset/data/img/BANNER_SALE.jpg'
-import Banner1 from '../../../asset/data/img/BANNER_SALE_1.jpg'
+import Banner from '../../../asset/data/img/banner1.jpg'
+import Banner1 from '../../../asset/data/img/banner2.jpg'
+import Banner2 from '../../../asset/data/img/banner3.jpg'
 import { NavLink } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 
@@ -149,6 +150,10 @@ class index extends Component {
                         </div>
                         <div>
                             <img src={Banner1} alt="test" />
+
+                        </div>
+                        <div>
+                            <img src={Banner2} alt="test" />
 
                         </div>
                         {/* <div>
