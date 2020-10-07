@@ -179,6 +179,9 @@ class index extends Component {
         );
     }
     componentDidMount() {
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
         let userObj = JSON.parse(localStorage.getItem('user'))
         if (userObj) {
 

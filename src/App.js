@@ -57,6 +57,12 @@ import SanPhamDaXemUser from './Component/EditUser/SanPhamDaXem';
 import ThayDoiDonHang from './Component/AdminUser/QuanLyDonHang/Update'
 import Header from './Component/Header'
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      loading : true
+    }
+  }
   render() {
     let render
     if (localStorage.getItem("user")) {

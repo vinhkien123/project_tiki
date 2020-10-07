@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Model from '../../Model';
 class index extends Component {
+    componentDidMount(){
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
+    }
     render() {
         return (
             <div className="container text-center gioHang my-5">
