@@ -105,8 +105,8 @@ class index extends Component {
         const giaSanPham = item.Price.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")
 
         return (
-            <NavLink to={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 card-tiki" style={{ position: "relative" }} key={index}>
-                <div className="card text-left" >
+            <NavLink to={`/chitietsanpham/${item._id}`} onClick={() => this.onClickSave(item)} className="col-12 col-md-6 col-lg-3 col-xl-3 card-tiki" style={{ position: "relative" }} key={index}>
+                <div className="card text-left" style={{ textOverflow: "ellipsis" }} >
                     <div className="hinhAnh">
                         <img className="card-img-top" src={item.Image} alt />
 
@@ -197,6 +197,7 @@ class index extends Component {
         )
     }
     render() {
+
         const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == false)
         const danhSachPhanTrang = this.props.danhSachSanPhamPhanTrang.products?.filter(item => item.StatusSale == false)
         const danhSachSanPhamPhanTrang = danhSachPhanTrang?.map((item, index) => {

@@ -108,7 +108,7 @@ class index extends Component {
         let elementSellTime;
         if (this.props.TrangChu == true) {
             elementSellTime = danhSachSale.map((item, index) => {
-                if (index < 4) {
+                if (index < 8) {
                     return this.renderElement(item, index)
                 }
             })

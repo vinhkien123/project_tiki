@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createAction } from '../../../Redux/Action';
 import { LOGINFACEBOOK } from '../../../Redux/Action/type';
 import { DangNhap } from '../../../Redux/Action/user';
+import LoginFB from '../../LoginFB'
 class index extends Component {
     constructor(props) {
         super(props);
@@ -51,6 +52,7 @@ class index extends Component {
                 <button onClick={this.onClick} className="btn btn-warning my-2 w-100">Đăng nhập</button>
                 <button className="btn btn-primary my-2 w-100"> Đăng nhập
         bằng Facebook</button>
+                <LoginFB />
                 <button className="btn btn-danger my-2 w-100"><span><i className="fab fa-google-plus-g" /></span> Đăng
         nhập bằng Google</button>
                 <button className="btn btn-info my-2 w-100">Đăng nhập bằng Zalo</button>
