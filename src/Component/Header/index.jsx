@@ -12,9 +12,10 @@ import uuDaiDoiTac from '../../asset/data/imgHeader/uudaidoitac.png';
 import { DanhSachSanPhamTheoDanhMuc } from '../../Redux/Action/product';
 import Model from '../Model';
 import Sreach from '../Sreach';
+import LoginFB from '../LoginFB'
 import DanhMucCon from './DanhMucCon';
 import DanhMucSanPham from './DanhMucSanPham';
-import DoiTra from '../../asset/data/img/doitra.png'
+import DoiTra from '../../asset/data/img/doitra.png';
 import { createAction } from "../../Redux/Action";
 import { LOGIN, THONGTINTAIKHOAN } from "../../Redux/Action/type";
 
@@ -56,7 +57,7 @@ class index extends Component {
         if (localStorage.getItem("user")) {
             localStorage.removeItem("user");
             this.props.dispatch(createAction(LOGIN, false))
-            this.props.dispatch(createAction(THONGTINTAIKHOAN,{}))
+            this.props.dispatch(createAction(THONGTINTAIKHOAN, {}))
         } else if (this.props.loginFacebook.name != "") {
             let obj = {}
             // this.props.dispatch(LOGINFACEBOOK, obj)
@@ -150,7 +151,7 @@ class index extends Component {
         let showLogin
         //////////////// KIỂM TRA NGƯỜI DÙNG CÓ ĐĂNG NHẬP TÀI KHOÀN WEBSITE NÀO //////////////////////////
         let user = localStorage.getItem("user")
-        console.log(this.props.user,"loginnnnn");
+        console.log(this.props.user, "loginnnnn");
         ///////////////////// tài khoản của website ///////////////////
         if (this.props.login == true || user) {
             user = JSON.parse(localStorage.getItem("user"))
@@ -289,7 +290,7 @@ class index extends Component {
                         </a> */}
                         </div>
                     </div>
-                    <div className="container headerMid">
+                    <div className="headerMid">
                         <div className="midLeft row">
                             <div className="logo col-12 col-md-2 col-lg-1">
 
@@ -297,10 +298,10 @@ class index extends Component {
                                     <img src={Logo1} height={33} alt="test" />
                                 </NavLink>
                             </div>
-                            <div className="form-sreach col-12 col-md-10 col-lg-6 mt-3" >
+                            <div className="form-sreach col-12 col-md-5 col-lg-6 mt-3" >
                                 <Sreach />
                             </div>
-                            <div className="header-link col-12 col-md-10 col-lg-5 mt-2">
+                            <div className="header-link col-12 col-md-5 col-lg-5 mt-2">
                                 <NavLink to="# " className="item">
                                     <i className="icon-tracking"></i>
                                 Theo dõi <br></br>
@@ -333,19 +334,21 @@ class index extends Component {
                                             {this.props.danhSachGioHangTheoUser?.ListProduct?.length > 0 ? this.props.danhSachGioHangTheoUser.ListProduct.length : 0}
                                         </span>
                                     </NavLink>
+                                    {/* <NavLink to="/admin">admin</NavLink> */}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="headerBottom container">
+
+                    <div className="headerBottom ">
                         <div className="row">
-                            <div className="menu col-12 col-md-6 col-lg-2">
+                            <div className="menu col-12 col-md-2 ">
                                 <div type="button" className="btn btn-primary dropdown-toggle" style={{ background: "none", border: "none" }} id="dropdownMenuOffset" data-toggle="dropdown">
                                     <FontAwesomeIcon icon={faBars} /> Danh mục sản phẩm
                                  </div>
                                 <DanhMucSanPham />
                             </div>
-                            <div className="viTri col-12 col-md-6 col-lg-2" style={{ margin: "0" }}>
+                            <div className="viTri col-12 " style={{ margin: "0" }}>
                                 <Button type="primary" style={{ padding: 0, boxShadow: "none" }} className=" viTriGiaoHang" onClick={this.showModal}>
                                     &nbsp;
                                     &nbsp;
@@ -372,7 +375,7 @@ class index extends Component {
                                         <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" defaultValue="option1" defaultChecked />
                                         <label className="form-check-label" htmlFor="exampleRadios1">
                                             Chọn khu vực giao hàng
-            </label>
+                                        </label>
                                     </div>
                                     <form className="form-sign_in">
                                         <div className="form-group row">
@@ -408,12 +411,15 @@ class index extends Component {
                                     </form>
                                 </Modal>
                             </div>
-                            <div style={{ paddingTop: "0px" }} className="sanPhamDaXem col-12 col-md-6 col-lg-2">
+                            {/* <div className="iconeMenu">
+                                        gâu gâu
+                            </div> */}
+                            <div style={{ paddingTop: "0px" }} className="sanPhamDaXem col-12 col-md-3 col-lg-3">
                                 <Popover placement="bottom" title={text} content={content} trigger="click">
                                     <Button>Sản phẩm bạn đã xem</Button>
                                 </Popover>
                             </div>
-                            <div className="link col-12 col-md-6 col-lg-6">
+                            <div className="link col-12 ">
                                 <NavLink to="/movie" onClick={this.Reload}>
                                     <img src={iconmarketship} alt="test" />
                                     <span>Giao hàng</span>
@@ -424,7 +430,7 @@ class index extends Component {
                                         Sản phẩm Mới
                                 </span>
                                 </NavLink>
-                                <NavLink to="/doitra">
+                                <NavLink to="/doitra" style={{display:"none"}}>
                                     <img src={DoiTra} alt="test" />
                                     <span>
                                         Đổi trả

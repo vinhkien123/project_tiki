@@ -72,6 +72,9 @@
 .testHinh{
     position: relative;
     .slick-slider{
+        img{
+            width: 100%;
+        }
         // .slick-prev{
         //     &::before{
         //         @include buttonCarousel();

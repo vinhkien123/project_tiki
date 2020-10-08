@@ -54,13 +54,14 @@ import SanPhamMuaSau from './Component/EditUser/SanPhamMuaSau';
 import SanPhamYeuThich from './Component/EditUser/SanPhamYeuThich';
 import ThongTinThanhToan from './Component/EditUser/ThongTinThanhToan'
 import SanPhamDaXemUser from './Component/EditUser/SanPhamDaXem';
-import ThayDoiDonHang from './Component/AdminUser/QuanLyDonHang/Update'
+import ThayDoiDonHang from './Component/AdminUser/QuanLyDonHang/Update';
+import { Spin } from 'antd';
 import Header from './Component/Header'
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state={
-      loading : true
+    this.state = {
+      loading: true
     }
   }
   render() {
@@ -132,39 +133,48 @@ class App extends Component {
 
         </>
     }
-    return (
-      <>
-        <ScrollToTop >
-          <Switch>
-            <HomeTemplate path="/tatcasanpham" exact Component={TatCaSanPham} />
+    if (this.state.loading ) {
+      return (
+        <div className="example">
+          <Spin />
+        </div>
+      )
+    }
+    else {
+      return (
+        <>
+          <ScrollToTop >
+            <Switch>
+              <HomeTemplate path="/tatcasanpham" exact Component={TatCaSanPham} />
 
-            <HomeTemplate path="/" exact Component={Component} />
-            <AdminBanHangTemplate path="/adminbanhang/capnhatthongtin" exact Component={CapNhatThongTinBanHang} />
-            <AdminBanHangTemplate path="/adminbanhang/trangchu" exact Component={TrangChuAdmin} />
-            <AdminBanHangTemplate path="/adminbanhang/sanpham" exact Component={ShopSanPham} />
-            <HomeTemplate path="/test" exact Component={Test} />
-            <HomeTemplate path="/chitietsanpham/:id" exact Component={ChiTietSanPham} />
-            <HomeTemplate path="/movie" exact Component={HomeMovie} />
-            <HomeTemplate path="/movie/chitietphim/:id" exact Component={ChiTietPhim} />
-            <Route path="/doitra" exact component={DoiTra} />
-            <Route path="/dangnhapbanhang" exact component={DangNhapBanHang} />
-            <HomeTemplate path="/sanphamdaxem" exact Component={SanPhamDaXem} />
-            <Route path="/banhang" exact component={BanHang} />
-            <HomeTemplate path="/sanpham" exact Component={PageSanPham} />
-            <HomeTemplate path="/sanpham/danhmuc/:title/:id" exact Component={PageSanPham} />
-            <HomeTemplate path="/sanpham/sreach/:keyWord" exact Component={PageSanPham} />
-            <HomeTemplate path="/khuyenmai" exact Component={KhuyenMai} />
-            <HomeTemplate path="/sanphammoi" exact Component={SanPhamMoi} />
-            <Route path="/dangkybanhang" exact component={DangKyBanHang} />
+              <HomeTemplate path="/" exact Component={Component} />
+              <AdminBanHangTemplate path="/adminbanhang/capnhatthongtin" exact Component={CapNhatThongTinBanHang} />
+              <AdminBanHangTemplate path="/adminbanhang/trangchu" exact Component={TrangChuAdmin} />
+              <AdminBanHangTemplate path="/adminbanhang/sanpham" exact Component={ShopSanPham} />
+              <HomeTemplate path="/test" exact Component={Test} />
+              <HomeTemplate path="/chitietsanpham/:id" exact Component={ChiTietSanPham} />
+              <HomeTemplate path="/movie" exact Component={HomeMovie} />
+              <HomeTemplate path="/movie/chitietphim/:id" exact Component={ChiTietPhim} />
+              <Route path="/doitra" exact component={DoiTra} />
+              <Route path="/dangnhapbanhang" exact component={DangNhapBanHang} />
+              <HomeTemplate path="/sanphamdaxem" exact Component={SanPhamDaXem} />
+              <Route path="/banhang" exact component={BanHang} />
+              <HomeTemplate path="/sanpham" exact Component={PageSanPham} />
+              <HomeTemplate path="/sanpham/danhmuc/:title/:id" exact Component={PageSanPham} />
+              <HomeTemplate path="/sanpham/sreach/:keyWord" exact Component={PageSanPham} />
+              <HomeTemplate path="/khuyenmai" exact Component={KhuyenMai} />
+              <HomeTemplate path="/sanphammoi" exact Component={SanPhamMoi} />
+              <Route path="/dangkybanhang" exact component={DangKyBanHang} />
 
-            {render}
+              {render}
 
 
-          </Switch>
-        </ScrollToTop>
-      </>
+            </Switch>
+          </ScrollToTop>
+        </>
 
-    );
+      );
+    }
   }
 
   componentDidMount() {
@@ -184,6 +194,9 @@ class App extends Component {
 
     }
     let banHang = localStorage.getItem('banHang')
+    this.setState({
+      loading: false
+    })
     if (banHang) {
 
     }

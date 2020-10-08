@@ -146,14 +146,14 @@ class index extends Component {
 
                     <Slider {...setting}>
                         <div>
-                            <img src={Banner} alt="test" />
+                            <img src={Banner} style={{width:"100% !important"}} alt="test" />
                         </div>
                         <div>
-                            <img src={Banner1} alt="test" />
+                            <img src={Banner1} style={{width:"100% !important"}} alt="test" />
 
                         </div>
                         <div>
-                            <img src={Banner2} alt="test" />
+                            <img src={Banner2} style={{width:"100% !important"}}  alt="test" />
 
                         </div>
                         {/* <div>
