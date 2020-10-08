@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 import { createAction } from '../../../Redux/Action';
 import { LOGINFACEBOOK } from '../../../Redux/Action/type';
 import { DangNhap } from '../../../Redux/Action/user';
+import LoginFacebook from "../../Login/Facebook.jsx";
 class index extends Component {
     constructor(props) {
         super(props);
@@ -24,19 +25,15 @@ class index extends Component {
         e.preventDefault();
         this.props.dispatch(DangNhap(this.state))
     }
-    componentClicked = () => {
-    }
+
+    responseFacebook(response) {
+        console.log(response)
+      }
     render() {
 
         return (
             <form>
-
-                {/* <FacebookLogin
-                    appId="424513988518241"
-                    autoLoad={false}
-                    fields="name,email,picture"
-                    onClick={this.componentClicked}
-                    callback={responseFacebook} /> */}
+             
                 <div className="form-group account__sign-form">
                     <label htmlFor="exampleInputEmail1">Email / SĐT</label>
                     <input type="text" name="Username" onChange={this.onChange} value={this.state.taiKhoan} className="form-control account-form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập Email hoặc Số điện thoại" />
@@ -49,11 +46,18 @@ class index extends Component {
                     <p>Quên mật khẩu? Nhấn vào <a>đây</a></p>
                 </div>
                 <button onClick={this.onClick} className="btn btn-warning my-2 w-100">Đăng nhập</button>
-                <button className="btn btn-primary my-2 w-100"> Đăng nhập
-        bằng Facebook</button>
+                <FacebookLogin
+                appId="562118384400275"
+                autoLoad={true}
+                fields="name,email,picture"
+                scope="public_profile,user_friends"
+                callback={this.responseFacebook}
+                icon="fa-facebook" />
+                <button className="btn btn-primary my-2 w-100" > Đăng nhập bằng Facebook</button>
                 <button className="btn btn-danger my-2 w-100"><span><i className="fab fa-google-plus-g" /></span> Đăng
-        nhập bằng Google</button>
+        nhập bằng Google</button> 
                 <button className="btn btn-info my-2 w-100">Đăng nhập bằng Zalo</button>
+                
             </form>
         );
     }
