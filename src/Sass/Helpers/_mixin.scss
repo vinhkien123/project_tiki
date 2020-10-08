@@ -430,15 +430,46 @@
     }
 }
 
-@mixin mediaQuery-2($screen) {
-    @if map-has-key($map: $breakpoints, $key: $screen) {
-        $value: map-get($map: $breakpoints, $key: $screen);
-        @media only screen and (max-width: $value) {
-            @content;
-        }
-    }
-    else {
-        @warn "`#($screen)` khong ton tai";
+// @mixin mediaQuery-2($screen) {
+//     @if map-has-key($map: $breakpoints, $key: $screen) {
+//         $value: map-get($map: $breakpoints, $key: $screen);
+//         @media only screen and (max-width: $value) {
+//             @content;
+//         }
+//     }
+//     else {
+//         @warn "`#($screen)` khong ton tai";
+//     }
+// }
+
+
+@mixin desktop-large {
+    @media(max-width: $lg-max){
+        @content;
     }
 }
-
+@mixin desktop {
+    @media(max-width: 1199px){
+        @content;
+    }
+}
+@mixin tablet {
+    @media screen and(max-width: $sm-max) and(min-height:500px){
+        @content;
+    }
+}
+@mixin mobile {
+    @media screen and(min-width: 320px) and(max-width:$xs-max){
+        @content;
+    }
+}
+@mixin mobile-xxs {
+    @media screen and (min-width: 320px) and (max-width: $xs-max){
+        @content;
+    }
+}
+@mixin maxW($args) {
+    @media (max-width:$args) {
+        @content;
+    }    
+}

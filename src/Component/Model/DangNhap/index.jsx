@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { createAction } from '../../../Redux/Action';
 import { LOGINFACEBOOK } from '../../../Redux/Action/type';
 import { DangNhap } from '../../../Redux/Action/user';
+<<<<<<< HEAD
 import LoginFacebook from "../../Login/Facebook.jsx";
+=======
+import LoginFB from '../../LoginFB'
+>>>>>>> master
 class index extends Component {
     constructor(props) {
         super(props);
@@ -46,6 +50,7 @@ class index extends Component {
                     <p>Quên mật khẩu? Nhấn vào <a>đây</a></p>
                 </div>
                 <button onClick={this.onClick} className="btn btn-warning my-2 w-100">Đăng nhập</button>
+<<<<<<< HEAD
                 <FacebookLogin
                 appId="562118384400275"
                 autoLoad={true}
@@ -54,6 +59,11 @@ class index extends Component {
                 callback={this.responseFacebook}
                 icon="fa-facebook" />
                 <button className="btn btn-primary my-2 w-100" > Đăng nhập bằng Facebook</button>
+=======
+                <button className="btn btn-primary my-2 w-100"> Đăng nhập
+        bằng Facebook</button>
+                <LoginFB />
+>>>>>>> master
                 <button className="btn btn-danger my-2 w-100"><span><i className="fab fa-google-plus-g" /></span> Đăng
         nhập bằng Google</button> 
                 <button className="btn btn-info my-2 w-100">Đăng nhập bằng Zalo</button>

@@ -7,7 +7,7 @@ export const LayoutHeader = (props) => {
     return (
         <>
             <Header />
-            <div className="with" style={{height: "157px"}}>
+            <div className="with" style={{height: "133px"}}>
 
             </div>
             {props.children}
