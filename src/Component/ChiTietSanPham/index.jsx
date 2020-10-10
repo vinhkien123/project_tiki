@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import React, { Component } from 'react';
 import ReactImageMagnify from 'react-image-magnify';
 import { connect } from 'react-redux';
@@ -6,15 +7,13 @@ import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import logo from '../../asset/data/img/logo.jpg';
 import { createAction } from '../../Redux/Action';
-import { ChiTietSanPham, LayDanhSachBinhLuan } from '../../Redux/Action/product';
-import { LayDanhSachGioHangUser, ThemGioHang } from '../../Redux/Action/shopingcart';
-import { DANHSACHGIOHANGTHEOUSER } from '../../Redux/Action/type';
+import { ChiTietSanPham, LayDanhSachBinhLuan, ThemBinhLuan } from '../../Redux/Action/product';
+import { ThemGioHang } from '../../Redux/Action/shopingcart';
+import { CHITIETSANPHAM } from '../../Redux/Action/type';
 import '../../Sass/main.scss';
-import { ShopingServices } from '../../Services';
-import { ThemBinhLuan } from '../../Redux/Action/product'
+import { ProductsService } from '../../Services';
 import NhanXetSanPham from './NhatXetSanPham';
-import './style.scss'
-import { Spin } from 'antd';
+import './style.scss';
 
 class index extends Component {
     constructor(props) {
@@ -277,7 +276,24 @@ class index extends Component {
         }
     }
     componentDidMount() {
+        const ChiTietSanPham = (id) => {
+            return dispatch => {
+                ProductsService.chiTietSanPham(id).then(res => {
+
+
+                    dispatch(createAction(CHITIETSANPHAM, res.data.data))
+                    this.setState({
+                        loading: true
+                    })
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        }
         this.props.dispatch(ChiTietSanPham(this.props.match.params.id))
+
+        // ChiTietSanPham(this.props.match.params.id)
+
         const user = JSON.parse(localStorage.getItem('user'))
         if (user) {
             this.props.dispatch(LayDanhSachBinhLuan(this.props.match.params.id, user.token))
@@ -286,9 +302,9 @@ class index extends Component {
         document.body.scrollTop = 0;
         // or
         window.scrollTo(0, 0);
-        this.setState({
-            loading: true
-        })
+        // this.setState({
+        //     loading: true
+        // })
     }
     // componentDidUpdate() {
     //     window.scrollTo(0, 0);

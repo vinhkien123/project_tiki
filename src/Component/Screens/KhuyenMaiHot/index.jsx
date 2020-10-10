@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Roll } from 'react-reveal';
 import SellTime from '../../SellTime';
-import Slidebar from '../../Sidebar';
-import {connect} from 'react-redux'
 class index extends Component {
     render() {
         const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == true)

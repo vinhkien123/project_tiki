@@ -1,12 +1,9 @@
+import { Spin } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DanhSachSanPham } from '../../Redux/Action/product';
-import { GiamGioHang, LayDanhSachGioHangUser, ThemGioHang, XoaDanhGioHang } from '../../Redux/Action/shopingcart';
-import { ShopingServices } from '../../Services';
-import GioHangRong from "./GioHangRong";
-import { Spin } from 'antd';
 import { NavLink } from 'react-router-dom';
-import {SanPhamXoa} from '../../Redux/Action/shopingcart'
+import { GiamGioHang, SanPhamXoa, ThemGioHang } from '../../Redux/Action/shopingcart';
+import GioHangRong from "./GioHangRong";
 class index extends Component {
     constructor(props) {
         super(props)

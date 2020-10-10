@@ -306,12 +306,12 @@ class index extends Component {
                                     <i className="icon-tracking"></i>
                                 Theo dõi <br></br>
                                 đơn hàng
-                            </NavLink>
+                               </NavLink>
                                 <NavLink to="# " className="item">
                                     <i className="icon-tracking"></i>
                                 Thông báo <br></br>
                                 của tôi
-                            </NavLink>
+                               </NavLink>
 
                                 {/* MODEL */}
                                 {showLogin}
@@ -430,7 +430,7 @@ class index extends Component {
                                         Sản phẩm Mới
                                 </span>
                                 </NavLink>
-                                <NavLink to="/doitra" style={{display:"none"}}>
+                                <NavLink to="/doitra" style={{ display: "none" }}>
                                     <img src={DoiTra} alt="test" />
                                     <span>
                                         Đổi trả

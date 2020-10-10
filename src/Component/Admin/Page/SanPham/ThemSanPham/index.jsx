@@ -2,9 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-import { createAction } from '../../../../../Redux/Action';
 import { SaveDanhMucCon, ThemSanPham } from '../../../../../Redux/Action/product';
-import { SAVEDANHMUCCON } from '../../../../../Redux/Action/type';
 const schema = yup.object().shape({
     Name: yup.string().required("Vui lòng không bỏ trống"),
     Price: yup.number().required("Vui lòng không bỏ trống"),

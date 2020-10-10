@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import Time from '../Time';
-import { createAction } from '../../Redux/Action';
-import { DANHSACHSANPHAMDAXEM } from '../../Redux/Action/type';
 class index extends Component {
     onClickSave = (sanPham) => {
         let array, flag

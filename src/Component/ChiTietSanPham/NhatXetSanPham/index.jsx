@@ -1,16 +1,18 @@
+import { Spin } from 'antd';
 import React, { Component } from 'react';
-import img from '../../../asset/data/img/556b075fd896c32ff38a3526bba0d3bc.jpg';
-import './style.scss'
-import { connect } from 'react-redux'
-import { ThemBinhLuan } from '../../../Redux/Action/product';
-import { ProductsService } from '../../../Services';
+import { connect } from 'react-redux';
+import Swal from 'sweetalert2';
 import { createAction } from '../../../Redux/Action';
+import { ThemBinhLuan } from '../../../Redux/Action/product';
 import { LAYDANHSACHBINHLUAN } from '../../../Redux/Action/type';
+import { ProductsService } from '../../../Services';
+import './style.scss';
 class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Content: ""
+            Content: "",
+            loading: false,
         }
     }
     hanldeOnChange = (e) => {
@@ -19,6 +21,9 @@ class index extends Component {
         })
     }
     hanldeOnClick = () => {
+        this.setState({
+            loading: true
+        })
         const user = JSON.parse(localStorage.getItem('user'))
         if (user) {
             const data = {
@@ -27,7 +32,30 @@ class index extends Component {
                 IdUser: user.user._id
             }
 
+            const ThemBinhLuan = (id, data, token) => {
+                return dispatch => {
+                    ProductsService.themBinhLuan(id, data, token).then(res => {
+                        console.log(res.data, "data them");
+                        dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.comment))
+                        this.setState({
+                            loading: false
+                        })
+
+                    }).catch(err => {
+
+                        console.log(err);
+
+                    })
+                }
+            }
             this.props.dispatch(ThemBinhLuan(this.props.id, data, user.token))
+            // ProductsService.themBinhLuan(this.props.id,data,user.token).then(res=>{
+            //     console.log(res.data,"data them");
+            //     this.props.dispatch(createAction(LAYDANHSACHBINHLUAN,res.data.data.comment))
+            // }).catch(err =>{
+            //     console.log(err);
+            // })
+
             // ProductsService.themBinhLuan(data.IdProduct, data, user.token).then(res => {
             //     console.log(res.data.data, "data them");
             //     // dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.comment))
@@ -39,14 +67,31 @@ class index extends Component {
             // })
 
         }
+        else {
+            this.setState({
+                loading: false
+            })
+            Swal.fire({
+                position: "center",
+                title: "Vui lòng đăng nhập để nhận xét",
+                icon: "error",
+                timer: 1200
+            })
+        }
     }
-
+    // static getDerivedStateFromProps(nextProps, nextState) {
+    //     // Any time props.email changes, update state.
+    //     if (nextProps?.binhLuan !== this?.props.binhLuan) {
+    //         return {
+    //             loading: false
+    //         }
+    //     }
+    // }
     themBinhLuan = (content) => {
 
     }
     render() {
-        
-        console.log(this.props.binhLuan, "??? view bl");
+
         const elmentBinhLuan = this.props.binhLuan?.map((item, index) => {
             const dateNow = new Date() - new Date(item.NewDateAt)
             // setSeconds(seconds => seconds + 1);
@@ -57,15 +102,15 @@ class index extends Component {
             let validateGiay = 1000 * 60
             let validatePhut = validateGiay * 60
             let validateGio = validatePhut * 24
-            let validateNgay = validateGio*30
-            let str ;
-            if(dateNow<validateGiay){
+            let validateNgay = validateGio * 30
+            let str;
+            if (dateNow < validateGiay) {
                 str = `${giay} giây trước`
-            }else if(dateNow<validatePhut){
+            } else if (dateNow < validatePhut) {
                 str = `${phut} phút trước`
-            }else if(dateNow<validateGio){
+            } else if (dateNow < validateGio) {
                 str = `${gio} giờ trước`
-            }else if(dateNow<validateNgay){
+            } else if (dateNow < validateNgay) {
                 str = `${ngay} ngày trước`
             }
             return (
@@ -221,8 +266,14 @@ class index extends Component {
                                 </div>
                             </div>
 
-                            {elmentBinhLuan
-                        
+                            {this.state.loading ?
+                                <>
+                                    <div className="example">
+                                        <Spin />
+                                    </div>
+                                </> :
+                                elmentBinhLuan
+
                             }
 
                         </div>

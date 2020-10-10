@@ -3,20 +3,18 @@ import React, { Component } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { connect } from 'react-redux';
 import { Bounce, LightSpeed } from 'react-reveal';
+import { NavLink } from 'react-router-dom';
 import Slider from "react-slick";
 import "../../../../node_modules/slick-carousel/slick/slick-theme.css";
 import "../../../../node_modules/slick-carousel/slick/slick.css";
+import Banner from '../../../asset/data/img/banner1.jpg';
+import Banner1 from '../../../asset/data/img/banner2.jpg';
+import Banner2 from '../../../asset/data/img/banner3.jpg';
 import { DanhSachSanPhamPhanTrang, SreachSanPham } from '../../../Redux/Action/product';
 import DanhSachSanPhamm from '../../DanhSachSanPham';
 import DanhMucCon from '../../Header/DanhMucCon';
 import SanPhamNew from '../../SanPhamNew';
 import SellTime from '../../SellTime';
-import Pagination from '../../Pagination'
-import Banner from '../../../asset/data/img/banner1.jpg'
-import Banner1 from '../../../asset/data/img/banner2.jpg'
-import Banner2 from '../../../asset/data/img/banner3.jpg'
-import { NavLink } from 'react-router-dom';
-import { Nav } from 'react-bootstrap';
 
 class index extends Component {
     constructor(props) {
@@ -82,9 +80,9 @@ class index extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            speed: 10000,
-            autoplaySpeed: 1,
-            cssEase: "linear",
+            speed: 500,
+            autoplaySpeed: 4000,
+            pauseOnHover : false,
             responsive: [
                 {
                     breakpoint: 1024,
@@ -146,14 +144,14 @@ class index extends Component {
 
                     <Slider {...setting}>
                         <div>
-                            <img src={Banner} style={{width:"100% !important"}} alt="test" />
+                            <img src={Banner} style={{ width: "100% !important" }} alt="test" />
                         </div>
                         <div>
-                            <img src={Banner1} style={{width:"100% !important"}} alt="test" />
+                            <img src={Banner1} style={{ width: "100% !important" }} alt="test" />
 
                         </div>
                         <div>
-                            <img src={Banner2} style={{width:"100% !important"}}  alt="test" />
+                            <img src={Banner2} style={{ width: "100% !important" }} alt="test" />
 
                         </div>
                         {/* <div>
@@ -185,7 +183,6 @@ class index extends Component {
                         <SanPhamNew TrangChu={true} />
                     </div>
                     <NavLink to="/sanphammoi" className="btn btn-primary float-right">Xem tất cả </NavLink>
-
                 </div>
 
                 <div className="container danhMuc">

@@ -1,18 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-
-// const IntervalExample = () => {
-//     const [seconds, setSeconds] = useState(0);
-
-//     useEffect(() => {
-
-//     }, []);
-
-//     return  (
-//         <>
-//             <p> {seconds} </p>
-//         </>
-//     );
-// };
 import React, { Component } from 'react';
 import { ProductsService } from '../../Services';
 

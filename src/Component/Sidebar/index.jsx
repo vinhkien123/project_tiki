@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createAction } from '../../Redux/Action';
 import { DanhSachSanPham } from '../../Redux/Action/product';
-import { DANHSACHSANPHAM } from '../../Redux/Action/type';
-import DanhMucCon from '../Header/DanhMucCon'
-import SreachTheoKhoangGia from '../SreachTheoKhoangGia'
+import DanhMucCon from '../Header/DanhMucCon';
+import SreachTheoKhoangGia from '../SreachTheoKhoangGia';
 class index extends Component {
     
     componentDidMount() {

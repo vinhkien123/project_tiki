@@ -110,6 +110,9 @@ export const ChiTietSanPham = (id) => {
 
 
             dispatch(createAction(CHITIETSANPHAM, res.data.data))
+            this.setState({
+                loading: true
+            })
         }).catch(err => {
             console.log(err);
         })

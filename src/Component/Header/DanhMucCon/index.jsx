@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { SreachTheoDanhMucCon } from '../../../Redux/Action/product';
-import { ProductsService } from '../../../Services';
 
 class index extends Component {
     sreachDanhMucCon = (id) =>{
