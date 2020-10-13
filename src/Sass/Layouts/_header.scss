@@ -1,10 +1,46 @@
 .header {
     @include desktop-large {
     }
-
+    @include desktop-medium{
+        .headerMid {
+            width: 80% !important;
+        }
+        .headerBottom {
+            width: 80% !important;
+        }
+    }
     @include desktop {
         .headerMid {
             width: 80% !important;
+            margin: 0px;
+            .midLeft {
+                .logo {
+                    margin: 0;
+                    padding: 0px;
+                    padding-left: 20px;
+                }
+                .form-sreach {
+                    margin: 0px !important;
+                    padding: 0px;
+
+                    .form-test {
+                        .test {
+                            span {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .header-link {
+                    margin: 0px !important;
+                    .item {
+                        padding: 2px 5px 0px 0px !important ;
+                    }
+                    .designButton {
+                        padding: 0px !important;
+                    }
+                }
+            }
         }
         .headerBottom {
             width: 80% !important;
