@@ -47,3 +47,11 @@
   .example {
     background: rgba(255,255,255,0.08);
   }
+
+  .kep-login-facebook{
+    width: 100% !important;
+    padding: 4px 0 !important;
+    font-size: 13px !important;
+    font-weight: unset !important;
+    text-transform: unset !important;
+}
