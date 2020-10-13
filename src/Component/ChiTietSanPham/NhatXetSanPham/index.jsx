@@ -6,6 +6,8 @@ import { createAction } from '../../../Redux/Action';
 import { ThemBinhLuan } from '../../../Redux/Action/product';
 import { LAYDANHSACHBINHLUAN } from '../../../Redux/Action/type';
 import { ProductsService } from '../../../Services';
+import { Menu, Dropdown, Button } from 'antd';
+
 import './style.scss';
 class index extends Component {
     constructor(props) {
@@ -20,7 +22,11 @@ class index extends Component {
             [e.target.name]: e.target.value
         })
     }
+
     xoaBinhLuan = (idComment) => {
+        this.setState({
+            loading: true
+        })
         const user = JSON.parse(localStorage.getItem('user'))
         // const XoaBinhLuan = (id, idComment, token) => {
         //     return dispatch => {
@@ -33,13 +39,35 @@ class index extends Component {
         //     }
         // }
         if (user) {
-            console.log(this.props.id,idComment);
-            ProductsService.xoaBinhLuan(this.props.id, idComment, user.token).then(res => {
-                console.log(res);
-                // this.props.dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.data))
-            }).catch(err => {
-                console.log(err);
-            })
+            console.log(this.props.id, idComment);
+            const data = {
+                IdProduct: this.props.id,
+                IdComment: idComment
+            }
+            const ThemBinhLuan = (data, token) => {
+                return dispatch => {
+                    ProductsService.xoaBinhLuan(data, token).then(res => {
+                        console.log(res.data, "data them");
+                        dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.comment))
+                        this.setState({
+                            loading: false
+                        })
+
+                    }).catch(err => {
+
+                        console.log(err);
+
+                    })
+                }
+            }
+            this.props.dispatch(ThemBinhLuan(data, user.token))
+            // ProductsService.xoaBinhLuan(data, user.token).then(res => {
+            //     console.log(res);
+            //     // this.props.dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.data))
+
+            // }).catch(err => {
+            //     console.log(err);
+            // })
         }
     }
     hanldeOnClick = () => {
@@ -112,7 +140,25 @@ class index extends Component {
     themBinhLuan = (content) => {
 
     }
+    Menu = (item) => {
+        return (
+            <Menu>
+                <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" onClick={() => this.xoaBinhLuan(item._id)}>
+                        Xóa
+                    </a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                        Chỉnh sửa
+                </a>
+                </Menu.Item>
+
+            </Menu>
+        )
+    }
     render() {
+
         const user = JSON.parse(localStorage.getItem("user"))
         const elmentBinhLuan = this.props.binhLuan?.map((item, index) => {
             const dateNow = new Date() - new Date(item.NewDateAt)
@@ -136,7 +182,7 @@ class index extends Component {
                 str = `${ngay} ngày trước`
             }
             return (
-                <div className="review d-flex" key={index}>
+                <div className={`review d-flex ${this.state.loading ? `opacityText` : ""}`} key={index}>
                     <div className="info-user d-flex text-center">
                         <div className="avatar">
                             <p className="icon-avatar d-flex align-items-center justify-content-center">MC</p>
@@ -155,7 +201,14 @@ class index extends Component {
                             </p>
                             <span>Hài lòng</span>
 
-                            {user.user._id == item.IdUser ? <span className="text-danger" onClick={() => this.xoaBinhLuan(item._id)} style={{ display: "flex", justifyContent: "flex-end", width: "80%", cursor: "pointer" }}>Xóa</span> : ""}
+                            {user.user._id == item.IdUser ?
+                                <>
+
+                                    <Dropdown overlay={() => this.Menu(item)} placement="bottomRight" arrow>
+                                        <Button>...</Button>
+                                    </Dropdown>
+                                </>
+                                : ""}
                         </div>
                         <p className="pur-infor d-flex align-items-center">
                             <span className="img-pur d-inline-block" /> Đã mua hàng
@@ -289,16 +342,20 @@ class index extends Component {
                                     </select>
                                 </div>
                             </div>
+                            <div className=" position">
+                                <div className={`example ${this.state.loading ? `opacityLoading` : ""}`} style={{}}>
+                                    <Spin />
+                                </div>
+                                {
 
-                            {this.state.loading ?
-                                <>
-                                    <div className="example">
-                                        <Spin />
-                                    </div>
-                                </> :
-                                elmentBinhLuan
 
-                            }
+                                    elmentBinhLuan
+
+                                }
+
+                            </div>
+
+
 
                         </div>
                         <div className="nhanXet">

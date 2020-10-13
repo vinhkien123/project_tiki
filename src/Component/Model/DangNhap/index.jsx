@@ -48,11 +48,12 @@ class index extends Component {
                     <p>Quên mật khẩu? Nhấn vào đây</p>
                 </div>
                 <button onClick={this.onClick} className="btn btn-warning my-2 w-100">Đăng nhập</button>
+                <LoginFB/>
                 <button className="btn btn-primary my-2 w-100"> Đăng nhập
-        bằng Facebook</button>
+                        bằng Facebook</button>
                 {/* <LoginFB /> */}
                 <button className="btn btn-danger my-2 w-100"><span><i className="fab fa-google-plus-g" /></span> Đăng
-        nhập bằng Google</button>
+                        nhập bằng Google</button>
                 <button className="btn btn-info my-2 w-100">Đăng nhập bằng Zalo</button>
             </form>
         );

@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { createAction } from ".";
 import { ShopingServices } from "../../Services";
-import { DANHSACHGIOHANGTHEOUSER, DONHANG, QUANLYDONHANG } from "./type";
+import { DANHSACHGIOHANGTHEOUSER, DONHANG, LOADINGGIOHANG, QUANLYDONHANG } from "./type";
 
 
 
@@ -25,7 +25,6 @@ export const ThemGioHang = (data, token, status) => {
         ShopingServices.themGioHang(data, token).then(res => {
             console.log("them gio hangdddddddddddddddddd", res.data);
             dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
-
 
             if (status == true) {
                 Swal.fire({
@@ -74,12 +73,13 @@ export const SanPhamXoa = (data, token) => {
         })
     }
 }
-export const LayDanhSachGioHangUser = (id, token) => {
+export const LayDanhSachGioHangUser = (id, token,setLoading) => {
     return dispatch => {
         console.log("API giỏ hàng");
         ShopingServices.layDanhSachGioHangTheoUser(id, token).then(res => {
             console.log("redux", res.data.data.ListProduct);
             dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
+          
         }).catch(err => {
             console.log("kthanhcong");
             console.log("al", err);

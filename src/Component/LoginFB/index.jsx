@@ -12,7 +12,7 @@ class MyComponent extends React.Component {
     return (
       <FacebookLogin
         appId="1074493309677220"
-        autoLoad={true}
+        autoLoad={false}
         fields="name,email,picture"
         callback={this.responseFacebook}
       />

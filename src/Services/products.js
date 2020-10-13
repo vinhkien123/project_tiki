@@ -174,25 +174,26 @@ class productsServices {
             }
         })
     }
-    xoaBinhLuan(idProduct,idComment,token) {
+    xoaBinhLuan(data, token) {
         return axios({
-            url : `${APILink}api/comment/delete-commentp?IdProduct=${idProduct}&IdComment=${idComment}`,
-            method: "GET",
+            url: `${APILink}api/comment/delete-commentp`,
+            method: "POST",
+            data,
             headers: {
-                'Authorization' : token
+                'Authorization': token
             }
         })
     }
-    danhSachSalePhanTrang(limit,page){
+    danhSachSalePhanTrang(limit, page) {
         return axios({
-            url : `${APILink}api/product/search/query?limit=${limit}&page=${page}&statusSale=true`,
+            url: `${APILink}api/product/search/query?limit=${limit}&page=${page}&statusSale=true`,
             method: `GET`,
 
         })
     }
-    danhSachNewPhanTrang(limit,page){
+    danhSachNewPhanTrang(limit, page) {
         return axios({
-            url : `${APILink}api/product/search/query?limit=${limit}&page=${page}&statusNew=true`,
+            url: `${APILink}api/product/search/query?limit=${limit}&page=${page}&statusNew=true`,
             method: `GET`
         })
     }

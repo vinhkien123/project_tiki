@@ -9,9 +9,11 @@
             width: 80% !important;
         }
     }
+ 
     @include desktop {
+       
         .headerMid {
-            width: 80% !important;
+            width: 90% !important;
             margin: 0px;
             .midLeft {
                 .logo {
@@ -43,7 +45,7 @@
             }
         }
         .headerBottom {
-            width: 80% !important;
+            width: 90% !important;
             margin: 0px;
             .menu {
                 flex: 0 0 16%;
@@ -185,6 +187,7 @@
             .logo {
                 background: none;
                 margin: 0px;
+                padding: 0px;
             }
             .form-sreach {
                 margin: 0px;

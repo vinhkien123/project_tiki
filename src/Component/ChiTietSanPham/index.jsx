@@ -9,7 +9,7 @@ import logo from '../../asset/data/img/logo.jpg';
 import { createAction } from '../../Redux/Action';
 import { ChiTietSanPham, LayDanhSachBinhLuan, ThemBinhLuan } from '../../Redux/Action/product';
 import { ThemGioHang } from '../../Redux/Action/shopingcart';
-import { CHITIETSANPHAM } from '../../Redux/Action/type';
+import { CHITIETSANPHAM, LOADINGGIOHANG } from '../../Redux/Action/type';
 import '../../Sass/main.scss';
 import { ProductsService } from '../../Services';
 import NhanXetSanPham from './NhatXetSanPham';
@@ -40,7 +40,8 @@ class index extends Component {
         let user = JSON.parse(localStorage.getItem("user"))
         if (user) {
             console.log("??????????Fdsf/sdfsdkfk");
-            this.props.dispatch(ThemGioHang(sanPham, user.token, true))
+            this.props.dispatch(ThemGioHang(sanPham, user.token,true))
+
         } else {
             Swal.fire({
                 position: 'center',

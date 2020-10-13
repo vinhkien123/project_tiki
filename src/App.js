@@ -190,7 +190,6 @@ class App extends Component {
       this.props.dispatch(ThongTinTaiKhoan(userObj?.token))
       this.props.dispatch(QuanLyDonHang(userObj?.token))
       this.props.dispatch(SaveDanhMucCon("5f60727110312900173437a0"))
-      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user._id, userObj?.token))
 
     }
     let banHang = localStorage.getItem('banHang')
