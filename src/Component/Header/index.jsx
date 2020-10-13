@@ -58,6 +58,7 @@ class index extends Component {
             localStorage.removeItem("user");
             this.props.dispatch(createAction(LOGIN, false))
             this.props.dispatch(createAction(THONGTINTAIKHOAN, {}))
+           
         } else if (this.props.loginFacebook.name != "") {
             let obj = {}
             // this.props.dispatch(LOGINFACEBOOK, obj)
@@ -165,10 +166,10 @@ class index extends Component {
                     </div>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <NavLink to="/user" className="dropdown-item">Thông tin tài khoản</NavLink>
-
                         <a className="dropdown-item view" href="#">Email : {this.props.user.Email}</a>
                         <a className="dropdown-item view" href="#">Điện thoại : {this.props.user.Phone}</a>
-                        <a className="dropdown-item" onClick={this.DangXuat} href="#">Đăng xuất</a>
+                        {this.props.user.Role=="admin"?<NavLink to="/admin" className="dropdown-item">Trang quản trị ADMIN</NavLink>:<></>}
+                        <NavLink to="/" className="dropdown-item" onClick={this.DangXuat} href="#">Đăng xuất</NavLink>
 
                     </div>
                 </div>

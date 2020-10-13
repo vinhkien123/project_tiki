@@ -86,10 +86,10 @@ export const LayDanhSachGioHangUser = (id, token) => {
         })
     }
 }
-export const QuanLyDonHang = (id, token) => {
+export const QuanLyDonHang = (token) => {
     return dispatch => {
-        ShopingServices.quanLyDonHang(id, token).then(res => {
-            console.log(res.data);
+        ShopingServices.quanLyDonHang(token).then(res => {
+            console.log(res.data.data.orders,"??don hang");
 
             dispatch(createAction(QUANLYDONHANG, res.data.data))
         }).catch(err => {
@@ -97,14 +97,15 @@ export const QuanLyDonHang = (id, token) => {
         })
     }
 }
-export const DonHang = (url) => {
+export const DonHang = (url,token) => {
+    console.log("?SA?AS?SA");
     return dispatch => {
-        ShopingServices.donHang(url).then(res => {
-            console.log(res.data);
+        ShopingServices.donHang(url,token).then(res => {
+            console.log(res.data,"don hang kien");
 
             dispatch(createAction(DONHANG, res.data.data))
         }).catch(err => {
-            console.log(err);
+            console.log(err,"Errrrrrrrrr");
         })
     }
 }

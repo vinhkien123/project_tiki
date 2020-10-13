@@ -86,7 +86,7 @@ class index extends Component {
                         StatusSale: false,
                         ExpirationDateSale: "",
                         soLuongBan: 0,
-                        Warranty: true,
+                        StatusNew: true,
 
                     }}
                     handleChange={() => {
@@ -168,7 +168,7 @@ class index extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label > Sản phẩm mới </label>
-                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="Warranty">
+                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="StatusNew">
                                             <option value={true}>True</option>
                                             <option value={false}>False</option>
                                         </Field>

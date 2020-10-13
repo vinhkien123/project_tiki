@@ -174,8 +174,28 @@ class productsServices {
             }
         })
     }
+    xoaBinhLuan(idProduct,idComment,token) {
+        return axios({
+            url : `${APILink}api/comment/delete-commentp?IdProduct=${idProduct}&IdComment=${idComment}`,
+            method: "GET",
+            headers: {
+                'Authorization' : token
+            }
+        })
+    }
+    danhSachSalePhanTrang(limit,page){
+        return axios({
+            url : `${APILink}api/product/search/query?limit=${limit}&page=${page}&statusSale=true`,
+            method: `GET`,
 
-
+        })
+    }
+    danhSachNewPhanTrang(limit,page){
+        return axios({
+            url : `${APILink}api/product/search/query?limit=${limit}&page=${page}&statusNew=true`,
+            method: `GET`
+        })
+    }
 
 }
 export default productsServices

@@ -139,6 +139,7 @@
         padding: 9px 0px 16px;
 
         .midLeft {
+            padding: 10px 0px 0px;
             justify-content: center;
             .div {
                 margin-top: 11px;
@@ -212,9 +213,10 @@
                 }
                 .login {
                     p {
+                        margin: 0px;
                         color: #fff;
                         font-weight: 400;
-                        line-height: 14px;
+                        line-height: 18px;
                         font-size: 12px;
                         small {
                             font-size: 11px;

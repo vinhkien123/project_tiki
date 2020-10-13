@@ -20,6 +20,27 @@ class index extends Component {
             [e.target.name]: e.target.value
         })
     }
+    xoaBinhLuan = (idComment) => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        // const XoaBinhLuan = (id, idComment, token) => {
+        //     return dispatch => {
+        //         ProductsService.xoaBinhLuan(this.props.id, idComment, user.token).then(res => {
+        //             console.log(res);
+        //             dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.data))
+        //         }).catch(err => {
+        //             console.log(err);
+        //         })
+        //     }
+        // }
+        if (user) {
+            ProductsService.xoaBinhLuan(this.props.id, idComment, user.token).then(res => {
+                console.log(res);
+                // this.props.dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.data))
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }
     hanldeOnClick = () => {
         this.setState({
             loading: true
@@ -91,7 +112,7 @@ class index extends Component {
 
     }
     render() {
-
+        const user = JSON.parse(localStorage.getItem("user"))
         const elmentBinhLuan = this.props.binhLuan?.map((item, index) => {
             const dateNow = new Date() - new Date(item.NewDateAt)
             // setSeconds(seconds => seconds + 1);
@@ -132,6 +153,8 @@ class index extends Component {
                                 <i className="fa fa-star" />
                             </p>
                             <span>Hài lòng</span>
+
+                            {user.user._id == item.IdUser ? <span className="text-danger" onClick={() => this.xoaBinhLuan(item._id)} style={{ display: "flex", justifyContent: "flex-end", width: "80%", cursor: "pointer" }}>Xóa</span> : ""}
                         </div>
                         <p className="pur-infor d-flex align-items-center">
                             <span className="img-pur d-inline-block" /> Đã mua hàng
@@ -182,7 +205,7 @@ class index extends Component {
                                     </div>
                                     <p className="percent text-right mb-0">
                                         69%
-          </p>
+                                    </p>
                                 </div>
                                 <div className="star-progress-bar d-flex align-items-center align-self-stretch">
                                     <p className="star-number d-flex align-items-center mb-0">
@@ -193,7 +216,7 @@ class index extends Component {
                                     </div>
                                     <p className="percent text-right mb-0">
                                         16%
-          </p>
+                                    </p>
                                 </div>
                                 <div className="star-progress-bar d-flex align-items-center align-self-stretch">
                                     <p className="star-number d-flex align-items-center mb-0">
@@ -204,7 +227,7 @@ class index extends Component {
                                     </div>
                                     <p className="percent text-right mb-0">
                                         5%
-          </p>
+                                    </p>
                                 </div>
                                 <div className="star-progress-bar d-flex align-items-center align-self-stretch">
                                     <p className="star-number d-flex align-items-center mb-0">
@@ -215,7 +238,7 @@ class index extends Component {
                                     </div>
                                     <p className="percent text-right mb-0">
                                         0%
-          </p>
+                                      </p>
                                 </div>
                                 <div className="star-progress-bar d-flex align-items-center align-self-stretch">
                                     <p className="star-number d-flex align-items-center mb-0">
@@ -226,7 +249,7 @@ class index extends Component {
                                     </div>
                                     <p className="percent text-right mb-0">
                                         10%
-          </p>
+                                      </p>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-4 py-4 d-flex align-items-center">
@@ -238,7 +261,7 @@ class index extends Component {
                             <div className="col-12 filter d-flex align-items-center">
                                 <p className="title text-center mb-0">
                                     Chọn xem nhận xét
-        </p>
+                                </p>
                                 <div className="opt-select">
                                     <select name="service">
                                         <option>Hữu ích</option>
