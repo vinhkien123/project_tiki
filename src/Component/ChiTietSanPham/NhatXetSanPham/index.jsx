@@ -33,6 +33,7 @@ class index extends Component {
         //     }
         // }
         if (user) {
+            console.log(this.props.id,idComment);
             ProductsService.xoaBinhLuan(this.props.id, idComment, user.token).then(res => {
                 console.log(res);
                 // this.props.dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.data))

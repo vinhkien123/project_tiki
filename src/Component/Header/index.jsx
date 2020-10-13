@@ -160,7 +160,7 @@ class index extends Component {
                 <div className="dropdown login item">
                     <div className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <p>
-                            <span> Chào {this.props.user.FullName}</span><br></br>
+                            <span> Chào {this.props.user.FullName?.length > 5 ? this.props.user.FullName.slice(0, 5) + "...." : this.props.user.FullName}</span><br></br>
                             <small>Tài khoản</small>
                         </p>
                     </div>
