@@ -1,4 +1,4 @@
-export const linkAPI = "http://localhost:4000/"
+export const linkAPI = "http://118.69.32.128:5005/"
 // http://103.130.214.106:3005/
 // http://118.69.32.128:5005/
 
