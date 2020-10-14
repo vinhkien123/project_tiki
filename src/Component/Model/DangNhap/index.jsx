@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 import { DangNhap } from '../../../Redux/Action/user';
-import LoginFB from '../../LoginFB';
+import Facebook from '../../Login/Facebook';
 class index extends Component {
     constructor(props) {
         super(props);
@@ -48,7 +48,7 @@ class index extends Component {
                     <p>Quên mật khẩu? Nhấn vào đây</p>
                 </div>
                 <button onClick={this.onClick} className="btn btn-warning my-2 w-100">Đăng nhập</button>
-                <LoginFB/>
+                <Facebook/>
                 <button className="btn btn-primary my-2 w-100"> Đăng nhập
                         bằng Facebook</button>
                 {/* <LoginFB /> */}

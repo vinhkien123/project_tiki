@@ -12,7 +12,6 @@ import uuDaiDoiTac from '../../asset/data/imgHeader/uudaidoitac.png';
 import { DanhSachSanPhamTheoDanhMuc } from '../../Redux/Action/product';
 import Model from '../Model';
 import Sreach from '../Sreach';
-import LoginFB from '../LoginFB'
 import DanhMucCon from './DanhMucCon';
 import DanhMucSanPham from './DanhMucSanPham';
 import DoiTra from '../../asset/data/img/doitra.png';
