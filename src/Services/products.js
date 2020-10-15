@@ -184,6 +184,26 @@ class productsServices {
             }
         })
     }
+    capNhatBinhLuan(data, token) {
+        return axios({
+            url: `${APILink}api/comment/update-commentp`,
+            method: `POST`,
+            data,
+            headers: {
+                'Authorization': token
+            }
+        })
+    }
+    layDanhSachBinhLuanCon(IdProduct, IdComment, token) {
+        console.log(IdProduct,IdComment);
+        return axios({
+            url: `${APILink}api/comment/comment-details/?IdComment=${IdComment}&IdProduct=${IdProduct}`,
+            method: `GET`,
+            headers: {
+                'Authorization': token
+            }
+        })
+    }
     danhSachSalePhanTrang(limit, page) {
         return axios({
             url: `${APILink}api/product/search/query?limit=${limit}&page=${page}&statusSale=true`,

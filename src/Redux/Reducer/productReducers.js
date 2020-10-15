@@ -1,5 +1,5 @@
 import { act } from "react-dom/test-utils"
-import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHNEWPHANTRANG, DANHSACHSALEPHANTRANG, DANHSACHSANPHAM, DANHSACHSANPHAMDAXEM, DANHSACHSANPHAMPHANTRANG, FLAG, KEYWORD, LAYDANHSACHBINHLUAN, LOADING, SAVEDANHMUCCON, SREACHAZ, SREACHDANHMUC, SREACHPRICE, SREACHPRODUCTAPI, SREACHSANPHAMDANHMUCCON, SREACHTHEODANHMUC, SREACHZA, THONGTINSANPHAM } from "../Action/type"
+import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHNEWPHANTRANG, DANHSACHSALEPHANTRANG, DANHSACHSANPHAM, DANHSACHSANPHAMDAXEM, DANHSACHSANPHAMPHANTRANG, FLAG, KEYWORD, LAYDANHSACHBINHLUAN, LAYDANHSACHBINHLUANCON, LOADING, SAVEDANHMUCCON, SREACHAZ, SREACHDANHMUC, SREACHPRICE, SREACHPRODUCTAPI, SREACHSANPHAMDANHMUCCON, SREACHTHEODANHMUC, SREACHZA, THONGTINSANPHAM } from "../Action/type"
 
 const initialState = {
     danhSachSanPham: [],
@@ -20,10 +20,11 @@ const initialState = {
     saveDanhMucCon: [],
     sreachSanPhamDanhMucCon: [],
     danhSachSanPhamDaXem: [],
-    layDanhSachBinhLuan : [],
-    loading : true,
-    danhSachSalePhanTrang : [],
-    danhSachNewPhanTrang : []
+    layDanhSachBinhLuan: [],
+    loading: true,
+    danhSachSalePhanTrang: [],
+    danhSachNewPhanTrang: [],
+    danhSachBinhLuanCon: []
 
 }
 const productReducers = (state = initialState, action) => {
@@ -95,16 +96,19 @@ const productReducers = (state = initialState, action) => {
             return { ...state }
         case LAYDANHSACHBINHLUAN:
             state.layDanhSachBinhLuan = action.payload
-            return {...state}
-        case LOADING: 
+            return { ...state }
+        case LOADING:
             state.loading = action.payload
-            return {...state}
+            return { ...state }
         case DANHSACHSALEPHANTRANG:
             state.danhSachSalePhanTrang = action.payload
-            return {...state}
+            return { ...state }
         case DANHSACHNEWPHANTRANG:
             state.danhSachNewPhanTrang = action.payload
-            return {...state}
+            return { ...state }
+        case LAYDANHSACHBINHLUANCON:
+            state.layDanhSachBinhLuanCon = action.payload
+            return { ...state }
         default:
             return { ...state }
     }

@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import { createAction } from "."
 import { ProductsService } from "../../Services"
-import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHNEWPHANTRANG, DANHSACHSALEPHANTRANG, DANHSACHSANPHAM, DANHSACHSANPHAMPHANTRANG, LAYDANHSACHBINHLUAN, LOADING, SAVEDANHMUCCON, SREACHPRODUCTAPI, SREACHTHEODANHMUC } from "./type"
+import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHNEWPHANTRANG, DANHSACHSALEPHANTRANG, DANHSACHSANPHAM, DANHSACHSANPHAMPHANTRANG, LAYDANHSACHBINHLUAN, LAYDANHSACHBINHLUANCON, LOADING, SAVEDANHMUCCON, SREACHPRODUCTAPI, SREACHTHEODANHMUC } from "./type"
 
 
 export const DanhSachSanPham = () => {
@@ -216,6 +216,26 @@ export const LayDanhSachBinhLuan = (id, token) => {
 
         }).catch(err => {
             console.log(err, "loi binh luan");
+        })
+    }
+}
+export const LayDanhSachBinhLuanCon = (IdProduct,IdComment,token) =>{
+    return dispatch =>{
+        ProductsService.layDanhSachBinhLuanCon(IdProduct,IdComment,token).then(res=>{
+            console.log(res.data);
+            dispatch(createAction(LAYDANHSACHBINHLUANCON,res.data.data.comment))
+
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+}
+export const CapNhatBinhLuan = (data) =>{
+    return dispatch => {
+        ProductsService.capNhatBinhLuan(data).then(res =>{
+            dispatch(createAction(LAYDANHSACHBINHLUAN,res.data.data.comment))
+        }).catch(err=>{
+            console.log(err, "loi");
         })
     }
 }
