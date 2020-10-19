@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
 import axios from "axios"
+
+import "./scss/Facebook.scss"
 export default class Facebook extends Component {
- 
+  
+  componentDidMount(){
+    
+  }
   responseFacebook = response => {
-     console.log(response);
      const headers = {
         "Content-Type": "application/json"
       }
@@ -24,7 +28,8 @@ export default class Facebook extends Component {
       fbContent = (
         <div
           style={{
-            width: "100%",
+            width: "400px",
+            margin: "auto",
             background: "#f4f4f4",
             padding: "20px"
           }}
@@ -43,6 +48,6 @@ export default class Facebook extends Component {
         />
       );
 
-    return <div className="Facebook_login">{fbContent}</div>;
+    return <div className="Facebook_login" style={this.props.FbStyle}>{fbContent}</div>;
   }
 }

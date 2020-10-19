@@ -55,6 +55,7 @@ import SanPhamYeuThich from './Component/EditUser/SanPhamYeuThich';
 import ThongTinThanhToan from './Component/EditUser/ThongTinThanhToan'
 import SanPhamDaXemUser from './Component/EditUser/SanPhamDaXem';
 import ThayDoiDonHang from './Component/AdminUser/QuanLyDonHang/Update';
+import ZaloCallback from './Component/Login/Zalo_callback';
 import { Spin } from 'antd';
 import Header from './Component/Header'
 class App extends Component {
@@ -120,7 +121,7 @@ class App extends Component {
             <UserTemplate path="/user/thongtinthanhtoan" exact Component={ThongTinThanhToan} />
             <UserTemplate path="/user/sanphamdaxem" exact Component={SanPhamDaXemUser} />
             <UserTemplate path="/user/thongbao" exact Component={ThongBao} />
-
+            <Route exact path='/login/zalo' component={ZaloCallback}/>
 
           </>
 
