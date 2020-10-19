@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import { createAction } from '../../../Redux/Action';
-import { ThemBinhLuan } from '../../../Redux/Action/product';
+import Comment from './Comment'
+import { CapNhatBinhLuan, ThemBinhLuan } from '../../../Redux/Action/product';
 import { LAYDANHSACHBINHLUAN } from '../../../Redux/Action/type';
 import { ProductsService } from '../../../Services';
 import { Menu, Dropdown, Button } from 'antd';
+import SubComment from './SubComment'
 
 import './style.scss';
 class index extends Component {
@@ -15,6 +17,9 @@ class index extends Component {
         this.state = {
             Content: "",
             loading: false,
+            update: false,
+            dataUpdate: "",
+            reply: false,
         }
     }
     hanldeOnChange = (e) => {
@@ -23,6 +28,32 @@ class index extends Component {
         })
     }
 
+    update = () => {
+        this.setState({
+            update: true
+        })
+    }
+    capNhatBinhLuan = (data) => {
+        this.setState({
+            loading: true
+        })
+        const user = JSON.parse(localStorage.getItem("user"))
+        if (user) {
+            const CapNhatBinhLuan = (data, token) => {
+                return dispatch => {
+                    ProductsService.capNhatBinhLuan(data, token).then(res => {
+                        dispatch(createAction(LAYDANHSACHBINHLUAN, res.data.data.comment))
+                        this.setState({
+                            loading: false
+                        })
+                    }).catch(err => {
+                        console.log(err, "loi");
+                    })
+                }
+            }
+            this.props.dispatch(CapNhatBinhLuan(data, user.token))
+        }
+    }
     xoaBinhLuan = (idComment) => {
         this.setState({
             loading: true
@@ -115,6 +146,9 @@ class index extends Component {
             // }).catch(err => {
             //     console.log(err);
             // })
+            this.setState({
+                content : ""
+            })
 
         }
         else {
@@ -149,7 +183,7 @@ class index extends Component {
                     </a>
                 </Menu.Item>
                 <Menu.Item>
-                    <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                    <a target="_blank" rel="noopener noreferrer" onClick={this.update}>
                         Chỉnh sửa
                 </a>
                 </Menu.Item>
@@ -163,6 +197,7 @@ class index extends Component {
         const elmentBinhLuan = this.props.binhLuan?.map((item, index) => {
             const dateNow = new Date() - new Date(item.NewDateAt)
             // setSeconds(seconds => seconds + 1);
+            console.log("item",item);
             let ngay = Math.floor(dateNow / 1000 / 60 / 60 / 24)
             let gio = Math.floor(dateNow / 1000 / 60 / 60 - ngay * 24)
             let phut = Math.floor(dateNow / 1000 / 60 - ngay * 24 * 60 - gio * 60)
@@ -191,29 +226,12 @@ class index extends Component {
                         </div>
                     </div>
                     <div className="information">
-                        <div className="title-infor d-flex">
-                            <p className="star-infor">
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                            </p>
-                            <span>Hài lòng</span>
 
-                            {user.user._id == item.IdUser ?
-                                <>
+                        <Comment item={item} IdComment={item._id} IdProduct={this.props.id} xoaBinhLuan={this.xoaBinhLuan} capNhatBinhLuan={this.capNhatBinhLuan} />
+                        
+                            <SubComment item={item} IdComment={item._id} Reply={item.Reply} IdProduct={this.props.id}/>
+                        
 
-                                    <Dropdown overlay={() => this.Menu(item)} placement="bottomRight" arrow>
-                                        <Button>...</Button>
-                                    </Dropdown>
-                                </>
-                                : ""}
-                        </div>
-                        <p className="pur-infor d-flex align-items-center">
-                            <span className="img-pur d-inline-block" /> Đã mua hàng
-                             </p>
-                        <p className="content">{item.Content}</p>
                         {/* <div className="images-infor">
                             <img src={img} alt="test" />
                         </div> */}
@@ -342,7 +360,7 @@ class index extends Component {
                                     </select>
                                 </div>
                             </div>
-                            <div className=" position">
+                            <div className="position">
                                 <div className={`example ${this.state.loading ? `opacityLoading` : ""}`} style={{}}>
                                     <Spin />
                                 </div>

@@ -280,8 +280,6 @@ class index extends Component {
         const ChiTietSanPham = (id) => {
             return dispatch => {
                 ProductsService.chiTietSanPham(id).then(res => {
-
-
                     dispatch(createAction(CHITIETSANPHAM, res.data.data))
                     this.setState({
                         loading: true
