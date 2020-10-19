@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 import { DangNhap } from '../../../Redux/Action/user';
 import FacebookLogin from '../../Login/Facebook';
