@@ -4,11 +4,15 @@ import {linkAPI} from "../../Services/routeAPI";
 const authResult = new URLSearchParams(window.location.search);
 class ZaloCallback extends Component { 
 
+    onClose() {
+        window.close();
+      }
+
     componentDidMount() {
         const headers = {
             "Content-Type": "application/json"
         }
-        
+        this.onClose();
         axios.post(`${linkAPI}api/users/login/zalo`,
             {
                 code: authResult.get("code"),
@@ -16,9 +20,12 @@ class ZaloCallback extends Component {
                 uid: authResult.get("uid")
             },headers)
             .then(response =>{
-                window.onbeforeunload = ()=> {return}
-                localStorage.setItem("login_marketplace", JSON.stringify(response.data));
+                localStorage.setItem("login_marketplace", JSON.stringify(response.data),(e,r)=>{
+                    this.onClose();
+                });
+                
             })
+            .catch(e => this.onClose())
     }
 
     render() {
