@@ -6,5 +6,5 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 });
 app.listen(2706, () => {
-   console.log("server is r  unnig on port 2706");
+   console.log("server is running on port 2706");
 });
