@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import { createAction } from "."
 import { ProductsService } from "../../Services"
-import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHSANPHAM, DANHSACHSANPHAMPHANTRANG, LAYDANHSACHBINHLUAN, SAVEDANHMUCCON, SREACHPRODUCTAPI, SREACHTHEODANHMUC } from "./type"
+import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHNEWPHANTRANG, DANHSACHSALEPHANTRANG, DANHSACHSANPHAM, DANHSACHSANPHAMPHANTRANG, LAYDANHSACHBINHLUAN, LOADING, SAVEDANHMUCCON, SREACHPRODUCTAPI, SREACHTHEODANHMUC } from "./type"
 
 
 export const DanhSachSanPham = () => {
@@ -9,6 +9,7 @@ export const DanhSachSanPham = () => {
         ProductsService.danhSachSanPham().then(res => {
             console.log(res.data);
             dispatch(createAction(DANHSACHSANPHAM, res.data.data.products))
+            dispatch(createAction(LOADING,false))
         }).catch(err => {
             console.log(err);
         })
@@ -38,6 +39,24 @@ export const DanhSachSanPhamPhanTrang = (limit, page) => {
             console.log(res.data);
             dispatch(createAction(DANHSACHSANPHAMPHANTRANG, res.data.data))
         }).catch(err => {
+            console.log(err);
+        })
+    }
+}
+export const DanhSachSalePhanTrang = (limit,page) =>{
+    return dispatch=>{
+        ProductsService.danhSachSalePhanTrang(limit,page).then(res=>{
+                dispatch(createAction(DANHSACHSALEPHANTRANG,res.data.data))
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+}
+export const DanhSachNewPhanTrang = (limit,page) =>{
+    return dispatch=>{
+        ProductsService.danhSachNewPhanTrang(limit,page).then(res=>{
+                dispatch(createAction(DANHSACHNEWPHANTRANG,res.data.data))
+        }).catch(err=>{
             console.log(err);
         })
     }
@@ -110,6 +129,9 @@ export const ChiTietSanPham = (id) => {
 
 
             dispatch(createAction(CHITIETSANPHAM, res.data.data))
+            this.setState({
+                loading: true
+            })
         }).catch(err => {
             console.log(err);
         })

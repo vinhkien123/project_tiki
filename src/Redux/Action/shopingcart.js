@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { createAction } from ".";
 import { ShopingServices } from "../../Services";
-import { DANHSACHGIOHANGTHEOUSER, DONHANG, QUANLYDONHANG } from "./type";
+import { DANHSACHGIOHANGTHEOUSER, DONHANG, LOADINGGIOHANG, QUANLYDONHANG } from "./type";
 
 
 
@@ -25,7 +25,6 @@ export const ThemGioHang = (data, token, status) => {
         ShopingServices.themGioHang(data, token).then(res => {
             console.log("them gio hangdddddddddddddddddd", res.data);
             dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
-
 
             if (status == true) {
                 Swal.fire({
@@ -74,22 +73,23 @@ export const SanPhamXoa = (data, token) => {
         })
     }
 }
-export const LayDanhSachGioHangUser = (id, token) => {
+export const LayDanhSachGioHangUser = (id, token,setLoading) => {
     return dispatch => {
         console.log("API giỏ hàng");
         ShopingServices.layDanhSachGioHangTheoUser(id, token).then(res => {
             console.log("redux", res.data.data.ListProduct);
             dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
+          
         }).catch(err => {
             console.log("kthanhcong");
             console.log("al", err);
         })
     }
 }
-export const QuanLyDonHang = (id, token) => {
+export const QuanLyDonHang = (token) => {
     return dispatch => {
-        ShopingServices.quanLyDonHang(id, token).then(res => {
-            console.log(res.data);
+        ShopingServices.quanLyDonHang(token).then(res => {
+            console.log(res.data.data.orders,"??don hang");
 
             dispatch(createAction(QUANLYDONHANG, res.data.data))
         }).catch(err => {
@@ -97,14 +97,15 @@ export const QuanLyDonHang = (id, token) => {
         })
     }
 }
-export const DonHang = (url) => {
+export const DonHang = (url,token) => {
+    console.log("?SA?AS?SA");
     return dispatch => {
-        ShopingServices.donHang(url).then(res => {
-            console.log(res.data);
+        ShopingServices.donHang(url,token).then(res => {
+            console.log(res.data,"don hang kien");
 
             dispatch(createAction(DONHANG, res.data.data))
         }).catch(err => {
-            console.log(err);
+            console.log(err,"Errrrrrrrrr");
         })
     }
 }

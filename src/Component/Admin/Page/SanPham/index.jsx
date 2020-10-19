@@ -33,7 +33,7 @@ class index extends Component {
         }, () => {
 
             let danhSachTimKiem = this.props.danhSachSanPham.filter(item =>
-                item.Name?.toLowerCase().indexOf(this.state.keyWord) != -1
+                item.Name?.toLowerCase().indexOf(this.state.keyWord) !== -1
             )
             this.setState({
                 danhSachTimKiem,

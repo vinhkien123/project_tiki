@@ -1,7 +1,6 @@
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import React, { Component } from 'react';
-import { Pagination } from 'antd';
 import { connect } from 'react-redux';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 class index extends Component {
     constructor(props) {
         super(props)

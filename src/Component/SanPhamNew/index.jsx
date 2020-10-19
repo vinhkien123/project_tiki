@@ -104,17 +104,18 @@ class index extends Component {
         )
     }
     render() {
-        const danhSachSale = this.props.danhSachSanPham.filter(item => item.Warranty == true)
+        console.log(this.props.danhSachSanPhamNew,"?new");
+        // const danhSachSale = this.props.danhSachSanPham.filter(item => item.Warranty == true)
         let elementSellTime;
         if (this.props.TrangChu == true) {
-            elementSellTime = danhSachSale.map((item, index) => {
-                if (index < 8) {
+            elementSellTime = this.props.danhSachSanPhamNew?.products?.map((item, index) => {
+               
                     return this.renderElement(item, index)
-                }
+                
             })
         }
         else {
-            elementSellTime = danhSachSale.map((item, index) => {
+            elementSellTime = this.props.danhSachSanPhamNew?.products?.map((item, index) => {
                 return this.renderElement(item, index)
             })
         }

@@ -448,11 +448,17 @@
         @content;
     }
 }
+@mixin desktop-medium {
+    @media(max-width: 1400px){
+        @content;
+    }
+}
 @mixin desktop {
     @media(max-width: 1199px){
         @content;
     }
 }
+
 @mixin tablet {
     @media screen and(max-width: $sm-max) and(min-height:500px){
         @content;

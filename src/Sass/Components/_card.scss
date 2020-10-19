@@ -91,7 +91,7 @@
         }
         .button {
             position: relative;
-            &:after{
+            &:after {
                 position: absolute;
             }
             transform-origin: center left;
@@ -144,6 +144,11 @@
                 .gia-hover {
                     transition: 0.5s all;
                     text-decoration: none;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
                 .giamGia {
                     position: absolute;
@@ -174,7 +179,13 @@
                 }
                 .price {
                     display: flex;
+                
                     .sellPrice {
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
                         color: rgb(120, 120, 120);
                         font-size: 13px;
                         font-weight: 300;
@@ -183,6 +194,11 @@
                         margin-left: 10px;
                     }
                     .gia-hover {
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
                         opacity: 1;
                         font-size: 1rem;
                         margin-bottom: 0px;

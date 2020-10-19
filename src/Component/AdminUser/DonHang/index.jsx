@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { DonHang } from '../../../Redux/Action/shopingcart';
 class index extends Component {
     componentDidMount() {
-        this.props.dispatch(DonHang(this.props.match.params._id))
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            this.props.dispatch(DonHang(this.props.match.params._id,user.token))
+
+        }
     }
     render() {
         // const elementDonHang = this.props.quanLyDonHang.map((item, index) => {

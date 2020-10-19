@@ -12,7 +12,6 @@ import uuDaiDoiTac from '../../asset/data/imgHeader/uudaidoitac.png';
 import { DanhSachSanPhamTheoDanhMuc } from '../../Redux/Action/product';
 import Model from '../Model';
 import Sreach from '../Sreach';
-import LoginFB from '../LoginFB'
 import DanhMucCon from './DanhMucCon';
 import DanhMucSanPham from './DanhMucSanPham';
 import DoiTra from '../../asset/data/img/doitra.png';
@@ -58,6 +57,7 @@ class index extends Component {
             localStorage.removeItem("user");
             this.props.dispatch(createAction(LOGIN, false))
             this.props.dispatch(createAction(THONGTINTAIKHOAN, {}))
+           
         } else if (this.props.loginFacebook.name != "") {
             let obj = {}
             // this.props.dispatch(LOGINFACEBOOK, obj)
@@ -159,16 +159,16 @@ class index extends Component {
                 <div className="dropdown login item">
                     <div className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <p>
-                            <span> Chào {this.props.user.FullName}</span><br></br>
+                            <span> Chào {this.props.user.FullName?.length > 5 ? this.props.user.FullName.slice(0, 5) + "...." : this.props.user.FullName}</span><br></br>
                             <small>Tài khoản</small>
                         </p>
                     </div>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <NavLink to="/user" className="dropdown-item">Thông tin tài khoản</NavLink>
-
                         <a className="dropdown-item view" href="#">Email : {this.props.user.Email}</a>
                         <a className="dropdown-item view" href="#">Điện thoại : {this.props.user.Phone}</a>
-                        <a className="dropdown-item" onClick={this.DangXuat} href="#">Đăng xuất</a>
+                        {this.props.user.Role=="admin"?<NavLink to="/admin" className="dropdown-item">Trang quản trị ADMIN</NavLink>:<></>}
+                        <NavLink to="/" className="dropdown-item" onClick={this.DangXuat} href="#">Đăng xuất</NavLink>
 
                     </div>
                 </div>
@@ -306,12 +306,12 @@ class index extends Component {
                                     <i className="icon-tracking"></i>
                                 Theo dõi <br></br>
                                 đơn hàng
-                            </NavLink>
+                               </NavLink>
                                 <NavLink to="# " className="item">
                                     <i className="icon-tracking"></i>
                                 Thông báo <br></br>
                                 của tôi
-                            </NavLink>
+                               </NavLink>
 
                                 {/* MODEL */}
                                 {showLogin}
@@ -430,7 +430,7 @@ class index extends Component {
                                         Sản phẩm Mới
                                 </span>
                                 </NavLink>
-                                <NavLink to="/doitra" style={{display:"none"}}>
+                                <NavLink to="/doitra" style={{ display: "none" }}>
                                     <img src={DoiTra} alt="test" />
                                     <span>
                                         Đổi trả

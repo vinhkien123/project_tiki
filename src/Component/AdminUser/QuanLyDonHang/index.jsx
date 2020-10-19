@@ -18,8 +18,8 @@ class index extends Component {
         //         </tr>
         //     )
         // })
-        console.log(this.props.quanLyDonHang.order, "view don hang");
-        const elmDonHang = this.props.quanLyDonHang.order?.map((item, index) => {
+        console.log(this.props.quanLyDonHang, "view don hang");
+        const elmDonHang = this.props.quanLyDonHang.orders?.map((item, index) => {
             return (
                 //  Address Name
                 <tr key={index}>

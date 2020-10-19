@@ -207,6 +207,10 @@ class index extends Component {
 
             )
         })
+        console.log("phan trang", this.props.danhSachSanPhamPhanTrang);
+        if (this.props.danhSachSanPhamPhanTrang?.products?.length === this.props.danhSachSanPhamPhanTrang?.count) {
+            this.props.flag(true)
+        }
         const danhSachSanPham = this.props.danhSachSanPhamPhanTrang.products?.map((item, index) => {
             let render;
             if (item.StatusSale == true) {
