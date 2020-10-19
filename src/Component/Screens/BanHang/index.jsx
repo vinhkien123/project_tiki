@@ -24,7 +24,7 @@ class index extends Component {
                         <div className="middle-nav">
                             <div className="container">
                                 <nav className="navbar navbar-expand-lg navbar-light nav-custom">
-                                    <a className="navbar-brand nav-logo" href="#"><img src="image/header-logo.png" alt="test" /></a>
+                                    <a className="navbar-brand nav-logo" href=" #"><img src="image/header-logo.png" alt="test" /></a>
                                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                         <span className="navbar-toggler-icon" />
                                     </button>
@@ -70,7 +70,7 @@ class index extends Component {
                                         <p className="title-step">Bước 1</p>
                                         <p className="content-step">
                                             Điền form đăng ký &amp;<br />ký hợp đồng
-            </p>
+                                         </p>
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4">
@@ -81,7 +81,7 @@ class index extends Component {
                                         <p className="title-step">Bước 2</p>
                                         <p className="content-step">
                                             Tham gia khoá học <br /> cùng Marketplace
-            </p>
+                                       </p>
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4">
@@ -92,7 +92,7 @@ class index extends Component {
                                         <p className="title-step">Bước 3</p>
                                         <p className="content-step">
                                             Đăng bán <br />sản phẩm
-            </p>
+                                       </p>
                                     </div>
                                 </div>
                             </div>
@@ -258,7 +258,7 @@ class index extends Component {
             </>
         );
     }
-    componentDidMount(){
+    componentDidMount() {
         document.body.scrollTop = 0;
         // or
         window.scrollTo(0, 0);

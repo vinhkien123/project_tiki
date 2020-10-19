@@ -1,5 +1,5 @@
 import { act } from "react-dom/test-utils"
-import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHSANPHAM, DANHSACHSANPHAMDAXEM, DANHSACHSANPHAMPHANTRANG, FLAG, KEYWORD, LAYDANHSACHBINHLUAN, SAVEDANHMUCCON, SREACHAZ, SREACHDANHMUC, SREACHPRICE, SREACHPRODUCTAPI, SREACHSANPHAMDANHMUCCON, SREACHTHEODANHMUC, SREACHZA, THONGTINSANPHAM } from "../Action/type"
+import { CHITIETSANPHAM, DANHMUCSANPHAM, DANHSACHDANHMUCCON, DANHSACHNEWPHANTRANG, DANHSACHSALEPHANTRANG, DANHSACHSANPHAM, DANHSACHSANPHAMDAXEM, DANHSACHSANPHAMPHANTRANG, FLAG, KEYWORD, LAYDANHSACHBINHLUAN, LOADING, SAVEDANHMUCCON, SREACHAZ, SREACHDANHMUC, SREACHPRICE, SREACHPRODUCTAPI, SREACHSANPHAMDANHMUCCON, SREACHTHEODANHMUC, SREACHZA, THONGTINSANPHAM } from "../Action/type"
 
 const initialState = {
     danhSachSanPham: [],
@@ -21,6 +21,9 @@ const initialState = {
     sreachSanPhamDanhMucCon: [],
     danhSachSanPhamDaXem: [],
     layDanhSachBinhLuan : [],
+    loading : true,
+    danhSachSalePhanTrang : [],
+    danhSachNewPhanTrang : []
 
 }
 const productReducers = (state = initialState, action) => {
@@ -92,6 +95,15 @@ const productReducers = (state = initialState, action) => {
             return { ...state }
         case LAYDANHSACHBINHLUAN:
             state.layDanhSachBinhLuan = action.payload
+            return {...state}
+        case LOADING: 
+            state.loading = action.payload
+            return {...state}
+        case DANHSACHSALEPHANTRANG:
+            state.danhSachSalePhanTrang = action.payload
+            return {...state}
+        case DANHSACHNEWPHANTRANG:
+            state.danhSachNewPhanTrang = action.payload
             return {...state}
         default:
             return { ...state }

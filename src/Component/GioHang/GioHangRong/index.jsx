@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Model from '../../Model';
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 class index extends Component {
     componentDidMount() {
         document.body.scrollTop = 0;
@@ -18,7 +19,7 @@ class index extends Component {
                     {this.props.login == true || user ?
                         <>
                             <p className="text-center mb-3">Không có sản phẩm nào trong giỏ hàng của bạn.</p>
-                            <a href="/" className="btn btn-warning mt-5">Tiếp tục mua sắm</a>
+                            <NavLink to="/" className="btn btn-warning mt-5">Tiếp tục mua sắm</NavLink>
                         </>
                         :
                         <>

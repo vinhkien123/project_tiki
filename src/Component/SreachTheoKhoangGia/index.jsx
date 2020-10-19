@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { createAction } from '../../Redux/Action';
-import { connect } from 'react-redux'
-import { DANHSACHSANPHAM } from '../../Redux/Action/type';
+import { connect } from 'react-redux';
 import { SreachTheoKhoangGiaDanhMuc } from '../../Redux/Action/product';
 class index extends Component {
     constructor(props) {

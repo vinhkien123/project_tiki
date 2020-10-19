@@ -2,9 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-import { createAction } from '../../../../../Redux/Action';
 import { SaveDanhMucCon, ThemSanPham } from '../../../../../Redux/Action/product';
-import { SAVEDANHMUCCON } from '../../../../../Redux/Action/type';
 const schema = yup.object().shape({
     Name: yup.string().required("Vui lòng không bỏ trống"),
     Price: yup.number().required("Vui lòng không bỏ trống"),
@@ -88,7 +86,7 @@ class index extends Component {
                         StatusSale: false,
                         ExpirationDateSale: "",
                         soLuongBan: 0,
-                        Warranty: true,
+                        StatusNew: true,
 
                     }}
                     handleChange={() => {
@@ -170,7 +168,7 @@ class index extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label > Sản phẩm mới </label>
-                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="Warranty">
+                                        <Field className="form-control" component="select" onChange={formikProps.handleChange} name="StatusNew">
                                             <option value={true}>True</option>
                                             <option value={false}>False</option>
                                         </Field>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import Time from '../Time';
-import { createAction } from '../../Redux/Action';
-import { DANHSACHSANPHAMDAXEM } from '../../Redux/Action/type';
 class index extends Component {
     onClickSave = (sanPham) => {
         let array, flag
@@ -100,13 +98,13 @@ class index extends Component {
     render() {
         let elementSellTime
         if (this.props.TrangChu == true) {
-            elementSellTime = this.props.danhSachSanPham?.map((item, index) => {
+            elementSellTime = this.props.danhSachSanPham?.products?.map((item, index) => {
                 if (index < 8) {
                     return this.renderElement(item, index)
                 }
             })
         } else {
-            elementSellTime = this.props.danhSachSanPham?.map((item, index) => {
+            elementSellTime = this.props.danhSachSanPham?.products?.map((item, index) => {
 
                 return this.renderElement(item, index)
 

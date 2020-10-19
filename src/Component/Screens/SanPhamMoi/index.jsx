@@ -1,14 +1,71 @@
 import React, { Component } from 'react';
 import { Roll } from 'react-reveal';
+import { createAction } from '../../../Redux/Action';
+import { DANHSACHNEWPHANTRANG, DANHSACHSANPHAMPHANTRANG } from '../../../Redux/Action/type';
+import { ProductsService } from '../../../Services';
 import SanPhamNew from '../../SanPhamNew';
 import Slidebar from '../../Sidebar';
+import { connect } from 'react-redux'
+import { Spin } from 'antd';
+import Pagination from '../../Pagination'
 class index extends Component {
-    componentDidMount(){
+    constructor(props) {
+        super(props)
+        this.state = {
+            limit: 8,
+            page: 1,
+            loading: false
+        }
+    }
+    componentDidUpdate() {
         document.body.scrollTop = 0;
         // or
         window.scrollTo(0, 0);
     }
+    componentDidMount() {
+        const DanhSachSalePhanTrang = (limit, page) => {
+            return dispatch => {
+                ProductsService.danhSachNewPhanTrang(limit, page).then(res => {
+                    console.log(res.data);
+                    dispatch(createAction(DANHSACHNEWPHANTRANG, res.data.data))
+                    this.setState({
+                        loading: false
+                    })
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        }
+        this.props.dispatch(DanhSachSalePhanTrang(8, this.state.page))
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
+    }
+    pageOnChange = (page) => {
+        this.setState({
+            page,
+            loading: true
+        }, () => {
+            const DanhSachSanPhamPhanTrang = (limit, page) => {
+                return dispatch => {
+                    ProductsService.danhSachNewPhanTrang(limit, page).then(res => {
+                        console.log(res.data);
+                        dispatch(createAction(DANHSACHNEWPHANTRANG, res.data.data))
+                        this.setState({
+                            loading: false,
+                            page,
+                        })
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }
+            }
+            this.props.dispatch(DanhSachSanPhamPhanTrang(8, this.state.page))
+
+        })
+    }
     render() {
+        console.log("san pham new ", this.props.danhSachSanPham.counts);
         return (
             <>
                 <div className="viewContent container" style={{ overflow: "hidden" }}>
@@ -53,12 +110,19 @@ class index extends Component {
                                 </ul>
                             </div>
                         </div>
-                        <div style={{ paddingLeft: "20px" }}>
-                            <div className="row">
-                                <SanPhamNew />
+                        {this.state.loading ?
+                            <div className="example">
+                                <Spin />
                             </div>
-                        </div>
-
+                            :
+                            <div style={{ paddingLeft: "20px" }}>
+                                <div className="row">
+                                    <SanPhamNew danhSachSanPhamNew={this.props.danhSachSanPham} />
+                                </div>
+                                <Pagination page={this.state.page} danhSachSanPham={this.props.danhSachSanPham}
+                                    limit={this.state.limit} pageOnChange={this.pageOnChange} total={Math.ceil(this.props.danhSachSanPham.counts / 8)} />
+                            </div>
+                        }
 
                     </div>
                 </div>
@@ -67,4 +131,7 @@ class index extends Component {
     }
 }
 
-export default index;
+const mapStateToProps = state => ({
+    danhSachSanPham: state.productReducers.danhSachNewPhanTrang,
+})
+export default connect(mapStateToProps)(index);

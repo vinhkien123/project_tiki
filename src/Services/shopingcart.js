@@ -5,61 +5,63 @@ const APILink = linkAPI
 
 ///////////// localhost:4000 https://cors-anywhere.herokuapp.com/ https://marketplacedata.herokuapp.com/
 class shoppingServices {
-    themGioHang(data,token) {
+    themGioHang(data, token) {
         return axios({
             url: `${APILink}api/cart/add`,
             method: "POST",
             data,
-            headers:{'Authorization':  token},
+            headers: { 'Authorization': token },
         })
     }
-    layDanhSachGioHangTheoUser(id,token) {
+    layDanhSachGioHangTheoUser(id, token) {
         return axios({
             url: `${APILink}api/cart?UserId=${id}`,
             method: "GET",
-            headers:{'Authorization':  token}
+            headers: { 'Authorization': token }
         })
     }
-    xoaGioHang(data,token){
-        console.log("du lieu",data);
+    xoaGioHang(data, token) {
+        console.log("du lieu", data);
         return axios({
-            url : `${APILink}api/cart/delete`,
+            url: `${APILink}api/cart/delete`,
             method: "POST",
             data,
-            headers:{'Authorization':  token}
+            headers: { 'Authorization': token }
 
         })
     }
-    giamSoLuongGioHang(data,token){
+    giamSoLuongGioHang(data, token) {
         return axios({
-            url :`${APILink}api/cart/delete-quantity`,
+            url: `${APILink}api/cart/delete-quantity`,
             method: "POST",
             data,
-            headers:{'Authorization':  token}
+            headers: { 'Authorization': token }
 
         })
     }
-    oderGioHang(data,token){
+    oderGioHang(data, token) {
         return axios({
-            url : `${APILink}api/order/create`,
+            url: `${APILink}api/order/create`,
             method: "POST",
             data,
-            headers:{'Authorization':  token}
+            headers: { 'Authorization': token }
 
         })
     }
-    quanLyDonHang(id,token){
+    quanLyDonHang(token) {
         return axios({
-            url : `${APILink}api/order/getOrderByUsers?UserId=${id}`,
+            url: `${APILink}api/order/search-users`,
             method: "GET",
-            headers:{'Authorization':  token}
+            headers: { 'Authorization': token }
 
         })
     }
-    donHang(url){
+    donHang(url, token) {
         return axios({
-            url:`${APILink}api/order/get/${url}`,
+            url: `${APILink}api/order/detail/${url}`,
             method: "GET",
+            headers: { 'Authorization': token }
+
         })
     }
 }

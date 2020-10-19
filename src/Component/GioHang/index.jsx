@@ -1,12 +1,13 @@
+import { Spin } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DanhSachSanPham } from '../../Redux/Action/product';
-import { GiamGioHang, LayDanhSachGioHangUser, ThemGioHang, XoaDanhGioHang } from '../../Redux/Action/shopingcart';
+import { NavLink } from 'react-router-dom';
+import { createAction } from '../../Redux/Action';
+import { GiamGioHang, LayDanhSachGioHangUser, SanPhamXoa, ThemGioHang } from '../../Redux/Action/shopingcart';
+import { DANHSACHGIOHANGTHEOUSER, LOADINGGIOHANG } from '../../Redux/Action/type';
 import { ShopingServices } from '../../Services';
 import GioHangRong from "./GioHangRong";
-import { Spin } from 'antd';
-import { NavLink } from 'react-router-dom';
-import {SanPhamXoa} from '../../Redux/Action/shopingcart'
+import './style.scss'
 class index extends Component {
     constructor(props) {
         super(props)
@@ -15,14 +16,19 @@ class index extends Component {
             loading: true,
         }
     }
+    setLoading() {
+        this.setState({
+            loading: false
+        })
+    }
     xoaGioHang(userId, productId) {
         const data = {
             UserId: userId,
             ProductId: productId
         }
         let user = JSON.parse(localStorage.getItem('user'))
-        if(user){
-            this.props.dispatch(SanPhamXoa(data,user.token))
+        if (user) {
+            this.props.dispatch(SanPhamXoa(data, user.token))
         }
 
     }
@@ -115,64 +121,71 @@ class index extends Component {
 
             )
         })
-        console.log("logio hang ", this.props.danhSachGioHangTheoUser);
+        console.log("logio hang ", this.props.loadingGioHang);
+        let render
+        if (this.state.loading == true) {
+            render = <div className="example">
+                <Spin />
+            </div>
+        } else if (this.props.danhSachGioHangTheoUser.ListProduct?.length >= 1) {
+
+            render = <div className="gioHang container my-5">
+                <h2 className="title"> Giỏ hàng <span>({this.props.danhSachGioHangTheoUser?.ListProduct.length} Sản phẩm)</span></h2>
+                <div className="row">
+                    <div className="cart-products-inner" style={{ float: "left" }} >
+                        <ul className="cart-products__products">
+                            {elementGioHang}
+
+                            {/* test */}
+                        </ul>
+                    </div>
+                    <div className="cart-total-prices">
+                        <div className="cart-total-prices__inner">
+                            <div className="prices">
+                                <ul className="prices__items">
+                                    <li className="prices__item">
+                                        <span className="prices__text">Tạm tính</span>
+                                        <span className="prices__value">
+                                            {this.props.danhSachGioHangTheoUser.SubPrice?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")}
+                                        </span>
+                                    </li>
+                                </ul>
+                                <p className="prices__total">
+                                    <span className="prices__text">Thành tiền</span>
+                                    <span className="prices__value ">
+                                        {this.props.danhSachGioHangTheoUser.SubPrice?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")}đ <i>(Đã bao gồm VAT nếu có)</i>
+                                    </span>
+                                </p>
+                                <NavLink to="/checkout/oder" className="cart__submit">Tiến hàng đặt hàng</NavLink>
+                                <div className="coupon">
+                                    <p className="coupon-title">
+                                        Mã giảm giá / Quà tặng
+                                    </p>
+                                    <div className="inner">
+                                        <input type="text" className="coupon-input" placeholder="Nhập ở đây...." />
+                                        <button className="coupon-button" disabled>Đồng ý</button>
+                                    </div>
+                                    <div className="coupon-content">
+                                        <p className="note">
+                                            Mã giảm giá đã lưu.
+                                            <a href="/">Xem tại đây</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        } else {
+
+            render = <GioHangRong />
+        }
         return (
             <>
 
-                {this.state.loading == true ? <Spin /> :
-                    this.props.danhSachGioHangTheoUser.ListProduct?.length >= 1 ?
-                        <div className="gioHang container my-5">
-                            <h2 className="title"> Giỏ hàng <span>({this.props.danhSachGioHangTheoUser?.ListProduct.length} Sản phẩm)</span></h2>
-                            <div className="row">
-                                <div className="cart-products-inner" style={{ float: "left" }} >
-                                    <ul className="cart-products__products">
-                                        {elementGioHang}
-
-                                        {/* test */}
-                                    </ul>
-                                </div>
-                                <div className="cart-total-prices">
-                                    <div className="cart-total-prices__inner">
-                                        <div className="prices">
-                                            <ul className="prices__items">
-                                                <li className="prices__item">
-                                                    <span className="prices__text">Tạm tính</span>
-                                                    <span className="prices__value">
-                                                        {this.props.danhSachGioHangTheoUser.SubPrice?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")}
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                            <p className="prices__total">
-                                                <span className="prices__text">Thành tiền</span>
-                                                <span className="prices__value ">
-                                                    {this.props.danhSachGioHangTheoUser.SubPrice?.toString().replace(/(?<=\d)(?=(\d\d\d)+(?!\d))/g, ",")}đ <i>(Đã bao gồm VAT nếu có)</i>
-                                                </span>
-                                            </p>
-                                            <NavLink to="/checkout/oder" className="cart__submit">Tiến hàng đặt hàng</NavLink>
-                                            <div className="coupon">
-                                                <p className="coupon-title">
-                                                    Mã giảm giá / Quà tặng
-                                                </p>
-                                                <div className="inner">
-                                                    <input type="text" className="coupon-input" placeholder="Nhập ở đây...." />
-                                                    <button className="coupon-button" disabled>Đồng ý</button>
-                                                </div>
-                                                <div className="coupon-content">
-                                                    <p className="note">
-                                                        Mã giảm giá đã lưu.
-                                <a href="/">Xem tại đây</a>
-                                                    </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> :
-                        <GioHangRong  />
-                }
-
+                {render}
 
 
             </>
@@ -184,11 +197,23 @@ class index extends Component {
         window.scrollTo(0, 0);
         let userObj = JSON.parse(localStorage.getItem('user'))
         if (userObj) {
-
+            const LayDanhSachGioHangUser = (id, token,setLoading) => {
+                return dispatch => {
+                    console.log("API giỏ hàng");
+                    ShopingServices.layDanhSachGioHangTheoUser(id, token).then(res => {
+                        console.log("redux", res.data.data.ListProduct);
+                        dispatch(createAction(DANHSACHGIOHANGTHEOUSER, res.data.data))
+                        this.setState({
+                            loading : false
+                        })
+                    }).catch(err => {
+                        console.log("kthanhcong");
+                        console.log("al", err);
+                    })
+                }
+            }
+            this.props.dispatch(LayDanhSachGioHangUser(userObj?.user._id, userObj?.token))
         }
-        this.setState({
-            loading: false
-        })
 
     }
 }
@@ -196,7 +221,8 @@ class index extends Component {
 const mapStateToProps = state => ({
     danhSachSanPham: state.productReducers.danhSachSanPham,
     danhSachGioHangTheoUser: state.shoppingcartReducers.danhSachGioHangTheoUser,
+    loadingGioHang: state.shoppingcartReducers.loadingGioHang,
     thongTinTaiKhoan: state.userReducers.thongTinTaiKhoan,
-    login : state.userReducers.login
+    login: state.userReducers.login
 })
 export default connect(mapStateToProps)(index);

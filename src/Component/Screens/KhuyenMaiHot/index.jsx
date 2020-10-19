@@ -1,12 +1,53 @@
+import Pagination from '../../Pagination'
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Roll } from 'react-reveal';
+import { createAction } from '../../../Redux/Action';
+import { DanhSachSalePhanTrang } from '../../../Redux/Action/product';
+import { DANHSACHSALEPHANTRANG, DANHSACHSANPHAMPHANTRANG } from '../../../Redux/Action/type';
+import { ProductsService } from '../../../Services';
 import SellTime from '../../SellTime';
-import Slidebar from '../../Sidebar';
-import {connect} from 'react-redux'
+import { Spin } from 'antd';
 class index extends Component {
-    render() {
-        const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == true)
+    constructor(props) {
+        super(props);
+        this.state = {
+            page: 1,
+            limit: 8,
+            loading: false,
+        }
+    }
+    componentDidUpdate() {
+        document.body.scrollTop = 0;
+        // or
+        window.scrollTo(0, 0);
+    }
+    pageOnChange = (page) => {
+        this.setState({
+            page,
+            loading: true
+        }, () => {
+            const DanhSachSanPhamPhanTrang = (limit, page) => {
+                return dispatch => {
+                    ProductsService.danhSachSalePhanTrang(limit, page).then(res => {
+                        console.log(res.data);
+                        dispatch(createAction(DANHSACHSALEPHANTRANG, res.data.data))
+                        this.setState({
+                            loading: false,
+                            page,
+                        })
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }
+            }
+            this.props.dispatch(DanhSachSanPhamPhanTrang(8, this.state.page))
 
+        })
+    }
+    render() {
+        // const danhSachSale = this.props.danhSachSanPham.filter(item => item.StatusSale == true)
+        console.log("?A>A?A>AS", this.props.danhSachSanPham.counts);
         return (
             <>
                 <div className="viewContent container" style={{ overflow: "hidden" }}>
@@ -53,26 +94,47 @@ class index extends Component {
                                 </ul>
                             </div>
                         </div>
-                        <div style={{ paddingLeft: "20px" }}>
-                            <div className="row">
-                                <SellTime danhSachSanPham={danhSachSale} />
+                        {this.state.loading ?
+                            <div className="example">
+                                <Spin />
                             </div>
-                        </div>
-
+                            :
+                            <div style={{ paddingLeft: "20px" }}>
+                                <div className="row">
+                                    <SellTime danhSachSanPham={this.props.danhSachSanPham} />
+                                </div>
+                                <Pagination page={this.state.page} danhSachSanPham={this.props.danhSachSanPham}
+                                    limit={this.state.limit} pageOnChange={this.pageOnChange} total={Math.ceil(this.props.danhSachSanPham.counts / 8)} />
+                            </div>
+                        }
 
                     </div>
                 </div>
             </>
         );
     }
-    componentDidMount(){
+    componentDidMount() {
+        const DanhSachSalePhanTrang = (limit, page) => {
+            return dispatch => {
+                ProductsService.danhSachSanPhamPhanTrang(limit, page).then(res => {
+                    console.log(res.data);
+                    dispatch(createAction(DANHSACHSANPHAMPHANTRANG, res.data.data))
+                    this.setState({
+                        loading: false
+                    })
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        }
+        this.props.dispatch(DanhSachSalePhanTrang(8, this.state.page))
         document.body.scrollTop = 0;
         // or
         window.scrollTo(0, 0);
     }
 }
 const mapStateToProps = state => ({
-    danhSachSanPham: state.productReducers.danhSachSanPham,
+    danhSachSanPham: state.productReducers.danhSachSalePhanTrang,
 
 })
-export default connect(mapStateToProps) (index);
+export default connect(mapStateToProps)(index);

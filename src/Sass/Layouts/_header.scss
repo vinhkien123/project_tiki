@@ -1,13 +1,51 @@
 .header {
     @include desktop-large {
     }
-
-    @include desktop {
+    @include desktop-medium{
         .headerMid {
             width: 80% !important;
         }
         .headerBottom {
             width: 80% !important;
+        }
+    }
+ 
+    @include desktop {
+       
+        .headerMid {
+            width: 90% !important;
+            margin: 0px;
+            .midLeft {
+                .logo {
+                    margin: 0;
+                    padding: 0px;
+                    padding-left: 20px;
+                }
+                .form-sreach {
+                    margin: 0px !important;
+                    padding: 0px;
+
+                    .form-test {
+                        .test {
+                            span {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .header-link {
+                    margin: 0px !important;
+                    .item {
+                        padding: 2px 5px 0px 0px !important ;
+                    }
+                    .designButton {
+                        padding: 0px !important;
+                    }
+                }
+            }
+        }
+        .headerBottom {
+            width: 90% !important;
             margin: 0px;
             .menu {
                 flex: 0 0 16%;
@@ -139,6 +177,7 @@
         padding: 9px 0px 16px;
 
         .midLeft {
+            padding: 10px 0px 0px;
             justify-content: center;
             .div {
                 margin-top: 11px;
@@ -148,6 +187,7 @@
             .logo {
                 background: none;
                 margin: 0px;
+                padding: 0px;
             }
             .form-sreach {
                 margin: 0px;
@@ -212,9 +252,10 @@
                 }
                 .login {
                     p {
+                        margin: 0px;
                         color: #fff;
                         font-weight: 400;
-                        line-height: 14px;
+                        line-height: 18px;
                         font-size: 12px;
                         small {
                             font-size: 11px;

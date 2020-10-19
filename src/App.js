@@ -38,7 +38,7 @@ import SanPhamMoi from './Component/Screens/SanPhamMoi';
 import ScrollToTop from './Component/ScrollToTop';
 import SanPhamDaXem from './Component/ShowSanPhamDaXem';
 import Test from './Component/Test/Content';
-import { DanhMucSanPham, DanhSachSanPham, DanhSachSanPhamPhanTrang, SaveDanhMucCon } from './Redux/Action/product';
+import { DanhMucSanPham, DanhSachSalePhanTrang, DanhSachSanPham, DanhSachSanPhamPhanTrang, SaveDanhMucCon } from './Redux/Action/product';
 import { LayDanhSachGioHangUser, QuanLyDonHang } from './Redux/Action/shopingcart';
 import { DanhSachNguoiDung, ThongTinTaiKhoan } from './Redux/Action/user';
 import { AdminBanHangTemplate } from './Template/AdminBanHangTemplate/index';
@@ -55,6 +55,7 @@ import SanPhamYeuThich from './Component/EditUser/SanPhamYeuThich';
 import ThongTinThanhToan from './Component/EditUser/ThongTinThanhToan'
 import SanPhamDaXemUser from './Component/EditUser/SanPhamDaXem';
 import ThayDoiDonHang from './Component/AdminUser/QuanLyDonHang/Update';
+import ZaloCallback from './Component/Login/Zalo_callback';
 import { Spin } from 'antd';
 import Header from './Component/Header'
 class App extends Component {
@@ -120,7 +121,7 @@ class App extends Component {
             <UserTemplate path="/user/thongtinthanhtoan" exact Component={ThongTinThanhToan} />
             <UserTemplate path="/user/sanphamdaxem" exact Component={SanPhamDaXemUser} />
             <UserTemplate path="/user/thongbao" exact Component={ThongBao} />
-
+            <Route exact path='/login/zalo' component={ZaloCallback}/>
 
           </>
 
@@ -182,15 +183,14 @@ class App extends Component {
     this.props.dispatch(DanhSachSanPham())
     this.props.dispatch(DanhSachNguoiDung())
     this.props.dispatch(DanhSachSanPhamPhanTrang(8, 1))
-
+    this.props.dispatch(DanhSachSalePhanTrang(8,1))
     let user = localStorage.getItem("user")
     if (user) {
       let userObj = JSON.parse(user)
       console.log("userrr", userObj);
       this.props.dispatch(ThongTinTaiKhoan(userObj?.token))
-      this.props.dispatch(QuanLyDonHang(userObj?.user._id))
+      this.props.dispatch(QuanLyDonHang(userObj?.token))
       this.props.dispatch(SaveDanhMucCon("5f60727110312900173437a0"))
-      this.props.dispatch(LayDanhSachGioHangUser(userObj?.user._id, userObj?.token))
 
     }
     let banHang = localStorage.getItem('banHang')

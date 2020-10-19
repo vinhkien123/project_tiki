@@ -60,7 +60,7 @@ class index extends Component {
     }
     render() {
         return (
-            <div className="viewContent" style={{ overflow: "hidden" }}>
+            <div className="viewContent" style={{ overflow: "hidden" , marginTop:"15px"}}>
                 <Flip>
                     <Slidebar title={this.props.match.params.title} idDanhMuc={this.props.match.params.id} danhSachDanhMucCon={this.props.danhSachDanhMucCon} />
                 </Flip>

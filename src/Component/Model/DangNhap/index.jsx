@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
-import { createAction } from '../../../Redux/Action';
-import { LOGINFACEBOOK } from '../../../Redux/Action/type';
 import { DangNhap } from '../../../Redux/Action/user';
-import LoginFB from '../../LoginFB'
+import FacebookLogin from '../../Login/Facebook';
+import GoogleLogin from '../../Login/Google_login';
+import ZaloLogin from '../../Login/Zalo_login';
 class index extends Component {
     constructor(props) {
         super(props);
@@ -33,7 +33,6 @@ class index extends Component {
 
         return (
             <form>
-             
                 <div className="form-group account__sign-form">
                     <label htmlFor="exampleInputEmail1">Email / SĐT</label>
                     <input type="text" name="Username" onChange={this.onChange} value={this.state.taiKhoan} className="form-control account-form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập Email hoặc Số điện thoại" />
@@ -43,16 +42,13 @@ class index extends Component {
                     <input type="password" name="Password" onChange={this.onChange} value={this.state.matKhau} className="form-control account-form" id="exampleInputPassword1" placeholder="Mật khẩu từ 6 đến 22 ký tự" />
                 </div>
                 <div className="form-group form-check check-form__account">
-                    <p>Quên mật khẩu? Nhấn vào <a>đây</a></p>
+                    <p>Quên mật khẩu? Nhấn vào đây</p>
                 </div>
                 <button onClick={this.onClick} className="btn btn-warning my-2 w-100">Đăng nhập</button>
-                <button className="btn btn-primary my-2 w-100"> Đăng nhập
-        bằng Facebook</button>
-                <LoginFB />
-                <button className="btn btn-danger my-2 w-100"><span><i className="fab fa-google-plus-g" /></span> Đăng
-        nhập bằng Google</button> 
-                <button className="btn btn-info my-2 w-100">Đăng nhập bằng Zalo</button>
-                
+                <FacebookLogin/>
+                <GoogleLogin/>
+                <ZaloLogin/>
+
             </form>
         );
     }
